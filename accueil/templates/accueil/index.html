@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} REFICHE {% endblock %}
+
+{% block header%} REFICHE [BETA] {% endblock %}
+
+{% block content %}
+	<h3>Bienvenue sur Refiche !</h3>
+	
+	<table>
+		<tr> 
+			<td><a href="{% url "blog.views.home" %}">Blog</a></td>
+			<td><a href="{% url "app.views.home" %}">Aller dans l'espace de classe</a></td>
+		</tr>
+		<tr> 
+			<td><a href='#'>Support</a></td>
+			<td>{% block login%}{% endblock %}</td>
+		</tr>
+	</table>
+{% endblock %}

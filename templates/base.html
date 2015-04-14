@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <title>{% block title %}REFICHE{% endblock %}</title>
+</head>
+<body>
+<header><h1>{% block header %}REFICHE [BETA]{% endblock %}</h1></header>
+   <nav>
+   		{% block nav %}{% endblock %}
+   </nav>	
+
+   <section id="content">
+       {% block content %}{% endblock %}
+   </section>
+   
+<footer>&copy;Ingegus  ||  <a href="/admin">Admin</a></footer>
+</body>
+</html>

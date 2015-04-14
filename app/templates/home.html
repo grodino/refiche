@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<ul>
+    <li>{{ user.first_name }} {{ user.last_name|upper }}</li>
+    <li>Image de {{ user.username }}</li>
+    <li>{{ student.classroom.name }}</li>
+    <li><a href="{% url "app.views.newSheetPage" %}">Poster une nouvelle fiche !</a>
+</ul>
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for lesson in student.lessons.all %}
+    	<li><a href="lesson/{{ lesson.name }}">{{ lesson.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
