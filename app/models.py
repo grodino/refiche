@@ -1,15 +1,16 @@
 # coding=UTF-8
+from os.path import splitext
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.files import File
-"""
-	Profile -> User
-			-> Classroom-> Level
-						-> School
-						-> Name
-						-> Short name (ex: '1ere S3' instead of 'première S3')
-			-> Level -> name
-"""
+
+def renameFile(instance, name):
+	""" NOT A MODEL, it's a function made to modify the name 
+		of the file like this it won't be executed """
+	extension = splitext(name)[1].replace('.', 'point-')
+	fileName = splitext(name)[0]
+	return "sheets/{}-{}".format(extension, fileName)
+
 
 class Lesson(models.Model):
 	""" The lesson/class model, they can only be created by a delegate """
@@ -92,8 +93,8 @@ class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
 
 	name = models.CharField(max_length=50)
-	sheetFile = models.FileField(upload_to="sheets/")
-	uploadedBy = models.OneToOneField(Student)
+	sheetFile = models.FileField(upload_to=renameFile)
+	uploadedBy = models.ForeignKey(Student)
 	lesson = models.ForeignKey('Lesson')
 
 	def __str__(self):

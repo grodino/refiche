@@ -43,3 +43,8 @@
 [2015-04-14 15:38:23] INFO [users.userConnected:8] User INGEGUS has connected !
 [2015-04-14 15:38:59] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
 [2015-04-14 15:39:06] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-04-15 14:27:48] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-04-15 14:29:14] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-04-15 16:28:50] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-04-15 16:31:46] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-04-15 16:31:53] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !

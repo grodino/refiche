@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import logging
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from app.models import Student, Lesson, School, Sheet
 from app.forms import UploadSheetForm
 
@@ -52,8 +53,18 @@ def newSheetPage(request):
 	""" NewSheet view to show the UploadSheetForm """
 
 	student = getStudent(request)
-	lessons = student.lessons.all()
 
-	form = UploadSheetForm(student=student)
+	if request.method == "POST":
+		form = UploadSheetForm(student=student, data=request.POST, files=request.FILES)
+		
+		if form.is_valid():
+			sheet = form.save(commit=False)
+			sheet.uploadedBy = student
+			sheet.save()
+
+			messages.add_message(request, messages.SUCCESS, 'Votre fichier a bien été envoyé !')
+			return redirect('/app/home')
+	else:
+		form = UploadSheetForm(student=student)
 
 	return render(request, 'app/newSheet.html', locals())

@@ -1,12 +1,9 @@
 {% extends "home.html" %}
 
 {% block content %}
-{% if save %}
-    <p>Done !</p>
-{% endif %}
    
 <p>
-    <form method="post" enctype="multipart/form-data" action=".">
+    <form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
        {% csrf_token %}
        {{ form.as_p }}
        <input type="submit"/>
