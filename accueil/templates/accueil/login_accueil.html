@@ -1,15 +1,15 @@
 {% extends "accueil/index.html" %}
 
 {% block login%}
-<h1>Se connecter</h1>
+<p>SE CONNECTER</p>
 
 {% if error %}
 	<p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
 {% endif %}
 
 {% if user.is_authenticated %}
-	<p>Vous êtes connecté, {{ user.username }} !</p>
-	<p><a href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
+	<p>Vous êtes connecté, {{ user.username }} ! <br />
+	<a class="inline_link" href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
 {% else %}
 	<form method="post" action=".">
    		{% csrf_token %}
