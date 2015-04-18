@@ -1,12 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block nav %}
-<ul>
-    <li>{{ user.first_name }} {{ user.last_name|upper }}</li>
-    <li>Image de {{ user.username }}</li>
-    <li>{{ student.classroom.name }}</li>
-    <li><a href="{% url "app.views.newSheetPage" %}">Poster une nouvelle fiche !</a>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="three columns"><img class="user-icon" src="{% static 'img/user_test_img.png' %}" /></div>
+        <div class="three columns">{{ user.first_name }} {{ user.last_name|upper }}</div>
+        <div class="two columns">{{ student.classroom.name }}</div>
+        <div class="four columns"><a class="button button-primary" href="{% url "app.views.newSheetPage" %}">Poster une nouvelle fiche !</a></div>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}

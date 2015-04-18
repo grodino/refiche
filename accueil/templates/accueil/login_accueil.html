@@ -1,11 +1,11 @@
 {% extends "accueil/index.html" %}
 
 {% block login%}
-<p class="menu_title">SE CONNECTER</p>
+<h3>SE CONNECTER</h3>
 
 {% if user.is_authenticated %}
 	<p>Vous êtes connecté, {{ user.username }} ! <br />
-	<a href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
+	<a class="button" href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
 {% else %}
 	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
    		{% csrf_token %}

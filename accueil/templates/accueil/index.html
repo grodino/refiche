@@ -9,11 +9,23 @@
         </div>
         
         <div class="row">
+            {% if user.is_authenticated %}
             <div class="bot-cell eight columns"><a class="menu_title" href="{% url "app.views.home" %}">
-                <div class="full-container-size">HUB DE LA CLASSE</div>
+                <div class="full-container-size">
+                    <h3>HUB DE LA CLASSE</h3>                    
+                        <p>Accédez au Hub de la classe pour envoyer vos fiches et voir celles qui ont été publiées !</p>
+                </div>
+            {% else %}
+                <div class="bot-cell eight columns"><a class="menu_title" href="#">
+                    <div class="full-container-size">
+                        <h3>HUB DE LA CLASSE</h3>                    
+                            <p>Connectez vous pour accéder au Hub de votre classe ! <br />
+                               Vous voulez en savoir plus ? Cliquez sur le lien ! ;)</p>
+                    </div>         
+            {% endif %}
             </a></div>
             <div class="bot-cell four columns"><a class="menu_title" href="{% url "blog.views.home" %}">
-                <div class="full-container-size">BLOG</div>
+                <div class="full-container-size"><h3>BLOG</h3></div>
             </a></div>
         </div>
 	</div>
