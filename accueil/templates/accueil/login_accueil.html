@@ -1,19 +1,30 @@
 {% extends "accueil/index.html" %}
 
 {% block login%}
-<p>SE CONNECTER</p>
-
-{% if error %}
-	<p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
-{% endif %}
+<p class="menu_title">SE CONNECTER</p>
 
 {% if user.is_authenticated %}
 	<p>Vous êtes connecté, {{ user.username }} ! <br />
-	<a class="inline_link" href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
+	<a href="{% url "django.contrib.auth.views.logout" %}">Déconnexion</a></p>
 {% else %}
-	<form method="post" action=".">
+	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
    		{% csrf_token %}
-    	{{ form.as_p }}
+        
+        {% if form.errors %}
+            <p>Oops ! Nous ne vous connaissons pas ou votre nom d'utilisateur ou votre mot de passe ne sont pas valides :(</p>
+        {% endif %}
+        
+        <div class="container">
+            <div class="row">
+                <div class="four columns">{{ form.username.label_tag }}</div>
+                <div class="eight columns">{{ form.username }}</div>
+            </div>
+            
+            <div class="row">
+                <div class="four columns">{{ form.password.label_tag }}</div>
+                <div class="eight columns">{{ form.password }}</div>
+            </div>
+        </div>
     	<input type="submit" value="Se connecter" />
 	</form>
 {% endif %}

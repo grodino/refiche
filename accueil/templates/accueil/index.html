@@ -2,13 +2,19 @@
 
 {% block title %} REFICHE {% endblock %}
 
-{% block header%} REFICHE [BETA] {% endblock %}
-
 {% block content %}
-	<div id="menu" class="grid-1-2">
-        <div><a href="{% url "blog.views.home" %}">BLOG</a></div>
-        <div><a href="{% url "app.views.home" %}">HUB DE LA CLASSE</a></div>
-        <div><a href='#'>SUPPORT</a></div>
-        <div>{% block login%}{% endblock %}</div>
+	<div id="menu" class="container">        
+        <div class="row">
+            <div class="cell twelve columns">{% block login%}{% endblock %}</div>
+        </div>
+        
+        <div class="row">
+            <div class="bot-cell eight columns"><a class="menu_title" href="{% url "app.views.home" %}">
+                <div class="full-container-size">HUB DE LA CLASSE</div>
+            </a></div>
+            <div class="bot-cell four columns"><a class="menu_title" href="{% url "blog.views.home" %}">
+                <div class="full-container-size">BLOG</div>
+            </a></div>
+        </div>
 	</div>
 {% endblock %}
