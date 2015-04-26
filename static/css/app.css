@@ -1,8 +1,46 @@
-nav .user-icon {
-    height: 5em;
-    width: 5em;
+/*  NAV
+------------------------------------------- */
+#content nav .container {
+    min-height: 15em;
 }
 
-nav button {
-    margin: 0px;
+#content nav .right-cell,
+#content nav .left-cell {
+    background-color: #D9D9D9;
 }
+
+#content nav .left-cell {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1.5em;
+    
+    text-align: center;
+}
+
+#content nav #user-icon {
+    display: inline;
+    width: 12em;
+    
+    border: 3px solid #2EA490;
+}
+
+#content nav .right-cell {
+    height: 7.5em;
+    
+    margin-bottom: 1.5em;
+    padding-left: 0.5em;
+}
+
+#content nav .right-cell a {
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+/*  MISCELANIOUS
+------------------------------------------- */
+

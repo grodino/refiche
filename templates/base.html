@@ -11,9 +11,6 @@
 <body>
 	{# The url specified is from django just to be able to include the login form in the index page #}
 <header><h1>{% block header %}<a href="{% url "django.contrib.auth.views.login" %}">REFICHE [BETA]</a>{% endblock %}</h1></header>
-    <nav>
-   		{% block nav %}{% endblock %}
-   </nav>	
 
 	{% if messages %}
 	<ul class="messages">
