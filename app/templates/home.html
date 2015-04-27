@@ -19,11 +19,16 @@
     </div>
 </nav>
 
-    <ul>
+<div id="lessons">
+    <header>
+        <h3>Matières</h3>
+    </header>
+    
+    <div class="flex-container">
         {% for lesson in student.lessons.all %}
-            <li><a href="lesson/{{ lesson.name }}">{{ lesson.name }}</a></li>
+            <div class="lesson"><a class="full-container-size" href="lesson/{{ lesson.name }}">{{ lesson.name }}</a></div>
         {% endfor %}
-    </ul>
-
+    </div>
+</div>
 
 {% endblock %}

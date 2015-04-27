@@ -15,6 +15,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 class LessonAdmin(admin.ModelAdmin):
 	list_display = ('name', 'teacher')
+	list_filter = ('teacher',)
 
 admin.site.register(Sheet, SheetAdmin)
 admin.site.register(Student, StudentAdmin)

@@ -74,3 +74,14 @@
 [2015-04-26 17:46:19] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
 [2015-04-26 19:37:38] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
 [2015-04-26 19:37:41] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-04-27 20:59:31] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-04-27 21:04:28] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-04-27 21:04:33] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-04-27 21:04:34] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-04-27 21:04:44] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-04-27 21:04:48] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-04-27 21:05:16] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-04-27 21:05:17] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-04-27 21:05:29] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-04-27 21:05:58] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-04-27 21:05:59] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !

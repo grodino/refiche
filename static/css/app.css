@@ -37,10 +37,70 @@
 
 
 
-
-
-
-
-/*  MISCELANIOUS
+/*  LESSONS LIST
 ------------------------------------------- */
+#lessons header {
+    background-color: #FFB948;
+    text-transform: uppercase;
+}
+
+#lessons .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#lessons .flex-container .lesson {
+    width: 15em;
+    height: 7em;
+    
+    margin-bottom: 0.7em;
+    
+    background-color: #D9D9D9;
+    text-transform: uppercase;
+}
+
+@media(max-width: 550px) {
+    #lessons .flex-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    
+    #lessons .flex-container .lesson { 
+        width: 100%;
+        
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
