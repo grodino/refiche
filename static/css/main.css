@@ -1,7 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700,300,400);
 
 body, html {
-    position: relative;
     min-height: 100%;
         
     background-color: #ffffff;
@@ -14,7 +13,6 @@ header {
     padding-left: 1em;
     
     background-color: #3a6baa;
-    
     color: white;
     vertical-align: middle;
 }

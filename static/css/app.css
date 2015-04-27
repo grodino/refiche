@@ -77,13 +77,19 @@
 }
 
 
+/*  NEW SHEET FORM
+------------------------------------------- */
+form .button {
+    width: 18em;
+}
 
+form .button-primary {
+    margin-top: 1.5em;
+}
 
-
-
-
-
-
+form input[type="file"] {
+    display: none;
+}
 
 
 

@@ -1,12 +1,34 @@
 {% extends "home.html" %}
 
 {% block content %}
-   
-<p>
-    <form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
-       {% csrf_token %}
-       {{ form.as_p }}
-       <input type="submit"/>
-    </form>
-</p>
+<form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
+   {% csrf_token %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            
+            <div class="six columns">
+                {{ form.lesson.label_tag }}
+                {{ form.lesson }}
+            </div>
+        </div>
+        
+        <div class="row form-tag">
+            <div class="six columns">
+                {{ form.sheetFile.label_tag }}
+                {{ form.sheetFile }}
+                
+                <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"  onclick="getFile();"/>
+            </div>
+            
+            <div class="six columns">
+                <input class="button-primary" type="submit"/>
+            </div>
+        </div>
+    </div>
+</form>
 {% endblock %}
