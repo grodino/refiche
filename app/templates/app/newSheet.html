@@ -1,6 +1,7 @@
 {% extends "home.html" %}
 
 {% block content %}
+
 <form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
    {% csrf_token %}
     
@@ -22,7 +23,9 @@
                 {{ form.sheetFile.label_tag }}
                 {{ form.sheetFile }}
                 
-                <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"  onclick="getFile();"/>
+                <div class="input-file-container">
+                    <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
+                </div>
             </div>
             
             <div class="six columns">
@@ -30,5 +33,7 @@
             </div>
         </div>
     </div>
+    
+    <p> A FAIRE EN AJAX</p>
 </form>
 {% endblock %}
