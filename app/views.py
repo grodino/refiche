@@ -45,6 +45,8 @@ def lessonPage(request, lesson_name):
 	except Lesson.DoesNotExist:
 		raise Http404("This lesson does not exist or you are not registered to it !")
 
+	sheets = Sheet.objects.filter(lesson=lesson)
+
 	return render(request, 'app/lesson.html', locals())
 
 

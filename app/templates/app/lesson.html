@@ -5,4 +5,8 @@
 {{ lesson.name }} :  {{ lesson.teacher.firstName }} {{ lesson.teacher.lastName }}
 <p> To be displayed later : the files related to the lesson.</p>
 
+{% for sheet in sheets %}
+	<p>Fiche : {{ sheet }}<p>
+{% endfor %}
+
 {% endblock %}
