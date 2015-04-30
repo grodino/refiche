@@ -4,7 +4,9 @@
 
 <form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
    {% csrf_token %}
-    
+
+   {{ form.errors }}
+
     <div class="container">
         <div class="row">
             <div class="six columns">

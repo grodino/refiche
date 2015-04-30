@@ -1,16 +1,45 @@
 # coding=UTF-8
-from os.path import splitext
+from os.path import splitext, join
+from os import remove
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.files import File
+from django.contrib.auth.models import User
+from django.db.models.signals import post_delete, post_save
+
+
+# _____________________________________________________________________
+# FUNCTIONS
 
 def renameFile(instance, name):
 	""" NOT A MODEL, it's a function made to modify the name 
 		of the file like this it won't be executed """
+
 	extension = splitext(name)[1].replace('.', 'point-')
 	fileName = splitext(name)[0]
+
 	return "sheets/{}-{}".format(extension, fileName)
 
+def deleteFile(sender, instance, **kwargs):
+	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded"""
+
+	# Deduct 1 from the user's numberOfSheetsUploaded
+	user = instance.uploadedBy
+	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded - 1
+	user.save()
+
+	remove(join(settings.MEDIA_ROOT, instance.sheetFile.name))
+
+def addFile(sender, instance, **kwargs):
+	""" Function made to add 1 to the user's numberOfSheetsUploaded """
+
+	user = instance.uploadedBy
+	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded + 1
+	user.save()
+
+
+# _____________________________________________________________________
+# MODELS
 
 class Lesson(models.Model):
 	""" The lesson/class model, they can only be created by a delegate """
@@ -74,6 +103,7 @@ class Student(Profile):
 
 	isDelegate = models.BooleanField(default=False) # If the student is authorized to manage the classroom
 	lessons = models.ManyToManyField(Lesson)
+	numberOfSheetsUploaded = models.IntegerField(default=0)
 
 	def __str__(self):
 		return "Profil de {0}".format(self.user.username)
@@ -99,3 +129,10 @@ class Sheet(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+# _____________________________________________________________________
+# SIGNALS
+
+post_save.connect(addFile, sender=Sheet)
+post_delete.connect(deleteFile, sender=Sheet)

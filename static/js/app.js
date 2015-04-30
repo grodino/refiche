@@ -7,7 +7,7 @@ file_avatar.addEventListener('click', function() {
 
 input_file.addEventListener('change', function() {
     if (input_file.value !== '') {
-        file_avatar.setAttribute('value', input_file.value);
+        file_avatar.setAttribute('value', input_file.value.replace("C:\\fakepath\\", ""));
     } else {
         file_avatar.setAttribute('value', 'Selectionner le fichier');
     }

@@ -16,6 +16,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MAX_SHEET_SIZE = 1048576 # 1MB
+ALLOWED_EXTENSIONS = ('.jpg', '.png', '.doc', '.docx')
+
 DEFAULT_CHARSET = 'utf-8'
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +32,7 @@ SECRET_KEY = 'dj1u-*030t9=!72+5od=056q_#*sp-g0(*$z^0f(w7o2&hh(c)'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'refiche.dev']
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -149,3 +153,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
+
+# Facebook API
+FACEBOOK_APP_ID = '1423338201308406'
+FACEBOOK_SECRET = 'b664debef8373dcd1525c0c1bc48e84a'

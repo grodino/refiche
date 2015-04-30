@@ -20,6 +20,10 @@
 	</ul>
 	{% endif %}
 
+  {% if error %}
+    {{ error }}
+  {% endif %}
+
    <section id="content">
        {% block content %}{% endblock %}
    </section>

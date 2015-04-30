@@ -1,5 +1,6 @@
 from django.shortcuts import render
-import logging
+from django.conf import settings
+import logging, requests
 
 def index(request):
 	""" Start page of the website """
