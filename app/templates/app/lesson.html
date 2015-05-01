@@ -5,8 +5,7 @@
 {{ lesson.name }} :  {{ lesson.teacher.firstName }} {{ lesson.teacher.lastName }}
 
 {% for sheet in sheets %}
-	<div>Fiche : {{ sheet.name }}</div>
-	<input type="hidden" value="{{ sheet.pk }}" />
+	<div><a href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}">Fiche : {{ sheet.name }}</a></div>
 	<div>Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} ({{ sheet.uploadedBy.classroom.shortName }})</div>
 {% endfor %}
 

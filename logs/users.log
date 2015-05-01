@@ -146,3 +146,12 @@
 [2015-05-01 12:32:07] INFO [users.userConnected:8] User INGEGUS has connected !
 [2015-05-01 12:42:41] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
 [2015-05-01 12:42:42] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-01 20:47:29] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-05-01 20:48:20] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-05-01 20:48:29] INFO [users.userConnected:8] User ARMAND88 has connected !
+[2015-05-01 20:48:58] INFO [users.userDisconnected:13] User ARMAND88 has disconnected !
+[2015-05-01 20:49:02] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-01 20:50:04] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-05-01 20:50:08] INFO [users.userConnected:8] User ARMAND88 has connected !
+[2015-05-01 20:50:20] INFO [users.userDisconnected:13] User ARMAND88 has disconnected !
+[2015-05-01 20:50:23] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !

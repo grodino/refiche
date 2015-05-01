@@ -3,6 +3,7 @@ import logging
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from app.models import Student, Lesson, School, Sheet
 from app.forms import UploadSheetForm
 
@@ -87,13 +88,21 @@ def newSheetPage(request):
 	return render(request, 'app/newSheet.html', locals())
 
 @login_required
-def downloadSheetPage(request):
+def downloadSheetPage(request, pk):
 	""" View for dowloading a sheet """
 
+	student = getStudent(request)
+
+	# Get the file
 	try:
-		sheet = Sheet.objects.get(name='test')
+		sheet = Sheet.objects.get(pk=pk)
 	except Sheet.DoesNotExist:
 		raise Http404("Sorry this file does not exist :(")
+	
+	# Check if the user can have access to it (if he is part of the lesson)
+	if sheet.lesson not in student.lessons.all():
+		raise PermissionDenied()
+
 	data = sheet.sheetFile.read()
 
 	response = HttpResponse(data, content_type=sheet.contentType)
