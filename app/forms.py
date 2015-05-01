@@ -23,4 +23,4 @@ class UploadSheetForm(forms.ModelForm):
 
 	class Meta:
 		model = Sheet
-		exclude = ('uploadedBy',)
+		exclude = ('uploadedBy', 'contentType',)

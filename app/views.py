@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 import logging
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from app.models import Student, Lesson, School, Sheet
 from app.forms import UploadSheetForm
+
+# _____________________________________________________________________
+# FUNCTIONS
 
 def getStudent(request):
 	""" /!\ Not a view, it fetches the user and verifiy if there
@@ -21,6 +24,17 @@ def getStudent(request):
 
 	return student
 
+def renameFileForDown(instance):
+	""" NOT A MODEL, it's a function made to modify the name 
+		of the file like this it won't be executed """
+
+	instance.name.replace('point-', '.')
+
+	return name
+
+
+# _____________________________________________________________________
+# VIEWS
 
 @login_required
 def home(request):
@@ -62,6 +76,7 @@ def newSheetPage(request):
 		if form.is_valid():
 			sheet = form.save(commit=False)
 			sheet.uploadedBy = student
+			sheet.contentType = form.cleaned_data['sheetFile'].content_type
 			sheet.save()
 
 			messages.add_message(request, messages.SUCCESS, 'Votre fichier a bien été envoyé !')
@@ -70,3 +85,18 @@ def newSheetPage(request):
 		form = UploadSheetForm(student=student)
 
 	return render(request, 'app/newSheet.html', locals())
+
+@login_required
+def downloadSheetPage(request):
+	""" View for dowloading a sheet """
+
+	try:
+		sheet = Sheet.objects.get(name='test')
+	except Sheet.DoesNotExist:
+		raise Http404("Sorry this file does not exist :(")
+	data = sheet.sheetFile.read()
+
+	response = HttpResponse(data, content_type=sheet.contentType)
+	response['Content-Disposition'] = 'attachment; filename="test.jpg"'
+
+	return response

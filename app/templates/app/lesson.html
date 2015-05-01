@@ -3,10 +3,11 @@
 {% block content %}
 
 {{ lesson.name }} :  {{ lesson.teacher.firstName }} {{ lesson.teacher.lastName }}
-<p> To be displayed later : the files related to the lesson.</p>
 
 {% for sheet in sheets %}
-	<p>Fiche : {{ sheet }}<p>
+	<div>Fiche : {{ sheet.name }}</div>
+	<input type="hidden" value="{{ sheet.pk }}" />
+	<div>Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} ({{ sheet.uploadedBy.classroom.shortName }})</div>
 {% endfor %}
 
 {% endblock %}

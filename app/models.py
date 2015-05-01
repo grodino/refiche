@@ -18,7 +18,7 @@ def renameFile(instance, name):
 	extension = splitext(name)[1].replace('.', 'point-')
 	fileName = splitext(name)[0]
 
-	return "sheets/{}-{}".format(extension, fileName)
+	return "sheets/{}-{}".format(fileName, extension)
 
 def deleteFile(sender, instance, **kwargs):
 	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded"""
@@ -126,6 +126,7 @@ class Sheet(models.Model):
 	sheetFile = models.FileField(upload_to=renameFile)
 	uploadedBy = models.ForeignKey(Student)
 	lesson = models.ForeignKey('Lesson')
+	contentType = models.CharField(max_length=50)
 
 	def __str__(self):
 		return self.name
