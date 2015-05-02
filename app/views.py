@@ -1,38 +1,11 @@
 from django.shortcuts import render, redirect
-import logging
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Student, Lesson, School, Sheet
+from app.models import Lesson, School, Sheet
 from app.forms import UploadSheetForm
-
-# _____________________________________________________________________
-# FUNCTIONS
-
-def getStudent(request):
-	""" /!\ Not a view, it fetches the user and verifiy if there
-		is a profile account logged to it. RETURNS THE STUDENT """
-
-	user = request.user
-	
-	try:
-		student = Student.objects.get(user=user)
-	except Student.DoesNotExist:
-		logger = logging.getLogger('users')
-		logger.error(user.username+'\'s account is not linked to a profile account! id = '+str(user.id))
-		raise Http404("Your user account is not linked to a profile account !")
-
-	return student
-
-def renameFileForDown(instance):
-	""" NOT A MODEL, it's a function made to modify the name 
-		of the file like this it won't be executed """
-
-	instance.name.replace('point-', '.')
-
-	return name
-
+from app.functions import getStudent
 
 # _____________________________________________________________________
 # VIEWS
@@ -86,6 +59,7 @@ def newSheetPage(request):
 		form = UploadSheetForm(student=student)
 
 	return render(request, 'app/newSheet.html', locals())
+
 
 @login_required
 def downloadSheetPage(request, pk):

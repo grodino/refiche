@@ -122,15 +122,21 @@ class Teacher(models.Model):
 class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
 
+	POSSIBLE_CHOICES = (('SHEET', 'Fiche'),
+						('NOTES', 'Cours'),
+						('TEST', 'Sujet de contrôle'),
+						('TEST_CORRECTION', 'Corrigé de contrôle'))
+
 	name = models.CharField(max_length=50)
+	lesson = models.ForeignKey('Lesson')
+	sheetType = models.CharField(max_length=50, choices=POSSIBLE_CHOICES, default='SHEET')
+
 	sheetFile = models.FileField(upload_to=renameFile)
 	uploadedBy = models.ForeignKey(Student)
-	lesson = models.ForeignKey('Lesson')
 	contentType = models.CharField(max_length=50)
 
 	def __str__(self):
 		return self.name
-
 
 # _____________________________________________________________________
 # SIGNALS

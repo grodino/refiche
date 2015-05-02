@@ -14,3 +14,30 @@ input_file.addEventListener('change', function() {
     
 }, false);
 
+
+var newSheetForm = document.querySelector('#new_sheet_form'),
+    userInfos = document.querySelector('#user_infos'),
+    classroomsProfile = document.querySelector('#classroom_profile'),
+    newSheetLink = document.querySelector('#new_sheet_link');
+
+function postNewSheet() {
+    if (newSheetForm.style.display == 'block') {
+        hideNewSheetForm()
+    } else {
+        showNewSheetForm();
+    }
+}
+
+function hideNewSheetForm() {
+    newSheetForm.style.display = 'none';
+    userInfos.style.display = 'block';
+    classroomsProfile.style.display = 'block';
+}
+
+function showNewSheetForm() {
+    newSheetForm.style.display = 'block';
+    userInfos.style.display = 'none';
+    classroomsProfile.style.display = 'none';
+    
+    
+}

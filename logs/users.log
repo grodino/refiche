@@ -155,3 +155,17 @@
 [2015-05-01 20:50:08] INFO [users.userConnected:8] User ARMAND88 has connected !
 [2015-05-01 20:50:20] INFO [users.userDisconnected:13] User ARMAND88 has disconnected !
 [2015-05-01 20:50:23] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-02 16:34:15] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-05-02 16:34:40] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-05-02 16:34:41] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-02 16:37:33] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-05-02 16:38:24] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-02 18:06:09] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-05-02 18:06:22] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-05-02 18:10:17] ERROR [users.getStudent:15] ingegus's account is not linked to a profile account! id = 1
+[2015-05-02 18:10:18] ERROR [users.getStudent:15] ingegus's account is not linked to a profile account! id = 1
+[2015-05-02 18:10:18] ERROR [users.getStudent:15] ingegus's account is not linked to a profile account! id = 1
+[2015-05-02 18:10:19] ERROR [users.getStudent:15] ingegus's account is not linked to a profile account! id = 1
+[2015-05-02 18:10:19] ERROR [users.getStudent:15] ingegus's account is not linked to a profile account! id = 1
+[2015-05-02 18:10:21] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-05-02 18:10:28] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !

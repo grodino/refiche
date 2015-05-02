@@ -1,19 +1,26 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static app_extras %}
 
 {% block content %}
 
 <nav class="container">
     <div class="row">
-        <div class="six columns left-cell full-container-size">
+        <div id="user_infos" class="six columns left-cell full-container-size">
             <a href="profile of the user" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
             <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
         </div>
         
         <div class="six columns">
             <div class="container">
-                <div class="row right-cell"><a href="profile of the classroom" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
-                <div class="row right-cell"><a href="{% url "app.views.newSheetPage" %}" class="full-container-size"><h5>Poster une nouvelle fiche !</h5></a></div>
+                <div id="classroom_profile" class="row right-cell"><a href="profile of the classroom" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
+                <div class="row right-cell">
+                    <a id="new_sheet_link" href="#" class="full-container-size" onclick="postNewSheet()">
+                        <h5>Poster une nouvelle fiche !</h5>
+                        <div id="new_sheet_form">
+                            {% getNewSheetForm request %}
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

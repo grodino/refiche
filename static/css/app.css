@@ -79,6 +79,11 @@
 
 /*  NEW SHEET FORM
 ------------------------------------------- */
+#new_sheet_form {
+    display: none;
+    color: #2F2F2F;
+}
+
 form .button {
     width: 18em;
 }
@@ -87,14 +92,14 @@ form .button-primary {
     margin-top: 2.5em;
 }
 
+form input,
+form select {
+    width: 15em;
+}
+
 form input[type="file"] {
     display: none;
 }
-
-
-
-
-
 
 
 

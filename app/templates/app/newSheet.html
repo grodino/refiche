@@ -1,41 +1,30 @@
-{% extends "home.html" %}
-
-{% block content %}
-
 <form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
-   {% csrf_token %}
+    {% csrf_token %}
 
-   {{ form.errors }}
-
+    {{ form.errors }}
+    
     <div class="container">
         <div class="row">
-            <div class="six columns">
+            <div class="eight columns">
                 {{ form.name.label_tag }}
                 {{ form.name }}
-            </div>
-            
-            <div class="six columns">
+
                 {{ form.lesson.label_tag }}
                 {{ form.lesson }}
+
+                {{ form.sheetType.label_tag }}
+                {{ form.sheetType }}
             </div>
-        </div>
         
-        <div class="row form-tag">
-            <div class="six columns">
+            <div class="four columns">
                 {{ form.sheetFile.label_tag }}
                 {{ form.sheetFile }}
-                
+
                 <div class="input-file-container">
                     <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
                 </div>
-            </div>
-            
-            <div class="six columns">
                 <input class="button-primary" type="submit"/>
             </div>
         </div>
     </div>
-    
-    <p> A FAIRE EN AJAX</p>
 </form>
-{% endblock %}
