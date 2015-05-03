@@ -1,4 +1,4 @@
-<form method="post" enctype="multipart/form-data" action="{% url "app.views.newSheetPage" %}">
+<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="" onsubmit="submitForm()">
     {% csrf_token %}
 
     {{ form.errors }}

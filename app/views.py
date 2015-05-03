@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
 from django.core.exceptions import PermissionDenied
 from app.models import Lesson, School, Sheet
 from app.forms import UploadSheetForm
@@ -51,14 +52,18 @@ def newSheetPage(request):
 			sheet = form.save(commit=False)
 			sheet.uploadedBy = student
 			sheet.contentType = form.cleaned_data['sheetFile'].content_type
+			sheetType = form.cleaned_data['sheetType']
 			sheet.save()
 
-			messages.add_message(request, messages.SUCCESS, 'Votre fichier a bien été envoyé !')
-			return redirect('/app/home')
-	else:
-		form = UploadSheetForm(student=student)
+			localVarsJSON = json.dumps({'sucess': 'Votre fichier a bien été envoyée',})
 
-	return render(request, 'app/newSheet.html', locals())
+			return HttpResponse(localVarsJSON, content_type='application/json')
+		else:
+			localVarsJSON = json.dumps(form.errors)
+	else:
+		raise Http404('Hey :/ I wasn\'t expecting you here !')
+
+	return HttpResponse(localVarsJSON, content_type='application/json')
 
 
 @login_required

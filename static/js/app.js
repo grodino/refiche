@@ -16,13 +16,13 @@ input_file.addEventListener('change', function() {
 
 
 var newSheetForm = document.querySelector('#new_sheet_form'),
-    userInfos = document.querySelector('#user_infos'),
-    classroomsProfile = document.querySelector('#classroom_profile'),
+    userInfos = document.querySelector('#user_infos').cloneNode(true),
+    classroomsProfile = document.querySelector('#classroom_profile').cloneNode(true),
     newSheetLink = document.querySelector('#new_sheet_link');
 
 function postNewSheet() {
     if (newSheetForm.style.display == 'block') {
-        hideNewSheetForm()
+        hideNewSheetForm();
     } else {
         showNewSheetForm();
     }
@@ -36,8 +36,64 @@ function hideNewSheetForm() {
 
 function showNewSheetForm() {
     newSheetForm.style.display = 'block';
-    userInfos.style.display = 'none';
-    classroomsProfile.style.display = 'none';
-    
-    
+    alert(userInfos.parentElement);
+    classroomsProfile.parentNode.removeChild(classroomsProfile);  
+
 }
+
+function submitForm() {
+    var formResponse = new XMLHttpRequest(),
+        sheetForm = document.querySelector('#id_sheet_form'),
+        sheetFormData = new FormData(sheetForm);
+    
+    formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
+    formResponse.send(sheetFormData);
+    
+    formResponse.addEventListener('readystatechange', function() {
+        if (formResponse.readyState === formResponse.DONE) {
+            if (formResponse.getResponseHeader('Content-type') === 'application/json') {
+                alert(formResponse.responseText);
+            } else {
+                alert('Oh non :( Une erreur est survenue')
+            }
+        }
+    }, false);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
