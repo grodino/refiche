@@ -10,11 +10,11 @@
             <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
         </div>
         
-        <div class="six columns">
+        <div id="left_cell" class="six columns">
             <div class="container">
                 <div id="classroom_profile" class="row right-cell"><a href="profile of the classroom" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
-                <div class="row right-cell">
-                    <a id="new_sheet_link" href="#" class="full-container-size" onclick="postNewSheet()">
+                <div class="row right-cell" id="new_sheet_div" >
+                    <a href="#" class="full-container-size" onclick="postNewSheet()">
                         <h5>Poster une nouvelle fiche !</h5>
                         <div id="new_sheet_form">
                             {% getNewSheetForm request %}

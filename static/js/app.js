@@ -17,8 +17,9 @@ input_file.addEventListener('change', function() {
 
 var newSheetForm = document.querySelector('#new_sheet_form'),
     userInfos = document.querySelector('#user_infos').cloneNode(true),
-    classroomsProfile = document.querySelector('#classroom_profile').cloneNode(true),
-    newSheetLink = document.querySelector('#new_sheet_link');
+    classroomsProfileContainer = document.querySelector('.row').cloneNode(true),
+    newSheetDiv = document.querySelector('#new_sheet_div').cloneNode(true),
+    navRow = document.querySelector('.row');
 
 function postNewSheet() {
     if (newSheetForm.style.display == 'block') {
@@ -30,14 +31,12 @@ function postNewSheet() {
 
 function hideNewSheetForm() {
     newSheetForm.style.display = 'none';
-    userInfos.style.display = 'block';
-    classroomsProfile.style.display = 'block';
+    navRow.insertBefore(userInfos, navRow.firstChild);
 }
 
 function showNewSheetForm() {
     newSheetForm.style.display = 'block';
-    alert(userInfos.parentElement);
-    classroomsProfile.parentNode.removeChild(classroomsProfile);  
+    navRow.removeChild(document.querySelector('#user_infos'));
 
 }
 
