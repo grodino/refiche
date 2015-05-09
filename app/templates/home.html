@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{# not displayed #}
+
 <nav class="container">
     <div class="row">
         <div id="user_infos" class="six columns left-cell full-container-size">
@@ -14,17 +16,17 @@
             <div class="container">
                 <div id="classroom_profile" class="row right-cell"><a href="profile of the classroom" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
                 <div class="row right-cell" id="new_sheet_div" >
-                    <a href="#" class="full-container-size" onclick="postNewSheet()">
-                        <h5>Poster une nouvelle fiche !</h5>
-                        <div id="new_sheet_form">
-                            {% getNewSheetForm request %}
-                        </div>
-                    </a>
+                    <a id="post_new_sheet_link" href="#" class="full-container-size post_new_sheet_link"><h5>Poster une nouvelle fiche !</h5></a>
                 </div>
             </div>
         </div>
     </div>
 </nav>
+
+<div id="new_sheet_form">
+    <h5><a id="hide_new_sheet_form">Poster une nouvelle fiche !</a></h5>
+    {% getNewSheetForm request %}
+</div>
 
 <div id="lessons">
     <header>
@@ -33,7 +35,12 @@
     
     <div class="flex-container">
         {% for lesson in student.lessons.all %}
-            <div class="lesson"><a class="full-container-size" href="lesson/{{ lesson.name }}">{{ lesson.name }}</a></div>
+        <div class="lesson">
+            <a class="full-container-size" href="lesson/{{ lesson.name }}">
+                <h5>{{ lesson.name }}</h5>
+                <p>{{ lesson.teacher.lastName }}</p>
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>

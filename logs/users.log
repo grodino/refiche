@@ -172,3 +172,12 @@
 [2015-05-03 16:47:51] INFO [users.userConnected:8] User INGEGUS has connected !
 [2015-05-03 16:48:59] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
 [2015-05-03 16:49:00] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-08 19:31:42] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-05-08 19:32:01] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-09 18:55:02] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-05-09 18:56:31] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-05-09 18:56:32] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-09 18:56:41] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-05-09 18:57:21] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-05-09 18:57:22] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-05-09 19:47:33] INFO [users.userConnected:8] User LWEED has connected !

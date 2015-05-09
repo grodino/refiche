@@ -14,31 +14,18 @@ input_file.addEventListener('change', function() {
     
 }, false);
 
-
-var newSheetForm = document.querySelector('#new_sheet_form'),
-    userInfos = document.querySelector('#user_infos').cloneNode(true),
-    classroomsProfileContainer = document.querySelector('.row').cloneNode(true),
-    newSheetDiv = document.querySelector('#new_sheet_div').cloneNode(true),
-    navRow = document.querySelector('.row');
-
-function postNewSheet() {
-    if (newSheetForm.style.display == 'block') {
-        hideNewSheetForm();
-    } else {
-        showNewSheetForm();
-    }
-}
-
-function hideNewSheetForm() {
-    newSheetForm.style.display = 'none';
-    navRow.insertBefore(userInfos, navRow.firstChild);
-}
-
-function showNewSheetForm() {
-    newSheetForm.style.display = 'block';
-    navRow.removeChild(document.querySelector('#user_infos'));
-
-}
+// Animation to post a new sheet
+$(function() {
+    $('#post_new_sheet_link').click(function() {
+        $('nav').slideUp('fast');
+        $('#new_sheet_form').slideDown('fast');
+    });
+    
+    $('#hide_new_sheet_form').click(function() {
+        $('nav').slideDown('fast');
+        $('#new_sheet_form').slideUp('fast');
+    });
+});
 
 function submitForm() {
     var formResponse = new XMLHttpRequest(),
