@@ -1,4 +1,4 @@
-<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="" onsubmit="submitForm()">
+<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="">
     {% csrf_token %}
 
     {{ form.errors }}
@@ -23,7 +23,7 @@
                 <div class="input-file-container">
                     <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
                 </div>
-                <input class="button-primary" type="submit"/>
+                <input id="submit_form" class="button-primary" type="submit"/>
             </div>
         </div>
     </div>

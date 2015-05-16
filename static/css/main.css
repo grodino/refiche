@@ -6,6 +6,9 @@ body, html {
     background-color: #ffffff;
 } 
 
+/*  HEADER
+------------------------------------------- */
+
 header {
     margin: 0px;
     padding-left: 1em;
@@ -25,10 +28,11 @@ header a {
     margin: auto;
 }
 
-/* CONTENT */
-
+/*  CONTENT
+------------------------------------------- */
 #content {
     margin: 1em;
+    margin-top: -0.5em;
 }
 
 #content header {
@@ -71,19 +75,17 @@ header a {
 }
 
 
-/* END CONTENT */
-
-/* FOOTER */
+/*  FOOTER
+------------------------------------------- */
 
 footer {
     display: block;
     text-align: center;
 }
 
-/* END FOOTER */
 
-
-/* GENERIC */
+/*  MICELLANEOUS
+------------------------------------------- */
 
 a {
     text-decoration: none;

@@ -100,8 +100,13 @@
     color: #2F2F2F;
 }
 
-#new_sheet_form h5{
+#new_sheet_form h5,
+#new_sheet_form a{
     text-transform: uppercase;
+}
+
+#new_sheet_form a {
+    margin-right: 0.5em;
     
     cursor: pointer;
 }

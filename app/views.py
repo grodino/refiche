@@ -1,3 +1,4 @@
+# coding=UTF-8
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -55,7 +56,7 @@ def newSheetPage(request):
 			sheetType = form.cleaned_data['sheetType']
 			sheet.save()
 
-			localVarsJSON = json.dumps({'sucess': 'Votre fichier a bien été envoyée',})
+			localVarsJSON = json.dumps({'sucess': 'Votre fichier a bien été envoyé !',})
 
 			return HttpResponse(localVarsJSON, content_type='application/json')
 		else:
