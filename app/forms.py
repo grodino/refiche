@@ -1,3 +1,4 @@
+#coding=UTF-8
 from os.path import splitext
 from django import forms
 from django.conf import settings
@@ -23,4 +24,4 @@ class UploadSheetForm(forms.ModelForm):
 
 	class Meta:
 		model = Sheet
-		exclude = ('uploadedBy', 'contentType',)
+		exclude = ('uploadedBy', 'contentType', 'uploadDate')

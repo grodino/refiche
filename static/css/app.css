@@ -47,6 +47,7 @@
 #lessons a {
     margin-left: 0.25em;
     
+    text-transform: uppercase;
     font-weight: 300;
 }
 
@@ -129,10 +130,30 @@ form input[type="file"] {
 }
 
 
+/*  SHEET LIST
+------------------------------------------- */
+#sheets header {
+    background-color: #FFB948;
+}
 
+#sheets a {
+    margin-left: 0.25em;
+    
+    font-weight: 300;
+}
 
+#sheets .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
-
+#sheets .flex-container .sheet{
+    background-color: #D9D9D9;
+    
+    margin-bottom: 1em;
+}
 
 
 

@@ -3,8 +3,6 @@
 
 {% block content %}
 
-{# not displayed #}
-
 <nav class="container">
     <div class="row">
         <div id="user_infos" class="six columns left-cell full-container-size">
@@ -28,6 +26,7 @@
     {% getNewSheetForm request %}
 </div>
 
+{% block in_content %}
 <div id="lessons">
     <header>
         <h3>Matières</h3>
@@ -38,11 +37,14 @@
         <div class="lesson">
             <a class="full-container-size" href="lesson/{{ lesson.name }}">
                 <h5>{{ lesson.name }}</h5>
-                <p>{{ lesson.teacher.lastName }}</p>
+                <p>
+                    {{ lesson.teacher.gender }}
+                    {{ lesson.teacher.lastName }}
+                </p>
             </a>
         </div>
         {% endfor %}
     </div>
 </div>
-
+{% endblock %}
 {% endblock %}

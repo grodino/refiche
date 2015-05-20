@@ -3,15 +3,15 @@ from django.contrib import admin
 from app.models import Student, Classroom, School, Level, Teacher, Lesson, Sheet
 
 class SheetAdmin(admin.ModelAdmin):
-	list_display = ('name', 'uploadedBy', 'lesson')
-	list_filter = ('uploadedBy',)
+	list_display = ('name', 'uploadedBy', 'lesson', 'uploadDate')
+	list_filter = ('uploadedBy','uploadDate')
 
 class StudentAdmin(admin.ModelAdmin):
 	list_display = ('user', 'classroom', 'school', 'isDelegate')
 	list_filter = ('school',)
 
 class TeacherAdmin(admin.ModelAdmin):
-	list_display = ('lastName', 'firstName')
+	list_display = ('lastName', 'gender')
 
 class LessonAdmin(admin.ModelAdmin):
 	list_display = ('name', 'teacher')

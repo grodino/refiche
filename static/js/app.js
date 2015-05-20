@@ -31,30 +31,37 @@ $(function() {
     // Dealing with the form
     $('#submit_form').click(function() {
         var formResponse = new XMLHttpRequest(),
-        sheetForm = document.querySelector('#id_sheet_form'),
-        sheetFormData = new FormData(sheetForm);
-    
-        formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
-        formResponse.send(sheetFormData);
+        sheetForm = document.querySelector('#id_sheet_form');
+            
+        if ($('#id_name').val() === ''
+            || $('#id_lesson').val() === ''
+            || $('#id_sheetFile').val() === '') {
+            alert('Pignouf');
+        } else {       
+            var sheetFormData = new FormData(sheetForm);
 
-        formResponse.addEventListener('readystatechange', function() {
-            if (formResponse.readyState === formResponse.DONE) {
-                if (!formResponse.getResponseHeader('Content-type') === 'application/json') {
-                    alert('Oh non :( Une erreur est survenue')
-                }
-                
-                var status = $.parseJSON(formResponse.responseText);
-                
-                if (status.sucess) {
-                    alert(status.sucess);
-                } else {
-                    for (error in status) {
-                        $('<div>ERREUR VAVASSEUR !</div>').insertBefore($('id_SheetType'));
-                        alert(status[error]);
+            formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
+            formResponse.send(sheetFormData);
+
+            formResponse.addEventListener('readystatechange', function() {
+                if (formResponse.readyState === formResponse.DONE) {
+                    if (!formResponse.getResponseHeader('Content-type') === 'application/json') {
+                        alert('Oh non :( Une erreur est survenue')
+                    }
+
+                    var status = $.parseJSON(formResponse.responseText);
+
+                    if (status.sucess) {
+                        location.reload();
+                    } else {
+                        for (error in status) {
+                            $('<div>ERREUR VAVASSEUR !</div>').insertBefore($('id_SheetType'));
+                            alert(status[error]);
+                        }
                     }
                 }
-            }
-        }, false);
+            }, false);
+        }
     });
 });
 

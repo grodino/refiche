@@ -1,3 +1,4 @@
+# coding=UTF-8
 from django.shortcuts import render
 from django.conf import settings
 import logging, requests

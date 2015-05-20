@@ -1,45 +1,9 @@
-# coding=UTF-8
-from os.path import splitext, join
-from os import remove
+#coding=UTF-8
 from django.db import models
-from django.conf import settings
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save
-
-
-# _____________________________________________________________________
-# FUNCTIONS
-
-def renameFile(instance, name):
-	""" NOT A MODEL, it's a function made to modify the name 
-		of the file like this it won't be executed """
-
-	extension = splitext(name)[1].replace('.', 'point-')
-	fileName = splitext(name)[0]
-
-	return "sheets/{}-{}".format(fileName, extension)
-
-def deleteFile(sender, instance, **kwargs):
-	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded"""
-
-	# Deduct 1 from the user's numberOfSheetsUploaded
-	user = instance.uploadedBy
-	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded - 1
-	user.save()
-
-	remove(join(settings.MEDIA_ROOT, instance.sheetFile.name))
-
-def addFile(sender, instance, **kwargs):
-	""" Function made to add 1 to the user's numberOfSheetsUploaded """
-
-	user = instance.uploadedBy
-	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded + 1
-	user.save()
-
-
-# _____________________________________________________________________
-# MODELS
+from app.functions import renameFile, addFile, deleteFile
 
 class Lesson(models.Model):
 	""" The lesson/class model, they can only be created by a delegate """
@@ -113,30 +77,37 @@ class Teacher(models.Model):
 	""" Teacher model, it does not extends the profile abstract but
 		might do in the future if some want to connect to refiche """
 
+	GENDER_CHOICES = (('M.', 'Monsieur'),
+					  ('Mme', 'Madame'),
+					  ('Mlle', 'Mademoiselle'))
+
 	lastName = models.CharField(max_length=60) # Last name of the teacher
-	firstName = models.CharField(max_length=30) # First name of the teacher
+	firstName = models.CharField(max_length=30, null=True) # First name of the teacher
+	gender = models.CharField(max_length=4, choices=GENDER_CHOICES)
 
 	def __str__(self):
-		return self.lastName
+		return "{0} {1}".format(self.gender, self.lastName)
 
 class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
 
-	POSSIBLE_CHOICES = (('SHEET', 'Fiche'),
-						('NOTES', 'Cours'),
-						('TEST', 'Sujet de contrôle'),
-						('TEST_CORRECTION', 'Corrigé de contrôle'))
+	SHEET_TYPE_CHOICES = (('SHEET', 'Fiche'),
+						  ('NOTES', 'Cours'),
+						  ('TEST', 'Sujet de contrôle'),
+						  ('TEST_CORRECTION', 'Corrigé de contrôle'))
 
 	name = models.CharField(max_length=50)
 	lesson = models.ForeignKey('Lesson')
-	sheetType = models.CharField(max_length=50, choices=POSSIBLE_CHOICES, default='SHEET')
+	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET')
 
 	sheetFile = models.FileField(upload_to=renameFile)
 	uploadedBy = models.ForeignKey(Student)
 	contentType = models.CharField(max_length=50)
+	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):
 		return self.name
+
 
 # _____________________________________________________________________
 # SIGNALS

@@ -1,9 +1,9 @@
 # coding=UTF-8
+import json
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-import json
 from django.core.exceptions import PermissionDenied
 from app.models import Lesson, School, Sheet
 from app.forms import UploadSheetForm
@@ -56,7 +56,8 @@ def newSheetPage(request):
 			sheetType = form.cleaned_data['sheetType']
 			sheet.save()
 
-			localVarsJSON = json.dumps({'sucess': 'Votre fichier a bien été envoyé !',})
+			localVarsJSON = json.dumps({'sucess': 'true',})
+			messages.add_message(request, messages.SUCCESS, 'Votre fiche a bien été envoyée !')
 
 			return HttpResponse(localVarsJSON, content_type='application/json')
 		else:
