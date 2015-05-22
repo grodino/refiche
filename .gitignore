@@ -1,3 +1,5 @@
 refiche/settings
 media/sheets/*
 db.sqlite3
+.idea/
+*.pyc

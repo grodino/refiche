@@ -10,9 +10,17 @@
     {% for sheet in sheets %}
         <div class="sheet">
             <a href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
-                <h5>{{ sheet.name }}</h5> <br />
-                Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} ({{ sheet.uploadedBy.classroom.shortName }}) {{ sheet.uploadDate|naturaltime }}<br />
-                <img src="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" width="300"/>
+                <div class="info_container">
+                    <h5>{{ sheet.name }}</h5> 
+                    <span class="sheet_info">
+                        Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} 
+                        ({{ sheet.uploadedBy.classroom.shortName }}) {{ sheet.uploadDate|naturaltime }}
+                    </span>
+                </div>
+                
+                <hr />
+                
+                <img src="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" width="300"/><br/>
             </a>
         </div>
     {% endfor %}

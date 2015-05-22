@@ -5,25 +5,33 @@
     
     <div class="container">
         <div class="row">
-            <div class="eight columns">
-                {{ form.name.label_tag }}
-                {{ form.name }}
+            <div class="seven columns">
+                <div id="name_input_wrapper">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                </div>
 
-                {{ form.lesson.label_tag }}
-                {{ form.lesson }}
+                 <div id="lesson_input_wrapper">
+                     {{ form.lesson.label_tag }}
+                     {{ form.lesson }}
+                 </div>
 
-                {{ form.sheetType.label_tag }}
-                {{ form.sheetType }}
+                <div id="sheet_type_input_wrapper">
+                    {{ form.sheetType.label_tag }}
+                    {{ form.sheetType }}
+                </div>
             </div>
         
-            <div class="four columns">
-                {{ form.sheetFile.label_tag }}
-                {{ form.sheetFile }}
+            <div class="five columns">
+                 <div id="sheetFile_input_wrapper">
+                    {{ form.sheetFile.label_tag }}
+                    {{ form.sheetFile }}
 
-                <div class="input-file-container">
-                    <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
-                </div>
-                <input id="submit_form" class="button button-primary" value="Envoyer !"/>
+                    <div class="input-file-container">
+                        <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
+                    </div>
+                    <input id="submit_form" class="button button-primary" readonly="true" value="Envoyer !"/>
+                 </div>
             </div>
         </div>
     </div>

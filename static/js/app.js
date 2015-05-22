@@ -32,12 +32,26 @@ $(function() {
     $('#submit_form').click(function() {
         var formResponse = new XMLHttpRequest(),
         sheetForm = document.querySelector('#id_sheet_form');
+
+        //clean errors
+        $('#id_name').removeClass('error');
+        $('#id_lesson').removeClass('error');
+        $('#file_avatar').removeClass('error');
+
+        // If one of the fields is empty
+        if ($('#id_name').val() === '' || $('#id_lesson').val() === '' || $('#id_sheetFile').val() === '') {
+            if ($('#id_name').val() === '') {
+                $('#id_name').addClass('error');
+            }
+            if ($('#id_lesson').val() === '') {
+                $('#id_lesson').addClass('error');
+            }
+            if ($('#id_sheetFile').val() === '') {
+                $('#file_avatar').addClass('error');
+            }
             
-        if ($('#id_name').val() === ''
-            || $('#id_lesson').val() === ''
-            || $('#id_sheetFile').val() === '') {
-            alert('Pignouf');
-        } else {       
+            alert('Oops je crois que tu as oublié quelque chose !');
+        } else {
             var sheetFormData = new FormData(sheetForm);
 
             formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
@@ -54,14 +68,15 @@ $(function() {
                     if (status.sucess) {
                         location.reload();
                     } else {
-                        for (error in status) {
-                            $('<div>ERREUR VAVASSEUR !</div>').insertBefore($('id_SheetType'));
-                            alert(status[error]);
-                        }
+                        alert('Oh non :( Je crois que j\'ai avalé de travers');
                     }
                 }
             }, false);
         }
+    });
+    
+    $('.success').click(function() {
+        $('.success').slideUp('fast');
     });
 });
 

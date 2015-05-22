@@ -2,7 +2,7 @@
 from os.path import splitext
 from django import forms
 from django.conf import settings
-from app.models import Sheet, Student
+from app.models import Sheet
 
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):

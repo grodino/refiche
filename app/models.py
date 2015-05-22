@@ -1,25 +1,26 @@
-#coding=UTF-8
+# coding=UTF-8
 from django.db import models
 from django.core.files import File
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save
 from app.functions import renameFile, addFile, deleteFile
 
+
 class Lesson(models.Model):
 	""" The lesson/class model, they can only be created by a delegate """
 
-	name = models.CharField(max_length=30) # The official name of the class
-	teacher = models.ForeignKey('Teacher') # The link to the teacher (one teacher for one class)
+	name = models.CharField(max_length=30)  # The official name of the class
+	teacher = models.ForeignKey('Teacher')  # The link to the teacher (one teacher for one class)
 
-	def __str__(self):	
+	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
 
 
 class Level(models.Model):
 	""" Level/ degree model, they can only be created by myself now
-		It might change in the future"""
+        It might change in the future"""
 
-	name = models.CharField(max_length=30) # The official name of the level/degree
+	name = models.CharField(max_length=30)  # The official name of the level/degree
 
 	def __str__(self):
 		return self.name
@@ -27,9 +28,9 @@ class Level(models.Model):
 
 class School(models.Model):
 	""" School model, it can refer to many levels (primaire, collège ...) """
-	
-	name = models.CharField(max_length=255) # The full name of the school chosen by the user
-	levels = models.ManyToManyField(Level) # Link with the levels of the school
+
+	name = models.CharField(max_length=255)  # The full name of the school chosen by the user
+	levels = models.ManyToManyField(Level)  # Link with the levels of the school
 
 	def __str__(self):
 		return self.name
@@ -37,11 +38,11 @@ class School(models.Model):
 
 class Classroom(models.Model):
 	""" Classroom model, it always refer to at least on profile """
-	
-	level = models.ForeignKey('Level') # Level or degree of the class (ex: 1ere)
-	school = models.ForeignKey('School') # School witch the classroom belongs to
-	name = models.CharField(max_length=100) # Name of the classroom (ex: Première S-3)
-	shortName = models.CharField(max_length=8) # Name of the classroom shortened (ex: 1-S3)
+
+	level = models.ForeignKey('Level')  # Level or degree of the class (ex: 1ere)
+	school = models.ForeignKey('School')  # School witch the classroom belongs to
+	name = models.CharField(max_length=100)  # Name of the classroom (ex: Première S-3)
+	shortName = models.CharField(max_length=8)  # Name of the classroom shortened (ex: 1-S3)
 	lessons = models.ManyToManyField(Lesson)
 
 	def __str__(self):
@@ -50,22 +51,22 @@ class Classroom(models.Model):
 
 class Profile(models.Model):
 	""" Abstract User profile, it extends the original User class
-		and is made to become weather a student or a teacher etc.. """
-	
-	user = models.OneToOneField(User) # Link with the original user class that we extend
-	classroom = models.ForeignKey('Classroom') # Link to the user's classroom
-	school = models.ForeignKey('School') # Link to the school of the profile (student or teacher)
+        and is made to become weather a student or a teacher etc.. """
+
+	user = models.OneToOneField(User)  # Link with the original user class that we extend
+	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
+	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
 	# I will add some other things but now this is it
 
 	class Meta(object):
 		abstract = True
 
 
-class Student(Profile):			
-	""" Student model, it exxtends the abstract Profile and the User
-		model """
+class Student(Profile):
+	""" Student model, it extends the abstract Profile and the User
+        model """
 
-	isDelegate = models.BooleanField(default=False) # If the student is authorized to manage the classroom
+	isDelegate = models.BooleanField(default=False)  # If the student is authorized to manage the classroom
 	lessons = models.ManyToManyField(Lesson)
 	numberOfSheetsUploaded = models.IntegerField(default=0)
 
@@ -75,18 +76,19 @@ class Student(Profile):
 
 class Teacher(models.Model):
 	""" Teacher model, it does not extends the profile abstract but
-		might do in the future if some want to connect to refiche """
+        might do in the future if some want to connect to refiche """
 
 	GENDER_CHOICES = (('M.', 'Monsieur'),
 					  ('Mme', 'Madame'),
 					  ('Mlle', 'Mademoiselle'))
 
-	lastName = models.CharField(max_length=60) # Last name of the teacher
-	firstName = models.CharField(max_length=30, null=True) # First name of the teacher
+	lastName = models.CharField(max_length=60)  # Last name of the teacher
+	firstName = models.CharField(max_length=30, null=True)  # First name of the teacher
 	gender = models.CharField(max_length=4, choices=GENDER_CHOICES)
 
 	def __str__(self):
 		return "{0} {1}".format(self.gender, self.lastName)
+
 
 class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
@@ -107,7 +109,6 @@ class Sheet(models.Model):
 
 	def __str__(self):
 		return self.name
-
 
 # _____________________________________________________________________
 # SIGNALS

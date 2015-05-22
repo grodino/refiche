@@ -83,6 +83,25 @@ footer {
     text-align: center;
 }
 
+/*  MESSAGES
+------------------------------------------- */
+.success {
+    display: block;
+    padding: 0.5em;
+    
+    background-color: #2bd123;
+    cursor: pointer;
+    
+    font-size: 1.2em;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 1em;
+}
+
+.success .helper {
+    font-size: 0.8em;
+    font-weight: 300;
+}
 
 /*  MICELLANEOUS
 ------------------------------------------- */
@@ -100,6 +119,17 @@ a {
     height: 100%;
 }
 
+.full-container-width {
+    display: block;
+    box-sizing: border-box;
+    
+    width: 100%;
+}
+
 .u-padding-left-1em {
     padding-left: 1em; 
+}
+
+.hidden {
+    display: none;
 }

@@ -113,7 +113,7 @@
 }
 
 form .button {
-    width: 18em;
+    width: 20em;
 }
 
 form .button-primary {
@@ -122,11 +122,15 @@ form .button-primary {
 
 form input,
 form select {
-    width: 15em;
+    width: 18em;
 }
 
 form input[type="file"] {
     display: none;
+}
+
+form .error {
+    border: 1px solid #ff2700;
 }
 
 
@@ -149,13 +153,32 @@ form input[type="file"] {
     justify-content: space-between;
 }
 
-#sheets .flex-container .sheet{
-    background-color: #D9D9D9;
-    
-    margin-bottom: 1em;
+#sheets .info_container {
+    margin-left: 0.5em;
 }
 
+#sheets .sheet{
+    display: block;
+    width: 25em;
+    height: 27em;
+    margin-bottom: 1em;
+    
+    background-color: #D9D9D9;
+}
 
+#sheets hr {
+    margin: 0.5em;
+    border-color: #2F2F2F;
+}
+
+#sheets .sheet h5 {
+    margin-bottom: 0px;
+    font-size: 2em;
+}
+
+#sheets .sheet_info {
+    color: #2F2F2F;
+}
 
 
 
