@@ -1,5 +1,5 @@
 # coding=UTF-8
-import json
+import json, logging
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -35,7 +35,7 @@ def lessonPage(request, lesson_name):
 	except Lesson.DoesNotExist:
 		raise Http404("This lesson does not exist or you are not registered to it !")
 
-	sheets = Sheet.objects.filter(lesson=lesson)
+	sheets = Sheet.objects.filter(lesson=lesson).order_by('-uploadDate')
 
 	return render(request, 'app/lesson.html', locals())
 
@@ -87,6 +87,9 @@ def downloadSheetPage(request, pk):
 	data = sheet.sheetFile.read()
 
 	response = HttpResponse(data, content_type=sheet.contentType)
+	logger = logging.getLogger('users')
+	logger.info(sheet.contentType)
+
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name)
 
 	return response

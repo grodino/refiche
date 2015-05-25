@@ -140,7 +140,11 @@ form .error {
     background-color: #FFB948;
 }
 
-#sheets a {
+#sheets header h3 {
+    max-width: 70%;
+}
+
+#sheets .info_container{
     margin-left: 0.25em;
     
     font-weight: 300;
@@ -153,17 +157,18 @@ form .error {
     justify-content: space-between;
 }
 
-#sheets .info_container {
-    margin-left: 0.5em;
-}
-
 #sheets .sheet{
     display: block;
     width: 25em;
-    height: 27em;
     margin-bottom: 1em;
     
-    background-color: #D9D9D9;
+    /*background-color: #D9D9D9;*/
+    background-image: url('http://refiche.dev:8000/app/download/64');
+    background-position: 50%;
+}
+
+#sheets .info_container {
+    margin-left: 0.5em;
 }
 
 #sheets hr {
@@ -173,16 +178,24 @@ form .error {
 
 #sheets .sheet h5 {
     margin-bottom: 0px;
-    font-size: 2em;
+    font-size: 1.6em;
 }
 
 #sheets .sheet_info {
     color: #2F2F2F;
 }
 
+#sheets .sheet p {
+    text-align: center;
+    vertical-align: middle;
+    
+    box-sizing: content-box;    
+}
 
-
-
-
+#sheets .sheet img {
+    display:inline-block;
+    vertical-align:middle;
+    text-align:left; /* on rétablit l'alignement du texte */
+}
 
 

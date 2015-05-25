@@ -3,7 +3,7 @@ from django.contrib import admin
 from app.models import Student, Classroom, School, Level, Teacher, Lesson, Sheet
 
 class SheetAdmin(admin.ModelAdmin):
-	list_display = ('name', 'uploadedBy', 'lesson', 'uploadDate')
+	list_display = ('name', 'uploadedBy', 'lesson', 'uploadDate', 'contentType')
 	list_filter = ('uploadedBy','uploadDate')
 
 class StudentAdmin(admin.ModelAdmin):

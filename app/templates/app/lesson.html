@@ -4,7 +4,9 @@
 {% block in_content %}
 
 <div id="sheets">
-    <header><h3>{{ lesson.name|upper }} :  {{ lesson.teacher.gender }} {{ lesson.teacher.lastName }}</h3></header>
+    <header>
+        <h3>{{ lesson.name|upper }} :  {{ lesson.teacher.gender }} {{ lesson.teacher.lastName }}
+    </header>
 
 <div class=flex-container>
     {% for sheet in sheets %}
@@ -14,13 +16,14 @@
                     <h5>{{ sheet.name }}</h5> 
                     <span class="sheet_info">
                         Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} 
-                        ({{ sheet.uploadedBy.classroom.shortName }}) {{ sheet.uploadDate|naturaltime }}
+                        ({{ sheet.uploadedBy.classroom.shortName }}) {{ sheet.uploadDate|naturaltime }} <br />
+                        {{ sheet.sheetType }}
                     </span>
                 </div>
                 
                 <hr />
                 
-                <img src="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" width="300"/><br/>
+                {# <p><img src="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" width="350" /></p> #}
             </a>
         </div>
     {% endfor %}
