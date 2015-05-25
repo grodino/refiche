@@ -75,9 +75,18 @@ $(function() {
         }
     });
     
+    // Dealing with the error and success messages
     $('.success').click(function() {
         $('.success').slideUp('fast');
     });
+    
+    // Reveals informations about a sheet 
+    $('.sheet').hover(function () {
+        $('.sheet_info', this).show('fast');
+    }, function() {
+        $('.sheet_info', this).stop(true, false);
+        $('.sheet_info', this).hide('fast');
+    }).delay(5000);
 });
 
 

@@ -138,16 +138,11 @@ form .error {
 ------------------------------------------- */
 #sheets header {
     background-color: #FFB948;
+    margin-bottom: 0.5em;
 }
 
 #sheets header h3 {
     max-width: 70%;
-}
-
-#sheets .info_container{
-    margin-left: 0.25em;
-    
-    font-weight: 300;
 }
 
 #sheets .flex-container {
@@ -159,16 +154,29 @@ form .error {
 
 #sheets .sheet{
     display: block;
+    
     width: 25em;
+    height: 23em;
     margin-bottom: 1em;
     
-    /*background-color: #D9D9D9;*/
-    background-image: url('http://refiche.dev:8000/app/download/64');
-    background-position: 50%;
+    border: 1px solid #3A6BAA;
+    background-color: #D9D9D9;
+    background-size: cover;
 }
 
-#sheets .info_container {
-    margin-left: 0.5em;
+#sheets a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#sheets .info_container {  
+    margin: 0;
+    padding-left: 0.5em;
+    
+    border-top: 1px solid #3A6BAA;
+    background-color: #D9D9D9;
+    font-weight: 300;
 }
 
 #sheets hr {
@@ -178,24 +186,16 @@ form .error {
 
 #sheets .sheet h5 {
     margin-bottom: 0px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     font-size: 1.6em;
 }
 
 #sheets .sheet_info {
-    color: #2F2F2F;
-}
-
-#sheets .sheet p {
-    text-align: center;
-    vertical-align: middle;
+    display: none;
+    margin-bottom: 0.5em;
     
-    box-sizing: content-box;    
-}
-
-#sheets .sheet img {
-    display:inline-block;
-    vertical-align:middle;
-    text-align:left; /* on rétablit l'alignement du texte */
+    color: #2F2F2F;
 }
 
 

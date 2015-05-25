@@ -93,10 +93,10 @@ class Teacher(models.Model):
 class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
 
-	SHEET_TYPE_CHOICES = (('SHEET', 'Fiche'),
-						  ('NOTES', 'Cours'),
-						  ('TEST', 'Sujet de contrôle'),
-						  ('TEST_CORRECTION', 'Corrigé de contrôle'))
+	SHEET_TYPE_CHOICES = (('SHEET', 'fiche'),
+						  ('NOTES', 'cours'),
+						  ('TEST', 'sujetDeContrôle'),
+						  ('TEST_CORRECTION', 'corrigéDeContrôle'))
 
 	name = models.CharField(max_length=50)
 	lesson = models.ForeignKey('Lesson')
@@ -104,7 +104,7 @@ class Sheet(models.Model):
 
 	sheetFile = models.FileField(upload_to=renameFile)
 	uploadedBy = models.ForeignKey(Student)
-	contentType = models.CharField(max_length=50)
+	contentType = models.CharField(max_length=255)
 	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):

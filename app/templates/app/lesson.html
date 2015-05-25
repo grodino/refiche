@@ -1,5 +1,5 @@
 {% extends "home.html" %}
-{% load humanize %}
+{% load humanize static app_extras %}
 
 {% block in_content %}
 
@@ -10,20 +10,28 @@
 
 <div class=flex-container>
     {% for sheet in sheets %}
-        <div class="sheet">
+        <div class="sheet" style="  {% if sheet.sheetType == 'SHEET' %}
+                                        background-image: url('{% static 'img/icons/note.png' %}');
+                                    {% elif sheet.sheetType == 'NOTES' %}
+                                        background-image: url('{% static 'img/icons/note.png' %}');
+                                    {% elif sheet.sheetType == 'TEST' %}
+                                        background-image: url('{% static 'img/icons/test.png' %}');
+                                    {% elif sheet.sheetType == 'TEST_CORRECTION' %}
+                                        background-image: url('{% static 'img/icons/test_correction.png' %}');
+                                    {% endif %}
+                                    ">
             <a href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
                 <div class="info_container">
                     <h5>{{ sheet.name }}</h5> 
-                    <span class="sheet_info">
-                        Créée par {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }} 
-                        ({{ sheet.uploadedBy.classroom.shortName }}) {{ sheet.uploadDate|naturaltime }} <br />
-                        {{ sheet.sheetType }}
-                    </span>
+                    <div class="sheet_info">
+                        #{{ sheet.get_sheetType_display }}<br />
+                        {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }}
+                        ({{ sheet.uploadedBy.classroom.shortName }})
+
+                        {{ sheet.uploadDate|naturaltime_addon }} <br />
+                        Cliquez pour télécharger
+                    </div>
                 </div>
-                
-                <hr />
-                
-                {# <p><img src="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" width="350" /></p> #}
             </a>
         </div>
     {% endfor %}

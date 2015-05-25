@@ -87,8 +87,6 @@ def downloadSheetPage(request, pk):
 	data = sheet.sheetFile.read()
 
 	response = HttpResponse(data, content_type=sheet.contentType)
-	logger = logging.getLogger('users')
-	logger.info(sheet.contentType)
 
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name)
 
