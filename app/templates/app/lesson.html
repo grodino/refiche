@@ -8,7 +8,7 @@
         <h3>{{ lesson.name|upper }} :  {{ lesson.teacher.gender }} {{ lesson.teacher.lastName }}
     </header>
 
-<div class=flex-container>
+    <div class=flex-container>
     {% for sheet in sheets %}
         <div class="sheet" style="  {% if sheet.sheetType == 'SHEET' %}
                                         background-image: url('{% static 'img/icons/note.png' %}');
@@ -35,6 +35,7 @@
             </a>
         </div>
     {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

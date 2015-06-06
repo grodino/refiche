@@ -90,6 +90,17 @@ class Teacher(models.Model):
 		return "{0} {1}".format(self.gender, self.lastName)
 
 
+class Chapter(models.Model):
+	""" Chapter model  """
+
+	name = models.CharField(max_length=255)
+	number = models.IntegerField()
+	lesson = models.ForeignKey('Lesson')
+
+	def __str__(self):
+		return '{}. {}'.format(self.number, self.name)
+
+
 class Sheet(models.Model):
 	""" Sheet model (card, notes about a lesson etc) """
 
@@ -100,6 +111,7 @@ class Sheet(models.Model):
 
 	name = models.CharField(max_length=50)
 	extension = models.CharField(max_length=50)
+	chapter = models.ForeignKey('Chapter', null=True)
 	lesson = models.ForeignKey('Lesson')
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET')
 
@@ -109,7 +121,8 @@ class Sheet(models.Model):
 	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):
-		return self.name
+		return '{}{}'.format(self.name, self.extension)
+
 
 # _____________________________________________________________________
 # SIGNALS

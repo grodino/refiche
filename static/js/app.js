@@ -18,11 +18,14 @@ $(function() {
     }, false);
     
     // Animation to post a new sheet
+
+    //Show
     $('#post_new_sheet_link').click(function() {
         $('nav').slideUp('fast');
         $('#new_sheet_form').slideDown('fast');
     });
-    
+
+    //Hide
     $('#hide_new_sheet_form').click(function() {
         $('nav').slideDown('fast');
         $('#new_sheet_form').slideUp('fast');

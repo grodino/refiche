@@ -792,3 +792,16 @@
 [2015-06-06 15:06:12] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
 [2015-06-06 15:06:13] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
 [2015-06-06 15:06:15] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-06 15:36:36] WARNING [users.addFile:56] 
+[2015-06-06 15:36:55] INFO [users.addFile:56] 
+[2015-06-06 15:37:34] INFO [users.addFile:56] sheets/test%20(1)-point-docx_s4RM7Az
+[2015-06-06 15:39:29] INFO [users.addFile:56] /home/ingegus/Documents/Programmation/Python/Django/refiche/media/sheets/test (1)-point-docx_cwivVhD
+[2015-06-06 18:11:18] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-06 18:11:32] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
+[2015-06-06 18:18:50] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-06 18:22:31] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-06 18:22:33] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
+[2015-06-06 18:22:34] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-06 18:25:25] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-06 18:29:54] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
+[2015-06-06 18:29:56] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
