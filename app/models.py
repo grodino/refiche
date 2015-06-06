@@ -99,6 +99,7 @@ class Sheet(models.Model):
 						  ('TEST_CORRECTION', 'corrigéDeContrôle'))
 
 	name = models.CharField(max_length=50)
+	extension = models.CharField(max_length=50)
 	lesson = models.ForeignKey('Lesson')
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET')
 

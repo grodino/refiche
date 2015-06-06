@@ -1,11 +1,12 @@
 # coding=UTF-8
-import json, logging
-from django.shortcuts import render, redirect
+import json
+from os.path import splitext
+from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Lesson, School, Sheet
+from app.models import Lesson, Sheet
 from app.forms import UploadSheetForm
 from app.functions import getStudent
 
@@ -53,7 +54,9 @@ def newSheetPage(request):
 			sheet = form.save(commit=False)
 			sheet.uploadedBy = student
 			sheet.contentType = form.cleaned_data['sheetFile'].content_type
-			sheetType = form.cleaned_data['sheetType']
+			sheet.name = splitext(form.cleaned_data['sheetFile'].name)[0]
+			sheet.extension = splitext(form.cleaned_data['sheetFile'].name)[1]
+			sheet.sheetType = form.cleaned_data['sheetType']
 			sheet.save()
 
 			localVarsJSON = json.dumps({'sucess': 'true',})
@@ -87,7 +90,6 @@ def downloadSheetPage(request, pk):
 	data = sheet.sheetFile.read()
 
 	response = HttpResponse(data, content_type=sheet.contentType)
-
-	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name)
+	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name+sheet.extension)
 
 	return response

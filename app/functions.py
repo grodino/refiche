@@ -23,7 +23,7 @@ def getStudent(request):
 
 
 def renameFile(instance, name):
-	""" NOT A MODEL, it's a function made to modify the name 
+	""" It's a function made to modify the name
 		of the file like this it won't be executed """
 
 	extension = splitext(name)[1].replace('.', 'point-')
