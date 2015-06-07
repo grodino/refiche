@@ -11,12 +11,11 @@ body, html {
 
 header {
     margin: 0px;
-    padding-left: 1em;
     
     background-color: #3a6baa;
 }
 
-header img {
+header .logo {
     margin-left: auto;
     margin-right: auto;
 

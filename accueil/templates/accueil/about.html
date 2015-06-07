@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/about.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="miew">
+        <img src="{% static 'img/logo_full.png' %}" />
+    </div>
+
+    <div>
+        A coucou efrgfdgf <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> A recourcour<br/><br/><br/><br/><br/><br/>iszhdsfghlfdghjdsfghli<br/><br/><br/><br/>
+    </div>
+{% endblock %}

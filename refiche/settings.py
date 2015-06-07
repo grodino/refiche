@@ -154,7 +154,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     )
-
-# Facebook API
-FACEBOOK_APP_ID = '1423338201308406'
-FACEBOOK_SECRET = 'b664debef8373dcd1525c0c1bc48e84a'

@@ -6,13 +6,13 @@
 <nav class="container">
     <div class="row">
         <div id="user_infos" class="six columns left-cell full-container-size">
-            <a href="profile of the user" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
+            <a href="{% url 'app.views.underConstruction' classroom_name='miew' %}" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
             <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
         </div>
         
         <div id="left_cell" class="six columns">
             <div class="container">
-                <div id="classroom_profile" class="row right-cell"><a href="profile of the classroom" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
+                <div id="classroom_profile" class="row right-cell"><a href="{% url 'app.views.underConstruction' classroom_name='miew' %}" class="full-container-size"><h5>{{ student.classroom.name }}</h5></a></div>
                 <div class="row right-cell" id="new_sheet_div" >
                     <a id="post_new_sheet_link" href="#" class="full-container-size post_new_sheet_link"><h5>Poster une nouvelle fiche !</h5></a>
                 </div>
@@ -35,7 +35,7 @@
     <div class="flex-container">
         {% for lesson in student.lessons.all %}
         <div class="lesson">
-            <a class="full-container-size" href="lesson/{{ lesson.name }}">
+            <a class="full-container-size" href="{% url 'app.views.lessonPage' lesson_name=lesson.name %}">
                 <h5>{{ lesson.name }}</h5>
                 <p>
                     {{ lesson.teacher.gender }}

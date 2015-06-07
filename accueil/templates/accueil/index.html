@@ -16,11 +16,11 @@
                         <p>Accédez au Hub de la classe pour envoyer vos fiches et voir celles qui ont été publiées !</p>
                 </div>
             {% else %}
-                <div class="bot-cell eight columns"><a class="menu_title" href="#">
+                <div class="bot-cell eight columns"><a class="menu_title" href="{% url 'accueil.views.about' %}">
                     <div class="full-container-size">
-                        <h3>HUB DE LA CLASSE</h3>                    
+                        <h3>ABOUT</h3>
                             <p>Connectez vous pour accéder au Hub de votre classe ! <br />
-                               Vous voulez en savoir plus ? Cliquez sur le lien ! ;)</p>
+                               Vous voulez en savoir plus ? Cliquez sur le lien !</p>
                     </div>         
             {% endif %}
             </a></div>

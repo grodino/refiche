@@ -24,6 +24,12 @@ def home(request):
 	return render(request, 'home.html', locals())
 
 
+def underConstruction(request, classroom_name):
+	""" A funny under construction page, just for fun """
+
+	return render(request, 'app/under_construction.html', locals())
+
+
 @login_required
 def lessonPage(request, lesson_name):
 	""" App lesson view, using the variable given it fetches 

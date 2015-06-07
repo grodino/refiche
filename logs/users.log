@@ -805,3 +805,12 @@
 [2015-06-06 18:25:25] INFO [users.userConnected:9] User INGEGUS has connected !
 [2015-06-06 18:29:54] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
 [2015-06-06 18:29:56] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-07 20:49:45] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-07 20:50:00] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-07 20:50:19] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-07 20:51:21] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-07 20:51:25] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-07 20:52:59] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-07 20:53:03] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-07 21:34:47] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-07 21:34:56] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
