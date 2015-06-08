@@ -9,9 +9,13 @@
     <script src="{% static 'js/about.js' %}"></script>
 {% endblock %}
 
+{% block header %}
+    {{ block.super }}
+    <h5 id="catchphrase">PARTAGEZ | ORGANISEZ | PROGRESSEZ</h5>
+{% endblock %}
+
 {% block content %}
     <div id="miew">
-        <img src="{% static 'img/logo_full.png' %}" />
     </div>
 
     <div>
