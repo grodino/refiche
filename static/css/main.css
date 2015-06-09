@@ -79,7 +79,10 @@ header a {
 
 footer {
     display: block;
+    position: relative;
     text-align: center;
+    
+    margin-bottom: 1em;
 }
 
 /*  MESSAGES

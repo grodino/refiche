@@ -18,7 +18,7 @@ $(function() {
             
             $('#catchphrase').show();
             $('header img').removeClass('img-fixed');
-        } else if (headerInitialHeight-currentScroll <= 170) { //Small header
+        } else { //Small header
             $('header a').css('background-color', '#3A6BAA');
             
             $('#catchphrase').hide();            
