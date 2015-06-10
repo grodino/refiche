@@ -11,7 +11,7 @@ header {
     transition: height 0.5s;
 }
 
-header a {
+#header-link {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,6 +22,7 @@ header a {
     
     background-color: rgba(58, 107, 170, 0.38);
     overflow-y: hidden;
+    cursor: default;
 }
 
 header img {
@@ -57,9 +58,17 @@ header #catchphrase {
 #content .columns {
     display: block;
     margin-bottom: 0.7em;
-    height: 10em;
-    
-    background-color: #D9D9D9;
+}
+
+#content .columns h3 {    
+    font-family: 'sifonnbasic';
+    text-align: center;
+    text-transform: uppercase;
+}
+
+hr {
+    border: 1px dashed;
+    margin: 1em;
 }
 
 footer {

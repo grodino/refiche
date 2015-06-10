@@ -822,3 +822,6 @@
 [2015-06-09 17:53:11] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
 [2015-06-09 17:57:46] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
 [2015-06-09 17:57:57] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-10 19:33:41] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-10 21:16:12] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-10 21:16:38] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !

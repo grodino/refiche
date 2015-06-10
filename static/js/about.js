@@ -10,9 +10,7 @@ $(function() {
         var windowHeight = $(window).height(),
             currentScroll = $(window).scrollTop();
         
-        console.log($('#catchphrase').height());
-        
-        if (headerInitialHeight-currentScroll >= 170){ // Big header
+        if (headerInitialHeight-currentScroll >= logoInitialHeight + 10){ // Big header
             $('header').height(headerInitialHeight-currentScroll);
             $('header a').css('background-color', 'rgba(58, 107, 170, 0.38)');
             
@@ -24,7 +22,7 @@ $(function() {
             $('#catchphrase').hide();            
             $('header img').addClass('img-fixed');
             $('header').height($('header img').height()+10);
-        }        
+        }
     });
 });
 
