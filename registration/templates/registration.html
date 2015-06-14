@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block add_js %}
+    <script src="{% static 'js/registration.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {# TODO: Check if the user is connected. If yes just say that he doesn't need to go here #}
+    <div id="intro">
+        <h3>Inscription</h3>
+
+        <p>
+            Vous êtes délégué de votre classe et vous souhaitez inscrire votre classe?
+            Rien de plus simple ! Il vous suffit d'envoyer votre demande à travers ce formulaire.
+            Vous recevrez un email de confirmation contenant un code pour que chacun des élèves de la classe s'inscrive.
+            Si votre établissement n'est pas présent dans la liste suivantes, veuillez me contacter par mail à <a href="mailto:admin@refiche.fr">admin@refiche.fr</a>
+        </p>
+    </div>
+
+    <div id="menu" class="container">
+        <div class="row">
+            <div id="delegate_form" class="six columns">
+                <a href="#" class="full-container-size">
+                    <h5>Délégué</h5>
+                    <p>Inscrivez votre classe</p>
+                </a>
+            </div>
+
+            <div id="student_form_link" class="six columns">
+                <a href="#" class="full-container-size">
+                    <h5>Élève</h5>
+                    <p>Entrez votre code</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="student_form">
+        <h5>
+            élève
+            <a id="hide_student_form" href="#">RETOUR</a>
+        </h5>
+
+        <form action="{% url 'registration.views.register' %}" method="POST" class="container">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="eight columns">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="four columns">
+                    <input id="submit_form" class="button button-primary" readonly="true" value="Envoyer !">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

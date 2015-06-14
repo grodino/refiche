@@ -1,0 +1,42 @@
+#intro h3 {
+    text-transform: uppercase;
+    margin-bottom: 0.2em;
+}
+
+#intro p {
+    text-align: justify;
+}
+
+#menu .columns {
+    height: 7em;
+    padding-left: 0.3em;
+    margin-bottom: 1em;
+
+    background-color: #D9D9D9;
+}
+
+#menu h5,
+#menu p{
+    text-transform: uppercase;
+}
+
+#menu p {
+    font-weight: 300;
+}
+
+#student_form {
+    display: none;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+
+    background-color: #D9D9D9;
+}
+
+#student_form h5 {
+    margin-right: 0px;
+    text-transform: uppercase;
+}
+
+#hide_student_form {
+    float: right;
+}

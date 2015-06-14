@@ -78,11 +78,6 @@ $(function() {
         }
     });
     
-    // Dealing with the error and success messages
-    $('.success').click(function() {
-        $('.success').slideUp('fast');
-    });
-    
     // Reveals informations about a sheet 
     $('.sheet').hover(function () {
         $('.sheet_info', this).show('fast');

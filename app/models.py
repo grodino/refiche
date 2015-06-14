@@ -111,11 +111,11 @@ class Sheet(models.Model):
 
 	name = models.CharField(max_length=50)
 	extension = models.CharField(max_length=50)
-	chapter = models.ForeignKey('Chapter', null=True)
-	lesson = models.ForeignKey('Lesson')
-	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET')
+	chapter = models.ForeignKey('Chapter', null=True, verbose_name="chapitre")
+	lesson = models.ForeignKey('Lesson', verbose_name="matière")
+	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET', verbose_name="catégorie")
 
-	sheetFile = models.FileField(upload_to=renameFile)
+	sheetFile = models.FileField(upload_to=renameFile, verbose_name="fichier")
 	uploadedBy = models.ForeignKey(Student)
 	contentType = models.CharField(max_length=255)
 	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)

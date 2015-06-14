@@ -825,3 +825,17 @@
 [2015-06-10 19:33:41] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
 [2015-06-10 21:16:12] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
 [2015-06-10 21:16:38] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-11 18:08:55] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-11 18:09:31] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-11 18:21:02] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-11 18:21:28] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-14 15:18:01] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-14 15:21:27] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-14 15:22:29] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-14 15:35:42] INFO [users.userDisconnected:14] User INGEGUSLERETOUR has disconnected !
+[2015-06-14 16:14:22] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-14 19:12:16] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-14 19:12:50] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
+[2015-06-14 19:12:52] INFO [users.userConnected:9] User INGEGUSLERETOUR has connected !
+[2015-06-14 19:12:55] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-14 19:13:42] INFO [users.userDisconnected:14] User INGEGUS has disconnected !

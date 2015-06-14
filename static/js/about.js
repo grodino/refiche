@@ -12,7 +12,7 @@ $(function() {
         
         if (headerInitialHeight-currentScroll >= logoInitialHeight + 10){ // Big header
             $('header').height(headerInitialHeight-currentScroll);
-            $('header a').css('background-color', 'rgba(58, 107, 170, 0.38)');
+            $('header a').css('background-color', 'rgba(58, 107, 170, 0.35)');
             
             $('#catchphrase').show();
             $('header img').removeClass('img-fixed');

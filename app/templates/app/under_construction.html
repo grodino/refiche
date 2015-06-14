@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<img src="{% static 'img/under_construction.jpg' %}" alt="Under Construction" class="full-container-width"/>
-{% endblock %}
+<style>
+    body {
+        background-image: url("{% static 'img/under_construction.jpg' %}");
+        background-size: 100% 100%;
+    }
+</style>

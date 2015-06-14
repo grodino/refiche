@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^', include('accueil.urls')),
     url(r'^$', 'django.contrib.auth.views.login', {'template_name': 'accueil/login_accueil.html'}),
     url(r'^app/', include('app.urls')),
-    url(r'^blog/', include('blog.urls')), 
+    url(r'^blog/', include('blog.urls')),
+    url(r'^register/', include('registration.urls')),
 ]

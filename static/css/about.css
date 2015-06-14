@@ -1,3 +1,5 @@
+/*  ANNIMATED HEADER
+------------------------------------------- */
 header {
     position: fixed;
     z-index: 9999;
@@ -20,7 +22,7 @@ header {
     height: 100%;
     width: 100%;
     
-    background-color: rgba(58, 107, 170, 0.38);
+    background-color: rgba(58, 107, 170, 0.35);
     overflow-y: hidden;
     cursor: default;
 }
@@ -48,10 +50,11 @@ header #catchphrase {
     color: #FFFFFF;
 }
 
+/*  THE WHOLE ABOUT PAGE
+------------------------------------------- */
 #content {
     position: relative;
     top: 100%;
-    
     margin-top: 0;
 }
 
@@ -60,15 +63,32 @@ header #catchphrase {
     margin-bottom: 0.7em;
 }
 
-#content .columns h3 {    
-    font-family: 'sifonnbasic';
-    text-align: center;
+#content h3 {
+    padding: 0.3em;
+    
+    color: #FFFFFF;
+    background-color: #FFB948;
+}
+
+#content strong {    
+    font-family: 'sifonnbasic_outline';
+    color: #3A6BAA;
     text-transform: uppercase;
 }
 
-hr {
-    border: 1px dashed;
-    margin: 1em;
+/*  GENERAL ORGANIZATION FOR 'LISTS' 
+/*  TO AVOID <ul>
+------------------------------------------- */
+#content .icons-flex-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#content .icon-flex-listed {
+    display: block;
+    width: 15em;
 }
 
 footer {

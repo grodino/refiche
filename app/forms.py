@@ -7,7 +7,7 @@ from app.models import Sheet
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):
 		super(UploadSheetForm, self).__init__(*args, **kwargs)
-		self.fields['lesson'] = forms.ModelChoiceField(queryset=student.lessons.all())
+		self.fields['lesson'] = forms.ModelChoiceField(queryset=student.lessons.all(), label="Matière")
 
 	def clean_sheetFile(self):
 		sheet = self.cleaned_data['sheetFile']
