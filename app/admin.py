@@ -7,7 +7,7 @@ class SheetAdmin(admin.ModelAdmin):
 	list_filter = ('uploadedBy','uploadDate')
 
 class StudentAdmin(admin.ModelAdmin):
-	list_display = ('user', 'classroom', 'school', 'isDelegate')
+	list_display = ('user', 'classroom', 'school')
 	list_filter = ('school',)
 
 class TeacherAdmin(admin.ModelAdmin):

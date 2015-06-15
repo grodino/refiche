@@ -25,7 +25,7 @@
     <div id="menu" class="container">
         <div class="row">
             <div id="delegate_form" class="six columns">
-                <a href="#" class="full-container-size">
+                <a href="{% url 'registration.views.delegateRegister' %}" class="full-container-size">
                     <h5>Délégué</h5>
                     <p>Inscrivez votre classe</p>
                 </a>
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="four columns">
-                    <input id="submit_form" class="button button-primary" readonly="true" value="Envoyer !">
+                    <input id="submit_form" class="button button-primary u-pull-right" readonly="true" value="A faire en JS">
                 </div>
             </div>
         </form>

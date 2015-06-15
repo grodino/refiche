@@ -33,8 +33,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['127.0.0.1', 'refiche.dev']
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/app/home/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Application definition

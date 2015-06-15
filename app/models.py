@@ -66,7 +66,6 @@ class Student(Profile):
 	""" Student model, it extends the abstract Profile and the User
         model """
 
-	isDelegate = models.BooleanField(default=False)  # If the student is authorized to manage the classroom
 	lessons = models.ManyToManyField(Lesson)
 	numberOfSheetsUploaded = models.IntegerField(default=0)
 
