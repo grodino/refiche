@@ -5,12 +5,12 @@ from os.path import splitext, join
 from django.conf import settings
 from django.http import Http404
 
-def getStudent(request):
+def getStudent(instance):
 	""" /!\ Not a view, it fetches the user and verifiy if there
 		is a profile account logged to it. RETURNS THE STUDENT """
 	from app.models import Student
 
-	user = request.user
+	user = instance
 	
 	try:
 		student = Student.objects.get(user=user)
@@ -50,4 +50,9 @@ def addFile(sender, instance, **kwargs):
 	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded + 1
 	user.save()
 
+def deleteUser(sender, instance, **kwargs):
+	""" Function to delete the Student object associated to the user when you delete it """
+	from app.models import Student
 
+	student = getStudent(instance)
+	student.delete()

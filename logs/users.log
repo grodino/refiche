@@ -854,3 +854,27 @@
 [2015-06-15 17:18:17] INFO [users.userConnected:9] User INGEGUS has connected !
 [2015-06-15 17:22:03] INFO [users.userDisconnected:14] User INGEGUS has disconnected !
 [2015-06-15 17:22:13] INFO [users.userConnected:9] User JGODINOT has connected !
+[2015-06-15 17:28:02] INFO [users.userConnected:9] User INGEGUS has connected !
+[2015-06-15 17:29:59] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-15 17:30:01] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-16 19:08:30] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 19:08:32] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-16 19:08:35] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 19:17:18] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 19:17:20] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-16 20:14:21] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 20:15:25] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 20:18:13] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 20:30:41] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 20:32:21] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 20:42:35] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 20:43:30] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 20:43:48] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 20:44:40] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 20:58:58] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 21:10:03] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 21:10:26] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 21:17:56] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 21:19:21] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-16 21:19:51] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-16 21:28:10] INFO [users.userDisconnected:13] User INGEGUS has disconnected !

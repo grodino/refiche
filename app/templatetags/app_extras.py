@@ -14,7 +14,7 @@ def getNewSheetForm(request):
 	:return: the form with the user's data
 	"""
 
-	student = getStudent(request)
+	student = getStudent(request.user)
 	form = UploadSheetForm(student=student)
 
 	return {'form': form }

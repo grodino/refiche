@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from app.models import Student, Classroom
+from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername
 from registration.forms import StudentRegistrationForm, DelegateRegistrationForm
 
 def register(request):
@@ -42,6 +43,10 @@ def delegateRegister(request):
 			classroomShortName = form.cleaned_data['classroomShortName']
 			classroomLevel = form.cleaned_data['classroomLevel']
 
+			# Checks if the email is unique if not, throws Http404
+			# And if it's ok, checks if the username is unique, if not change it until it is
+			checkUniqueEmail(email)
+			username = checkAndFixUniqueUsername(username)
 
 			# Saving everything
 			newUser = User.objects.create_user(username=username,
@@ -49,6 +54,7 @@ def delegateRegister(request):
 											   password=password,
 											   first_name=firstName,
 											   last_name=lastName)
+
 			newClassroom = Classroom(level=classroomLevel,
 									 school=school,
 									 name=classroomName,
@@ -60,8 +66,43 @@ def delegateRegister(request):
 												 classroom=newClassroom)
 			newDelegate.save()
 
-			messages.add_message(request, messages.SUCCESS, 'Vous êtes bien inscrit!')
+			# TODO: Create a code for the number of students
+
+			messages.add_message(request, messages.SUCCESS, 'Vous êtes bien inscrit! Regardez bien votre messagerie vous allez recevoir des informations.')
 	else:
 		form = DelegateRegistrationForm()
 
 	return render(request, 'registration/delegate_register.html', locals())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

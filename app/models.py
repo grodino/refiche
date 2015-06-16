@@ -2,8 +2,8 @@
 from django.db import models
 from django.core.files import File
 from django.contrib.auth.models import User
-from django.db.models.signals import post_delete, post_save
-from app.functions import renameFile, addFile, deleteFile
+from django.db.models.signals import post_delete, post_save, pre_delete
+from app.functions import renameFile, addFile, deleteFile, deleteUser
 
 
 class Lesson(models.Model):
@@ -128,3 +128,4 @@ class Sheet(models.Model):
 
 post_save.connect(addFile, sender=Sheet)
 post_delete.connect(deleteFile, sender=Sheet)
+pre_delete.connect(deleteUser, sender=User)

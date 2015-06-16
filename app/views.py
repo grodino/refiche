@@ -17,7 +17,7 @@ from app.functions import getStudent
 def home(request):
 	""" App index view """
 
-	student = getStudent(request)
+	student = getStudent(request.user)
 	lessons = student.lessons.all()
 	classroom = student.classroom
 
@@ -35,7 +35,7 @@ def lessonPage(request, lesson_name):
 	""" App lesson view, using the variable given it fetches 
 		the lesson and all it's components """
 	
-	student = getStudent(request)
+	student = getStudent(request.user)
 	
 	try:
 		lesson = student.lessons.get(name=lesson_name)
@@ -51,7 +51,7 @@ def lessonPage(request, lesson_name):
 def newSheetPage(request):
 	""" NewSheet view to show the UploadSheetForm """
 
-	student = getStudent(request)
+	student = getStudent(request.user)
 
 	if request.method == "POST":
 		form = UploadSheetForm(student=student, data=request.POST, files=request.FILES)
@@ -81,7 +81,7 @@ def newSheetPage(request):
 def downloadSheetPage(request, pk):
 	""" View for dowloading a sheet """
 
-	student = getStudent(request)
+	student = getStudent(request.user)
 
 	# Get the file
 	try:
