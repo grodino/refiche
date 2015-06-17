@@ -54,6 +54,8 @@ def delegateRegister(request):
 											   password=password,
 											   first_name=firstName,
 											   last_name=lastName)
+			newUser.is_active = False
+			newUser.save()
 
 			newClassroom = Classroom(level=classroomLevel,
 									 school=school,
@@ -66,9 +68,11 @@ def delegateRegister(request):
 												 classroom=newClassroom)
 			newDelegate.save()
 
-			# TODO: Create a code for the number of students
+			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
+																   Nom d\'utilisateur: {}
+																   Mot de passe: {}""".format(username, password))
 
-			messages.add_message(request, messages.SUCCESS, 'Vous êtes bien inscrit! Regardez bien votre messagerie vous allez recevoir des informations.')
+			return render(request, 'registration/register_success.html', locals())
 	else:
 		form = DelegateRegistrationForm()
 

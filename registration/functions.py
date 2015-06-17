@@ -17,9 +17,8 @@ def checkAndFixUniqueUsername(username):
 	try:
 		while User.objects.get(username=username):
 			# If it's the second pass, don't add a number, just increase it
-			# TODO: fix the infinit loop
 			if username[-1].isnumeric():
-				username.replace(username[-1], str(int(username[-1])+1))
+				username = username.replace(username[-1], str(int(username[-1])+1))
 			else:
 				username += '1'
 	except User.DoesNotExist:
