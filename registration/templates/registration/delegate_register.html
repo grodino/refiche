@@ -1,9 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
 
 {% block content %}
-    <form action="{% url 'registration.views.delegateRegister' %}" method="POST">
+
+
+    <form id="delegate_form" action="{% url 'registration.views.delegateRegister' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Envoyer!">
+
+        <h3 class="full-container-width">Inscription délégué</h3>
+
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+            {% cycle '<div class="row">' silent%}
+                <div class="six columns">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+
+                {% if forloop.revcounter0 == 0 %}
+                    <div class="six columns">
+                        <input class="button-primary full-container-size"type="submit" value="Envoyer!">
+                    </div>
+                {% endif %}
+            {% cycle '' '</div>' %}
+        {% endfor %}
     </form>
 {% endblock %}

@@ -2,7 +2,7 @@ from datetime import timedelta
 from django import template
 from django.utils import timezone
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
-from app.forms import UploadSheetForm
+from app.forms import UploadSheetForm, LessonForm
 from app.functions import getStudent
 
 register = template.Library()
@@ -18,6 +18,15 @@ def getNewSheetForm(request):
 	form = UploadSheetForm(student=student)
 
 	return {'form': form }
+
+
+@register.inclusion_tag('app/newLesson.html')
+def getLessonForm():
+	""" Returns the LessonForm """
+
+	form = LessonForm()
+	return {'form': form }
+
 
 @register.filter()
 def naturaltime_addon(uploadDate):

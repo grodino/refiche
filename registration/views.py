@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 from app.models import Student, Classroom
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername
 from registration.forms import StudentRegistrationForm, DelegateRegistrationForm
@@ -53,8 +54,9 @@ def delegateRegister(request):
 											   email=email,
 											   password=password,
 											   first_name=firstName,
-											   last_name=lastName)
-			newUser.is_active = False
+											   last_name=lastName,)
+			newUser.is_staff = True
+			newUser.groups.add(Group.objects.get(name='delegates'))
 			newUser.save()
 
 			newClassroom = Classroom(level=classroomLevel,

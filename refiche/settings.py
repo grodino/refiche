@@ -47,7 +47,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'guardian',
     'blog',
     'accueil',
     'app',
@@ -64,14 +63,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
-)
-
-# TODO: Continue configuring the permissions for instances with https://www.djangopackages.com/packages/p/django-guardian/
-ANONYMOUS_USER_ID = -1
 
 ROOT_URLCONF = 'refiche.urls'
 

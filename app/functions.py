@@ -50,6 +50,7 @@ def addFile(sender, instance, **kwargs):
 	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded + 1
 	user.save()
 
+
 def deleteUser(sender, instance, **kwargs):
 	""" Function to delete the Student object associated to the user when you delete it """
 	from app.models import Student

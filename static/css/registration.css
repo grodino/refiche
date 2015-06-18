@@ -40,3 +40,13 @@
 #hide_student_form {
     float: right;
 }
+
+#delegate_form h3 {
+    font-size: 2.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+#delegate_form .row {
+    margin-bottom: 0.7em;
+}

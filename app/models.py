@@ -1,6 +1,5 @@
 # coding=UTF-8
 from django.db import models
-from django.core.files import File
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
 from app.functions import renameFile, addFile, deleteFile, deleteUser
@@ -14,6 +13,11 @@ class Lesson(models.Model):
 
 	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
+
+	class Meta:
+		permissions = (
+			('can_add', 'peut ajouter une lesson'),
+		)
 
 
 class Level(models.Model):
@@ -47,6 +51,9 @@ class Classroom(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	class Meta:
+		permissions = (('view_classroom', 'Peut voir la classe'),)
 
 
 class Profile(models.Model):

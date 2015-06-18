@@ -9,31 +9,31 @@ class DelegateRegistrationForm(forms.Form):
 	# Information about the delegate, will be stored in the User model
 	firstName = forms.CharField(max_length=30,
 								label='Prénom',
-								widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Jean'}))
+								widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Jean', 'class': 'full-container-width'}))
 	lastName = forms.CharField(max_length=30,
 							   label='Nom',
-							   widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Dupond'}))
-	email = forms.EmailField(max_length=100,
-							 widget=forms.EmailInput(attrs={'required': True, 'placeholder': 'Ex: jdupond@email.fr'}))
+							   widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Dupond', 'class': 'full-container-width'}))
 	password1 = forms.CharField(label='Mot de passe',
-								widget=forms.PasswordInput(attrs={'required': True, 'placeholder': 'Tous les caractères sont autorisés'}))
+								widget=forms.PasswordInput(attrs={'required': True, 'placeholder': 'Tous les caractères sont autorisés', 'class': 'full-container-width'}))
 	password2 = forms.CharField(label='Confirmation du mot de passe',
-								widget=forms.PasswordInput(attrs={'required': True}))
+								widget=forms.PasswordInput(attrs={'required': True, 'class': 'full-container-width'}))
+	email = forms.EmailField(max_length=100,
+							 widget=forms.EmailInput(attrs={'required': True, 'placeholder': 'Ex: jdupond@email.fr', 'class': 'full-container-width'}))
 
 	# Information about the classroom, will be stored in the corresponding models
 	school = forms.ModelChoiceField(School.objects.all(),
 									label='École',
-									widget=forms.Select(attrs={'required': True}),
+									widget=forms.Select(attrs={'required': True, 'class': 'full-container-width'}),
 									empty_label=None)
 	classroomName = forms.CharField(max_length=100,
 									label='Nom de la classe',
-									widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Première S3'}))
+									widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Première S3', 'class': 'full-container-width'}))
 	classroomShortName = forms.CharField(max_length=100,
 										 label='Nom court de la classe',
-										 widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: 1-S3'}))
+										 widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: 1-S3', 'class': 'full-container-width'}))
 	classroomLevel = forms.ModelChoiceField(Level.objects.all(),
 											label='Degré',
-											widget=forms.Select(attrs={'required': True}),
+											widget=forms.Select(attrs={'required': True, 'class': 'full-container-width'}),
 											empty_label=None)
 
 	def clean_password2(self):

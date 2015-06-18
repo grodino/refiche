@@ -891,3 +891,107 @@
 [2015-06-17 18:09:03] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
 [2015-06-17 18:09:09] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
 [2015-06-17 18:09:17] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 13:36:16] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 13:36:20] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 14:04:30] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 14:08:12] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 14:08:42] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 14:08:50] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 14:08:58] INFO [users.userConnected:8] User JGODINOT has connected !
+[2015-06-18 14:09:03] INFO [users.userDisconnected:13] User JGODINOT has disconnected !
+[2015-06-18 14:09:07] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 14:09:48] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 14:09:54] INFO [users.userConnected:8] User LWEED has connected !
+[2015-06-18 14:11:17] INFO [users.userDisconnected:13] User LWEED has disconnected !
+[2015-06-18 14:11:25] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 14:26:39] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:05:30] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 15:20:44] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 15:20:44] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-18 15:21:14] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:21:25] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 15:45:56] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 15:48:57] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:49:19] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 15:49:29] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:50:00] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 15:51:52] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 15:51:56] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 15:55:30] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:55:35] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 15:55:44] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 15:55:52] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 15:57:15] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 15:57:22] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 16:10:01] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 16:10:08] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:14:29] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:14:49] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 16:14:56] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 16:15:02] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:15:15] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:15:18] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 16:35:19] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 16:35:26] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:41:36] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:41:44] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 16:43:32] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 16:43:38] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:43:48] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:45:08] INFO [users.userConnected:8] User AGODINOT1 has connected !
+[2015-06-18 16:45:39] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
+[2015-06-18 16:45:47] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:48:35] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:48:40] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:48:54] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:48:59] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 16:53:51] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 16:53:56] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:54:09] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:54:13] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:54:17] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:54:20] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:54:43] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:55:35] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:56:11] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:56:23] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:56:31] ERROR [users.getStudent:19] agodinot's account is not linked to a profile account! id = 29
+[2015-06-18 16:57:15] ERROR [users.getStudent:19] agodinot1's account is not linked to a profile account! id = 33
+[2015-06-18 16:57:34] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:58:04] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 16:58:24] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 16:58:35] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-06-18 17:02:39] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-06-18 17:02:46] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 17:04:17] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 17:04:28] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-06-18 17:12:29] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-06-18 17:12:31] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 17:43:37] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 17:43:42] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 17:43:54] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 17:43:56] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 17:53:50] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 17:54:53] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 17:58:05] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 17:58:06] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:09:26] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:09:28] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:10:14] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:10:17] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 18:51:46] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 18:51:48] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:51:57] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:51:59] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 18:52:13] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 18:52:14] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:55:00] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:55:06] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 18:55:19] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 18:55:22] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:55:44] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:56:22] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-18 18:58:36] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
+[2015-06-18 18:58:38] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-18 18:58:45] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-18 18:59:32] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !

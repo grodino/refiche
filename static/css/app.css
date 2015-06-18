@@ -10,8 +10,6 @@
 }
 
 #content nav .left-cell {
-    padding-top: 1em;
-    padding-bottom: 1em;
     margin-bottom: 1.5em;
     
     text-align: center;
@@ -35,6 +33,41 @@
     text-transform: uppercase;
 }
 
+#content #user_infos_content {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+#content #user_options {
+    display: none;
+    margin-top: 0;
+}
+
+#content #user_options h5 {
+    font-family: sifonnbasic_outline;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background-color: #3A6BAA;
+}
+
+#content #user_options div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#content #user_options div div {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+
+/*  ADD LESSON FORM
+------------------------------------------- */
+#content #add_lesson_form {
+}
 
 
 /*  LESSONS LIST

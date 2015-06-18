@@ -18,8 +18,8 @@ def home(request):
 	""" App index view """
 
 	student = getStudent(request.user)
-	lessons = student.lessons.all()
 	classroom = student.classroom
+	lessons = classroom.lessons.all()
 
 	return render(request, 'home.html', locals())
 

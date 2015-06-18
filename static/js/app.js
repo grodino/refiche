@@ -16,16 +16,42 @@ $(function() {
         }
 
     }, false);
-    
-    // Animation to post a new sheet
 
-    //Show
+
+    // User options
+    // Show
+    $('#user_infos').css('height', $('#user_infos').outerHeight());
+
+    $('#user_infos_content').click(function(){
+        $('#user_infos_content').slideUp('fast');
+        $('#user_options').slideDown('fast');
+        $('#user_infos').css('border', '1px solid #3A6BAA');
+    });
+
+    // Hide
+    $('#hide_user_options').click(function(){
+        $('#user_infos_content').slideDown('fast');
+        $('#user_options').slideUp('fast');
+        $('#user_infos').css('border', '');
+    });
+
+    // AddLesson form
+    // Show
+    $('#add_lesson_form').hide();
+
+    $('#add_lesson').click(function(){
+        $('nav').slideUp('fast');
+        $('#add_lesson_form').slideDown('fast');
+    });
+
+    // Animation to post a new sheet
+    // Show
     $('#post_new_sheet_link').click(function() {
         $('nav').slideUp('fast');
         $('#new_sheet_form').slideDown('fast');
     });
 
-    //Hide
+    // Hide
     $('#hide_new_sheet_form').click(function() {
         $('nav').slideDown('fast');
         $('#new_sheet_form').slideUp('fast');

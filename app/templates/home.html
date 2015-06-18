@@ -6,8 +6,40 @@
 <nav class="container">
     <div class="row">
         <div id="user_infos" class="six columns left-cell full-container-size">
-            <a href="{% url 'app.views.underConstruction' classroom_name='miew' %}" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
-            <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
+            <div id="user_infos_content">
+                <a href="#" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
+                <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
+            </div>
+
+            <div id="user_options" class="full-container-size">
+                <div class="full-container-size">
+                    <h5>Options</h5>
+
+                    {% if 'app.add_lesson' in perms %}
+                    <div>
+                        <a id="add_lesson" href="#add_lesson_form">Ajouter une matière</a>
+                    </div>
+                    {% endif %}
+
+                    {% if 'app.add_teacher' in perms %}
+                        <div>
+                            <a href="#">Ajouter un professeur</a>
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <a href="#">Mon compte</a>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'django.contrib.auth.views.logout' %}">Déconnexion</a>
+                    </div>
+
+                    <div>
+                        <a id="hide_user_options" href="#">RETOUR</a>
+                    </div>
+                    </div>
+            </div>
         </div>
         
         <div id="left_cell" class="six columns">
@@ -24,6 +56,10 @@
 <div id="new_sheet_form">
     <h5>Poster une nouvelle fiche ! <a id="hide_new_sheet_form" class="u-pull-right">Retour</a></h5>
     {% getNewSheetForm request %}
+</div>
+
+<div id="add_lesson_form">
+    {% getLessonForm %}
 </div>
 
 {% block in_content %}
@@ -43,6 +79,11 @@
                 </p>
             </a>
         </div>
+        {% empty %}
+            <div class="full-container-size">
+                <h5>Vous n'avez pas encore de matière :(</h5>
+                <p>Demandez à votre délégué de les créer !</p>
+            </div>
         {% endfor %}
     </div>
 </div>
