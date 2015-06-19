@@ -14,11 +14,6 @@ class Lesson(models.Model):
 	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
 
-	class Meta:
-		permissions = (
-			('can_add', 'peut ajouter une lesson'),
-		)
-
 
 class Level(models.Model):
 	""" Level/ degree model, they can only be created by myself now
@@ -51,9 +46,6 @@ class Classroom(models.Model):
 
 	def __str__(self):
 		return self.name
-
-	class Meta:
-		permissions = (('view_classroom', 'Peut voir la classe'),)
 
 
 class Profile(models.Model):
@@ -91,6 +83,7 @@ class Teacher(models.Model):
 	lastName = models.CharField(max_length=60)  # Last name of the teacher
 	firstName = models.CharField(max_length=30, null=True)  # First name of the teacher
 	gender = models.CharField(max_length=4, choices=GENDER_CHOICES)
+	createdBy = models.ForeignKey(Student)
 
 	def __str__(self):
 		return "{0} {1}".format(self.gender, self.lastName)

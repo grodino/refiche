@@ -1,8 +1,11 @@
 from django import forms
 from app.models import School, Level
+from registration.models import StudentRegistrationCode
 
-class StudentRegistrationForm(forms.Form):
-	code = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'full-container-width'}))
+class StudentRegistrationForm(forms.ModelForm):
+	class Meta:
+		model = StudentRegistrationCode
+		fields = ('code', 'numberOfStudents',)
 
 
 class DelegateRegistrationForm(forms.Form):
@@ -45,8 +48,3 @@ class DelegateRegistrationForm(forms.Form):
 										code='password_mismatch',)
 
 		return password2
-
-	def clean_numberOfStudents(self):
-		if self.cleaned_data.get('numberOfStudents') <= 0:
-			raise forms.ValidationError('Vous ne pouvez pas avoir un nombre d\'élèves négatif ou nul dans une classe !',
-										code='password_mismatch',)

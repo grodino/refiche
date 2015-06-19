@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static app_extras %}
+{% load static app_extras admin_urls %}
 
 {% block content %}
 
@@ -12,19 +12,17 @@
             </div>
 
             <div id="user_options" class="full-container-size">
-                <div class="full-container-size">
+                <div class="full-container-size" style="background-image: url('{% static 'img/icons/settings.png' %}');">
                     <h5>Options</h5>
 
                     {% if 'app.add_lesson' in perms %}
                     <div>
-                        <a id="add_lesson" href="#add_lesson_form">Ajouter une matière</a>
+                        <a id="add_lesson" href="{% url 'admin:index' %}">Administration</a>
                     </div>
-                    {% endif %}
 
-                    {% if 'app.add_teacher' in perms %}
-                        <div>
-                            <a href="#">Ajouter un professeur</a>
-                        </div>
+                    <div>
+                        <a id="get_code" href="#">Obtenir un code</a>
+                    </div>
                     {% endif %}
 
                     <div>
@@ -53,13 +51,9 @@
     </div>
 </nav>
 
-<div id="new_sheet_form">
+<div id="new_sheet_form" class="new_form">
     <h5>Poster une nouvelle fiche ! <a id="hide_new_sheet_form" class="u-pull-right">Retour</a></h5>
     {% getNewSheetForm request %}
-</div>
-
-<div id="add_lesson_form">
-    {% getLessonForm %}
 </div>
 
 {% block in_content %}
@@ -69,7 +63,7 @@
     </header>
     
     <div class="flex-container">
-        {% for lesson in student.lessons.all %}
+        {% for lesson in classroom.lessons.all %}
         <div class="lesson">
             <a class="full-container-size" href="{% url 'app.views.lessonPage' lesson_name=lesson.name %}">
                 <h5>{{ lesson.name }}</h5>

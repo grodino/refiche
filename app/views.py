@@ -38,7 +38,7 @@ def lessonPage(request, lesson_name):
 	student = getStudent(request.user)
 	
 	try:
-		lesson = student.lessons.get(name=lesson_name)
+		lesson = student.classroom.lessons.get(name=lesson_name)
 	except Lesson.DoesNotExist:
 		raise Http404("This lesson does not exist or you are not registered to it !")
 

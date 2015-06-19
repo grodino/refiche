@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
 from app.models import Student, Classroom
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername
 from registration.forms import StudentRegistrationForm, DelegateRegistrationForm
@@ -19,6 +19,17 @@ def register(request):
 		form = StudentRegistrationForm()
 
 	return render(request, 'registration.html', locals())
+
+
+@login_required
+def getCode(request):
+	""" View made to get a code valid for limited number of student to be able to sign up """
+
+	if request.method == 'POST':
+		form = StudentRegistrationForm(request.POST)
+
+		if form.is_valid():
+			test= 1
 
 
 def delegateRegister(request):

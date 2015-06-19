@@ -2,7 +2,7 @@
 from os.path import splitext
 from django import forms
 from django.conf import settings
-from app.models import Sheet, Lesson
+from app.models import Sheet, Lesson, Teacher
 
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):
@@ -25,9 +25,3 @@ class UploadSheetForm(forms.ModelForm):
 	class Meta:
 		model = Sheet
 		exclude = ('name', 'chapter', 'extension', 'uploadedBy', 'contentType', 'uploadDate')
-
-
-class LessonForm(forms.ModelForm):
-	class Meta:
-		model = Lesson
-		fields = ('name', 'teacher',)

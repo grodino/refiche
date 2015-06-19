@@ -55,20 +55,18 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    background-repeat: no-repeat;
 }
 
 #content #user_options div div {
     flex-grow: 1;
     display: flex;
     justify-content: center;
+
+    text-transform: uppercase;
+    font-weight: 300;
 }
-
-
-/*  ADD LESSON FORM
-------------------------------------------- */
-#content #add_lesson_form {
-}
-
 
 /*  LESSONS LIST
 ------------------------------------------- */
@@ -123,25 +121,25 @@
 }
 
 
-/*  NEW SHEET FORM
+/*  NEW FORM
 ------------------------------------------- */
-#new_sheet_form {
+.new_form {
     display: none;
     background-color: #D9D9D9;
     
     padding-left: 0.5em;
-    
+    padding-right: 0.5em;
+
     color: #2F2F2F;
 }
 
-#new_sheet_form h5,
-#new_sheet_form a{
+.new_form h5,
+.new_form a{
     text-transform: uppercase;
+    margin-bottom: 0.5em;
 }
 
-#new_sheet_form a {
-    margin-right: 0.5em;
-    
+.new_form a {
     cursor: pointer;
 }
 

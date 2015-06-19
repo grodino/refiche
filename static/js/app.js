@@ -20,9 +20,8 @@ $(function() {
 
     // User options
     // Show
-    $('#user_infos').css('height', $('#user_infos').outerHeight());
-
     $('#user_infos_content').click(function(){
+        $('#user_infos').css('height', $('#user_infos').outerHeight());
         $('#user_infos_content').slideUp('fast');
         $('#user_options').slideDown('fast');
         $('#user_infos').css('border', '1px solid #3A6BAA');
@@ -33,15 +32,6 @@ $(function() {
         $('#user_infos_content').slideDown('fast');
         $('#user_options').slideUp('fast');
         $('#user_infos').css('border', '');
-    });
-
-    // AddLesson form
-    // Show
-    $('#add_lesson_form').hide();
-
-    $('#add_lesson').click(function(){
-        $('nav').slideUp('fast');
-        $('#add_lesson_form').slideDown('fast');
     });
 
     // Animation to post a new sheet
@@ -58,7 +48,7 @@ $(function() {
     });
     
     // Dealing with the form
-    $('#submit_form').click(function() {
+    $('#submit_new_sheet_form').click(function() {
         var formResponse = new XMLHttpRequest(),
         sheetForm = document.querySelector('#id_sheet_form');
 
