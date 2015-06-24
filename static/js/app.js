@@ -46,6 +46,12 @@ $(function() {
         $('nav').slideDown('fast');
         $('#new_sheet_form').slideUp('fast');
     });
+
+    //Animation for getting a code
+    $('#get_code').click(function() {
+        $('nav').slideToggle('fast');
+        $('#new_code_form').slideToggle('fast');
+    });
     
     // Dealing with the form
     $('#submit_new_sheet_form').click(function() {

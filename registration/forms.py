@@ -3,6 +3,11 @@ from app.models import School, Level
 from registration.models import StudentRegistrationCode
 
 class StudentRegistrationForm(forms.ModelForm):
+	def clean_numberOfStudents(self):
+		if self.cleaned_data.get('numberOfStudents') <= 0:
+			raise forms.ValidationError('Vous ne pouveez pas inscrire un nombre nul ou négatif d\'élèves :/',
+										code='not_positive')
+
 	class Meta:
 		model = StudentRegistrationCode
 		fields = ('code', 'numberOfStudents',)

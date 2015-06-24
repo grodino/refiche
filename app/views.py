@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from app.models import Lesson, Sheet
 from app.forms import UploadSheetForm
 from app.functions import getStudent
-
+from registration.forms import StudentRegistrationForm
 # _____________________________________________________________________
 # VIEWS
 
