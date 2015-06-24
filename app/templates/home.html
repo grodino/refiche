@@ -15,7 +15,7 @@
                 <div class="full-container-size" style="background-image: url('{% static 'img/icons/settings.png' %}');">
                     <h5>Options</h5>
 
-                    {% if 'app.add_lesson' in perms %}
+                    {% if request.user.is_staff %}
                     <div>
                         <a id="add_lesson" href="{% url 'admin:index' %}">Administration</a>
                     </div>
@@ -55,6 +55,11 @@
     <h5>Poster une nouvelle fiche ! <a id="hide_new_sheet_form" class="u-pull-right">Retour</a></h5>
     {% getNewSheetForm request %}
 </div>
+
+{% if request.user.is_staff %}
+    {% load registration_extras %}
+    {% getStudentRegistrationForm request %}
+{% endif %}
 
 {% block in_content %}
 <div id="lessons">

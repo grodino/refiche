@@ -1089,3 +1089,8 @@
 [2015-06-19 22:23:30] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
 [2015-06-19 22:26:23] INFO [users.userDisconnected:13] User INGEGUSLERETOUR has disconnected !
 [2015-06-19 22:26:41] INFO [users.userConnected:8] User INGEGUSLERETOUR has connected !
+[2015-06-24 23:04:03] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-06-24 23:04:04] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-24 23:08:35] ERROR [users.getStudent:19] ingegus's account is not linked to a profile account! id = 1
+[2015-06-24 23:08:41] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-06-24 23:08:55] INFO [users.userConnected:8] User AGODINOT has connected !
