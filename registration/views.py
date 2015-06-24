@@ -29,7 +29,7 @@ def getCode(request):
 		form = StudentRegistrationForm(request.POST)
 
 		if form.is_valid():
-			test= 1
+			form.save()
 
 
 def delegateRegister(request):
