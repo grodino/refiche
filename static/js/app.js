@@ -52,8 +52,50 @@ $(function() {
         $('nav').slideToggle('fast');
         $('#new_code_form').slideToggle('fast');
     });
+
+    // If the value is changed after an error
+    $('#id_numberOfStudents').change(function() {
+        $('#id_numberOfStudents').removeClass('error');
+    });
+
+    // Dealing with the get code form
+    $('#submit_new_code_form').click(function() {
+        // If the form is not empty
+        if ($('#id_numberOfStudents').val() >=1) {
+            var request = new FormData($('#submit_new_code_form form')),
+                response = new XMLHttpRequest();
+
+            // TODO: Deal with the error I get when I send the form : 403 forbidden (the server side says it's because of the csrf token)
+            alert(request);
+            // Send the form to the server
+            response.open('POST', '/register/get-student-code/');
+            response.send(request.toArray());
+
+            // Deal with the response
+            response.addEventListener('readystatechange', function() {
+                if (response.readyState === response.DONE) {
+                    if (!response.getResponseHeader('Content-type') === 'application/json') {
+                        alert('Oh non :( Une erreur est survenue')
+                    }
+
+                    var status = $.parseJSON(response.responseText);
+
+                    if (status.sucess) {
+                        alert(status);
+                    } else {
+                        alert('Oh non :( Je crois que j\'ai avalé de travers');
+                    }
+                }
+            }, false);
+
+        } else {
+            $('#id_numberOfStudents').addClass('error');
+        }
+
+    });
+
     
-    // Dealing with the form
+    // Dealing with the new sheet_form
     $('#submit_new_sheet_form').click(function() {
         var formResponse = new XMLHttpRequest(),
         sheetForm = document.querySelector('#id_sheet_form');

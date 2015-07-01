@@ -1,5 +1,5 @@
 import json
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
@@ -31,12 +31,14 @@ def getCode(request):
 		form = StudentRegistrationForm(request.POST)
 
 		if form.is_valid():
+			form.save(commit=False)
+			form.code = 'test'
 			form.save()
 
 			JSONResponse = json.dumps({'sucess': 'true',})
 			messages.add_message(request, messages.SUCCESS, 'Votre code a bien été généré pour {} élèves !'.format(form.numberOfStudent))
 		else:
-			JSONResponse = json.dumps(form.errorss)
+			JSONResponse = json.dumps(form.errors)
 	else:
 		raise Http404('Hey :/ I wasn\'t expecting you here !')
 

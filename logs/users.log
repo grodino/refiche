@@ -1106,3 +1106,6 @@
 [2015-06-29 18:26:34] INFO [users.userConnected:8] User AGODINOT has connected !
 [2015-06-29 18:28:06] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
 [2015-06-29 18:28:13] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-06-30 18:28:28] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-07-01 16:04:00] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-07-01 16:04:02] INFO [users.userConnected:8] User AGODINOT has connected !
