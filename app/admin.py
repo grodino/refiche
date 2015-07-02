@@ -1,7 +1,5 @@
 # coding=UTF-8
-from django.db import models
 from django.contrib import admin
-from django.forms import SelectMultiple
 from app.functions import getStudent
 from app.models import Student, Classroom, School, Level, Teacher, Lesson, Sheet, Chapter
 
