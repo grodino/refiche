@@ -1,12 +1,14 @@
-import json, logging
+import json, logging, random, string
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
+from app.functions import getStudent
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername
 from registration.forms import StudentRegistrationForm, DelegateRegistrationForm
+
 
 def register(request):
 	""" View for signing up, also includes a form for the students who have a link """
@@ -24,19 +26,26 @@ def register(request):
 
 
 @login_required
+@permission_required('registration.add_studentregistrationcode')
 def getCode(request):
 	""" View made to get a code valid for limited number of student to be able to sign up """
+
+	student = getStudent(request.user)
 
 	if request.method == 'POST':
 		form = StudentRegistrationForm(request.POST)
 
 		if form.is_valid():
-			form.save(commit=False)
-			form.code = 'test'
-			form.save()
+			code = form.save(commit=False)
 
-			JSONResponse = json.dumps({'sucess': 'true',})
-			messages.add_message(request, messages.SUCCESS, 'Votre code a bien été généré pour {} élèves !'.format(form.numberOfStudent))
+			# Create a random string of 20 chars for the code
+			code.code = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20))
+			code.classroom = student.classroom
+			code.numberOfStudentsLeft = code.numberOfStudents
+			code.save()
+
+			JSONResponse = json.dumps({'sucess': 'true', 'code': code.code})
+			messages.add_message(request, messages.SUCCESS, 'Votre code a bien été généré pour {} élèves !'.format(code.numberOfStudents))
 		else:
 			JSONResponse = json.dumps(form.errors)
 	else:

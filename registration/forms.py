@@ -7,7 +7,7 @@ class StudentRegistrationForm(forms.ModelForm):
 		model = StudentRegistrationCode
 		fields = ('numberOfStudents',)
 		widgets = {
-			'numberOfStudents': forms.NumberInput(attrs={'min': '1'})
+			'numberOfStudents': forms.NumberInput(attrs={'min': '1', 'class': 'full-container-width'})
 		}
 
 	def clean_numberOfStudents(self):
@@ -15,6 +15,7 @@ class StudentRegistrationForm(forms.ModelForm):
 			raise forms.ValidationError('Vous ne pouveez pas inscrire un nombre nul ou négatif d\'élèves :/',
 										code='not_positive')
 
+		return self.cleaned_data.get('numberOfStudents')
 
 
 class DelegateRegistrationForm(forms.Form):

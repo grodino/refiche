@@ -36,8 +36,22 @@
                     <div>
                         <a id="hide_user_options" href="#">RETOUR</a>
                     </div>
-                    </div>
+                </div>
             </div>
+
+            {% if request.user.is_staff %}
+                <div id="new_code_form" class="new_form">
+                    {% load registration_extras %}
+                    {% getStudentRegistrationForm request %}
+                </div>
+
+                <div id="new_code_form_success" class="full-container-size">
+                    <div class="full-container-size">
+                        <h5>Votre code : </h5>
+                        <input type="text" readonly="true" value="ERROR">
+                    </div>
+                </div>
+            {% endif %}
         </div>
         
         <div id="left_cell" class="six columns">
@@ -55,13 +69,6 @@
     <h5>Poster une nouvelle fiche ! <a id="hide_new_sheet_form" class="u-pull-right">Retour</a></h5>
     {% getNewSheetForm request %}
 </div>
-
-{% if request.user.is_staff %}
-    <div id="new_code_form" class="new_form">
-        {% load registration_extras %}
-        {% getStudentRegistrationForm request %}
-    </div>
-{% endif %}
 
 {% block in_content %}
 <div id="lessons">

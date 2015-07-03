@@ -49,7 +49,12 @@ $(function() {
 
     //Animation for getting a code
     $('#get_code').click(function() {
-        $('nav').slideToggle('fast');
+        $('#user_options').slideToggle('fast');
+        $('#new_code_form').slideToggle('fast');
+    });
+
+    $('#hide_new_code_form').click(function() {
+        $('#user_options').slideToggle('fast');
         $('#new_code_form').slideToggle('fast');
     });
 
@@ -59,18 +64,26 @@ $(function() {
     });
 
     // Dealing with the get code form
-    $('#submit_new_code_form').click(function() {
+    $('#new_code_form').submit(function(e) {
+        e.preventDefault();
+        jQuery.ajaxSettings.traditional = true;
+
         // If the form is not empty
         if ($('#id_numberOfStudents').val() >=1) {
             $.post(
                 '/register/get-student-code/',
                 {
-                    numberOfStudents: 3, //$('#id_numberOfStudents').val(),
-                    csrfmiddlewaretoken: $('#new_code_form form input[name="csrfmiddlewaretoken"]').val(),
+                    'numberOfStudents': $('#id_numberOfStudents').val(),
+                    'csrfmiddlewaretoken': $('#new_code_form form input[name="csrfmiddlewaretoken"]').val(),
 
                 },
-                function(data, statusCode) {
-                    alert(JSON.stringify(statusCode));
+                function(data) {
+                    if (data.sucess === 'true') {
+                        $('#new_code_form').slideToggle('fast');
+                        $('#new_code_form_success').slideToggle('fast');
+
+                        $('#new_code_form_success input').val(data.code);
+                    }
                 },
                 'json'
             );

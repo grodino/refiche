@@ -68,6 +68,17 @@
     font-weight: 300;
 }
 
+#content #new_code_form_success {
+    display: none;
+}
+
+#content #new_code_form_success div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 /*  LESSONS LIST
 ------------------------------------------- */
 #lessons header {
@@ -164,6 +175,22 @@ form .error {
     border: 1px solid #ff2700;
 }
 
+#new_code_form {
+    height: 100%;
+    overflow-y: hidden;
+
+    text-align: left;
+}
+
+#new_code_form p,
+#new_code_form input {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+#new_code_form input[type="submit"] {
+    margin-bottom: 0;
+}
 
 /*  SHEET LIST
 ------------------------------------------- */

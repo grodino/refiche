@@ -2,13 +2,15 @@
     {% csrf_token %}
 
     {{ form.errors }}
-    
-    <div class="container">
-        <div class="row">
-            {{ form.numberOfStudents.label_tag }}
-            {{ form.numberOfStudents }}
-        </div>
+    <p>
+        ATTENTION ! Vous ne pouvez génerer un code qu'une seule fois, faites attention au nombres d'élèves que vous voulez inscrire ;)
+        <a id="hide_new_code_form">Retour</a>
+    </p>
 
-        <input id="submit_new_code_form" class="button button-primary" readonly="true" value="Envoyer !"/>
+    <div>
+        {{ form.numberOfStudents.label_tag }}
+        {{ form.numberOfStudents }}
+
+        <input id="submit_new_code_form" type="submit" class="button-primary full-container-width" readonly="true" value="Envoyer !"/>
     </div>
 </form>
