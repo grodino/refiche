@@ -45,7 +45,6 @@ def getCode(request):
 			code.save()
 
 			JSONResponse = json.dumps({'sucess': 'true', 'code': code.code})
-			messages.add_message(request, messages.SUCCESS, 'Votre code a bien été généré pour {} élèves !'.format(code.numberOfStudents))
 		else:
 			JSONResponse = json.dumps(form.errors)
 	else:

@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from app.models import Lesson, Sheet
 from app.forms import UploadSheetForm
 from app.functions import getStudent
-from registration.forms import StudentRegistrationForm
+from registration.models import StudentRegistrationCode
 # _____________________________________________________________________
 # VIEWS
 
@@ -20,6 +20,12 @@ def home(request):
 	student = getStudent(request.user)
 	classroom = student.classroom
 	lessons = classroom.lessons.all()
+
+	if request.user.has_perm('registration.add_studentregistrationcode'):
+		try:
+			code = StudentRegistrationCode.objects.get(classroom=student.classroom)
+		except StudentRegistrationCode.DoesNotExist:
+			code = 'NONE'
 
 	return render(request, 'home.html', locals())
 

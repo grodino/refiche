@@ -50,7 +50,17 @@ $(function() {
     //Animation for getting a code
     $('#get_code').click(function() {
         $('#user_options').slideToggle('fast');
-        $('#new_code_form').slideToggle('fast');
+
+        if ($('#new_code_form_success input').val() === 'NONE') {
+            $('#new_code_form').slideToggle('fast');
+        } else {
+            $('#new_code_form_success').slideToggle('fast');
+        }
+    });
+
+    $('#hide_new_code_success').click(function() {
+        $('#new_code_form_success').slideToggle('fast');
+        $('#user_options').slideToggle('fast');
     });
 
     $('#hide_new_code_form').click(function() {

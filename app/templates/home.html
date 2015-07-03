@@ -48,7 +48,8 @@
                 <div id="new_code_form_success" class="full-container-size">
                     <div class="full-container-size">
                         <h5>Votre code : </h5>
-                        <input type="text" readonly="true" value="ERROR">
+                        <input type="text" readonly="true" value="{{ code.code }}">
+                        <a href="#" id="hide_new_code_success">RETOUR</a>
                     </div>
                 </div>
             {% endif %}

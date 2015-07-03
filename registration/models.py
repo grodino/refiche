@@ -7,7 +7,7 @@ class StudentRegistrationCode(models.Model):
 
 	code = models.CharField(unique=True,
 							max_length=20)
-	classroom = models.ForeignKey(Classroom)
+	classroom = models.OneToOneField(Classroom)
 	numberOfStudents = models.IntegerField(verbose_name='nombre d\'élèves')
 	numberOfStudentsLeft = models.IntegerField(verbose_name='nombre d\'élèves restants')
 
