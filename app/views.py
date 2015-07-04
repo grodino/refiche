@@ -23,7 +23,7 @@ def home(request):
 
 	if request.user.has_perm('registration.add_studentregistrationcode'):
 		try:
-			code = StudentRegistrationCode.objects.get(classroom=student.classroom)
+			code = StudentRegistrationCode.objects.get(classroom=student.classroom).code
 		except StudentRegistrationCode.DoesNotExist:
 			code = 'NONE'
 
