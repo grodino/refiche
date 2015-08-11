@@ -2,6 +2,7 @@ from django import forms
 from app.models import School, Level
 from registration.models import StudentRegistrationCode
 
+# TODO: rename this form into StudentCodeForm
 class StudentRegistrationForm(forms.ModelForm):
 	class Meta:
 		model = StudentRegistrationCode
@@ -12,10 +13,16 @@ class StudentRegistrationForm(forms.ModelForm):
 
 	def clean_numberOfStudents(self):
 		if self.cleaned_data.get('numberOfStudents') <= 0:
-			raise forms.ValidationError('Vous ne pouveez pas inscrire un nombre nul ou négatif d\'élèves :/',
+			raise forms.ValidationError('Vous ne pouvez pas inscrire un nombre nul ou négatif d\'élèves :/',
 										code='not_positive')
 
 		return self.cleaned_data.get('numberOfStudents')
+
+
+# TODO: rename this form into StudentRefistrationForm
+class StudentCodeRegistrationForm(forms.Form):
+	code = forms.CharField(max_length=20,
+						   label='Code d\'inscription')
 
 
 class DelegateRegistrationForm(forms.Form):

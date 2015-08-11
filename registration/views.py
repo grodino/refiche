@@ -6,21 +6,30 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
-from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername
-from registration.forms import StudentRegistrationForm, DelegateRegistrationForm
+from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
+from registration.forms import StudentRegistrationForm, DelegateRegistrationForm, StudentCodeRegistrationForm
 
 
 def register(request):
 	""" View for signing up, also includes a form for the students who have a link """
 
 	if request.method == 'POST':
-		form = StudentRegistrationForm(request.POST)
+		form = StudentCodeRegistrationForm(request.POST)
 
 		if form.is_valid():
-			hello_g = form.cleaned_data['code']
-			messages.add_message(request, messages.SUCCESS, 'Ouiiiiiiiiii!')
+			classroom = checkStudentRegistrationCode(form.cleaned_data['code'])
+
+			if classroom is None: # If the code does not exist
+				# TODO: return an error message probably in JSON
+				formUrl = None
+				success = None
+			else:
+				formUrl = 'url where the user is going to be redirected'
+				success = 'true'
+
+			return HttpResponse(json.dumps({'success': success,	'url': formUrl }), content_type='application/json')
 	else:
-		form = StudentRegistrationForm()
+		form = StudentCodeRegistrationForm()
 
 	return render(request, 'registration.html', locals())
 
@@ -51,6 +60,12 @@ def getCode(request):
 		raise Http404('Hey :/ I wasn\'t expecting you here !')
 
 	return HttpResponse(JSONResponse, content_type='application/json')
+
+
+def studentRegister(request):
+	""" View made to let the students register themselves to their own classroom """
+
+	return render(request, 'student_register', locals())
 
 
 def delegateRegister(request):

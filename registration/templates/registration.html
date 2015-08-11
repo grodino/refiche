@@ -46,7 +46,7 @@
             <a id="hide_student_form" href="#">RETOUR</a>
         </h5>
 
-        <form action="{% url 'registration.views.register' %}" method="POST" class="container">
+        <form id="student_registration" action="#" method="POST" class="container">
             {% csrf_token %}
 
             <div class="row">
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="four columns">
-                    <input id="submit_form" class="button button-primary u-pull-right" readonly="true" value="A faire en JS">
+                    <input id="submit_form" class="button button-primary u-pull-right" type="submit" value="continuer">
                 </div>
             </div>
         </form>
