@@ -50,3 +50,11 @@
 #delegate_form .row {
     margin-bottom: 0.7em;
 }
+
+#content h3 {
+    width: 100%;
+
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: #FFB948;
+}

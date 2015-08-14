@@ -19,14 +19,15 @@ class StudentRegistrationForm(forms.ModelForm):
 		return self.cleaned_data.get('numberOfStudents')
 
 
-# TODO: rename this form into StudentRefistrationForm
+# TODO: rename this form into StudentRegistrationForm
 class StudentCodeRegistrationForm(forms.Form):
 	code = forms.CharField(max_length=20,
 						   label='Code d\'inscription')
 
 
-class DelegateRegistrationForm(forms.Form):
-	# Information about the delegate, will be stored in the User model
+class RegistrationForm(forms.Form):
+	""" Basic form for registration, it is generic to be inherited """
+
 	firstName = forms.CharField(max_length=30,
 								label='Prénom',
 								widget=forms.TextInput(attrs={'required': True, 'placeholder': 'Ex: Jean', 'class': 'full-container-width'}))
@@ -40,7 +41,20 @@ class DelegateRegistrationForm(forms.Form):
 	email = forms.EmailField(max_length=100,
 							 widget=forms.EmailInput(attrs={'required': True, 'placeholder': 'Ex: jdupond@email.fr', 'class': 'full-container-width'}))
 
-	# Information about the classroom, will be stored in the corresponding models
+	def clean_password2(self):
+		password1 = self.cleaned_data.get('password1')
+		password2 = self.cleaned_data.get('password2')
+
+		if password1 and password2 and password1 != password2:
+			raise forms.ValidationError('Les deux mots de passe ne correspondent pas',
+										code='password_mismatch',)
+
+		return password2
+
+
+class DelegateRegistrationForm(RegistrationForm):
+	""" Extends the basic form and adds the classroom creation ability for delegates"""
+
 	school = forms.ModelChoiceField(School.objects.all(),
 									label='École',
 									widget=forms.Select(attrs={'required': True, 'class': 'full-container-width'}),
@@ -55,13 +69,3 @@ class DelegateRegistrationForm(forms.Form):
 											label='Degré',
 											widget=forms.Select(attrs={'required': True, 'class': 'full-container-width'}),
 											empty_label=None)
-
-	def clean_password2(self):
-		password1 = self.cleaned_data.get('password1')
-		password2 = self.cleaned_data.get('password2')
-
-		if password1 and password2 and password1 != password2:
-			raise forms.ValidationError('Les deux mots de passe ne correspondent pas',
-										code='password_mismatch',)
-
-		return password2

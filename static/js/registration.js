@@ -24,7 +24,7 @@ $(function() {
                 },
                 function(data) {
                     if (data.success === 'true') {
-                        alert('ouiiiiiiiiiii'); // TODO: rediriger vers la page d'inscription
+                        $('#student_registration').html('<a href="'+data.url+'">Redirection vers le formulaire</a>');// TODO: rediriger vers la page d'inscription
                     } else {
                     	$('#id_code').addClass('error');
                     }
@@ -32,7 +32,5 @@ $(function() {
                 'json'
             );
     }); 
-
-    // Displays if the user can register after he submitted the code
 
 });

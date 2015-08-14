@@ -139,8 +139,7 @@ $(function() {
                     if (!formResponse.getResponseHeader('Content-type') === 'application/json') {
                         alert('Oh non :( Une erreur est survenue')
                     }
-
-                    alert(formResponse.responseText);
+                    
                     var status = JSON.parse(formResponse.responseText);
 
                     if (status.sucess) {
