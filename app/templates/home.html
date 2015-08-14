@@ -78,7 +78,7 @@
     </header>
     
     <div class="flex-container">
-        {% for lesson in classroom.lessons.all %}
+        {% for lesson in lessons %}
         <div class="lesson">
             <a class="full-container-size" href="{% url 'app.views.lessonPage' lesson_name=lesson.name %}">
                 <h5>{{ lesson.name }}</h5>
@@ -86,7 +86,14 @@
                     {{ lesson.teacher.gender }}
                     {{ lesson.teacher.lastName }}
                 </p>
-            </a>
+
+                <!-- TODO: Write the css and think about the layout for the recent sheets -->
+                {% for sheet in lesson.getLastSheets %}
+                    <p>{{ sheet.name }}</p>
+                {% empty %}
+                    <p>Aucun ficher récent</p>
+                {% endfor %}
+            </a> 
         </div>
         {% empty %}
             <div class="full-container-size">

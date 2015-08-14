@@ -131,7 +131,7 @@ $(function() {
         } else {
             var sheetFormData = new FormData(sheetForm);
 
-            formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
+            formResponse.open('POST', 'http://127.0.0.1:8000/app/upload/'); //Changed refiche.dev to 127.0.0.1. TODO: change it back
             formResponse.send(sheetFormData);
 
             formResponse.addEventListener('readystatechange', function() {
@@ -140,7 +140,8 @@ $(function() {
                         alert('Oh non :( Une erreur est survenue')
                     }
 
-                    var status = $.parseJSON(formResponse.responseText);
+                    alert(formResponse.responseText);
+                    var status = JSON.parse(formResponse.responseText);
 
                     if (status.sucess) {
                         location.reload();

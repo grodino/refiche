@@ -14,19 +14,19 @@ $(function() {
     //Deals with the code inscription form
     $('#student_registration').submit(function(e) {
     	e.preventDefault();
+    	$('#id_code').removeClass('error');
 
     	$.post(
                 '/register/',
                 {
                     'code': $('#id_code').val(),
                     'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-
                 },
                 function(data) {
                     if (data.success === 'true') {
-                        alert('ouiiiiiiiiiii');
+                        alert('ouiiiiiiiiiii'); // TODO: rediriger vers la page d'inscription
                     } else {
-                    	alert('nooooooooon');
+                    	$('#id_code').addClass('error');
                     }
                 },
                 'json'

@@ -20,7 +20,9 @@ def home(request):
 	student = getStudent(request.user)
 	classroom = student.classroom
 	lessons = classroom.lessons.all()
+	lastSheets = {}
 
+	# Construct the menu for the delegate
 	if request.user.has_perm('registration.add_studentregistrationcode'):
 		try:
 			code = StudentRegistrationCode.objects.get(classroom=student.classroom).code

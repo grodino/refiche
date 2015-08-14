@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
-from app.functions import renameFile, addFile, deleteFile, deleteUser
+from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson
 
 
 class Lesson(models.Model):
@@ -13,6 +13,10 @@ class Lesson(models.Model):
 
 	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
+
+	def getLastSheets(self):
+		""" Return the 2 last sheets for the lesson """
+		return getLastSheetsForLesson(self, 2)
 
 
 class Level(models.Model):
