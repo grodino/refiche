@@ -2,8 +2,11 @@
 
 {% block title %}BLOG | REFICHE {% endblock %}
 
-{% block header%} BLOG {% endblock %}
-
 {% block content %}
-<p>Ceci est une page qui n'a rien à voir avec le Hacking !</p>
+	<h3>Blog</h3>
+
+	{% for post in posts %}
+		<h5>{{ post.title }}, publié le {{ post.pubDate }} par {{ post.author }}</h5>
+		<p>{{ post.content }}</p>
+	{% endfor %}
 {% endblock %}
