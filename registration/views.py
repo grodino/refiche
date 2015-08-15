@@ -66,6 +66,8 @@ def getCode(request):
 def studentRegister(request, code):
 	""" View made to let the students register themselves to their own classroom """
 
+	# TODO: send an email to the delegate telling him that someone subscribed
+
 	try:
 		code = StudentRegistrationCode.objects.get(code=code)
 	except StudentRegistrationCode.DoesNotExist:

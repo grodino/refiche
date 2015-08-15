@@ -4,9 +4,10 @@ from os.path import splitext
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Lesson, Sheet
+from app.models import Lesson, Sheet, Classroom, Student
 from app.forms import UploadSheetForm
 from app.functions import getStudent
 from registration.models import StudentRegistrationCode
@@ -52,6 +53,26 @@ def lessonPage(request, lesson_name):
 	sheets = Sheet.objects.filter(lesson=lesson).order_by('-uploadDate')
 
 	return render(request, 'app/lesson.html', locals())
+
+
+@login_required
+def classroomPage(request):
+	""" View to display informations about the classroom 
+		like the students, the teachers, the school and so on """
+
+	# TODO: If the student is delegate, allow him to modify stuff like delete students or name of the classroom
+	student = getStudent(request.user)
+	classroom = student.classroom
+
+	# Get the Users who are in the classroom and who are part of the group delegates
+	delegatesGroup = Group.objects.filter(name='delegates')
+	delegates = Student.objects.filter(classroom=classroom,
+									   user__groups=delegatesGroup)
+
+	numberOfStudents = Student.objects.filter(classroom=classroom).count()
+	numberOfLessons = classroom.lessons.all().count()
+
+	return render(request, 'app/classroom.html', locals())
 
 
 @login_required

@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+
+
+{# By default, the menu not included but I'll make it in a way that it's possible to reveal it #}
+{# TODO: Make something practical be able to reveal the menu #}
+
+{% block content %}
+	<div class="container">
+		<h3>Informations</h3>
+
+		<div class="row">
+			<div class="eight columns"><h5>{{ classroom.name }}</h5></div>
+			<div class="four columns"><h5>{{ numberOfStudents }} élèves</h5></div>
+		</div>
+
+		<div class="row">
+			<div class="four columns"><h5>{{ numberOfLessons }} matières</h5></div>
+			<div class="eight columns">
+				<h5>
+					Délégué(e)(s): 
+					{% for delegate in delegates %}
+						{{ delegate.user.first_name }} {{ delegate.user.last_name|upper }}
+					{% endfor %}
+				</h5>
+			</div>
+		</div>
+	</div>
+{% endblock %}

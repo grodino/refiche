@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
 {% block title %}BLOG | REFICHE {% endblock %}
 
-{% block content %}
-	<h3>Blog</h3>
+{% block header %}{{ block.super }} <h1>Blog</h1> {% endblock %}
 
+{% block content %}
 	{% for post in posts %}
 		<h5>{{ post.title }}, publié le {{ post.pubDate }} par {{ post.author }}</h5>
 		<p>{{ post.content }}</p>
