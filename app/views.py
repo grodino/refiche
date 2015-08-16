@@ -64,6 +64,8 @@ def classroomPage(request):
 	student = getStudent(request.user)
 	classroom = student.classroom
 
+	classmates = Student.objects.filter(classroom=classroom).order_by('user__last_name')
+
 	# Get the Users who are in the classroom and who are part of the group delegates
 	delegatesGroup = Group.objects.filter(name='delegates')
 	delegates = Student.objects.filter(classroom=classroom,

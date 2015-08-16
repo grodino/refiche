@@ -1188,3 +1188,5 @@
 [2015-08-15 22:41:41] ERROR [users.getStudent:21] ingegus's account is not linked to a profile account! id = 1
 [2015-08-15 22:41:48] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
 [2015-08-15 22:42:08] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-16 15:12:52] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-16 23:54:14] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
