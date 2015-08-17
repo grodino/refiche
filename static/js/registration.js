@@ -15,16 +15,17 @@ $(function() {
     $('#student_registration').submit(function(e) {
     	e.preventDefault();
     	$('#id_code').removeClass('error');
+        var code = $('#id_code').val();
 
     	$.post(
                 '/register/',
                 {
-                    'code': $('#id_code').val(),
+                    'code': code,
                     'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
                 },
                 function(data) {
                     if (data.success === 'true') {
-                        $('#student_registration').html('<a href="'+data.url+'">Redirection vers le formulaire</a>');// TODO: rediriger vers la page d'inscription
+                        location.replace('/register/code/'+code);
                     } else {
                     	$('#id_code').addClass('error');
                     }
