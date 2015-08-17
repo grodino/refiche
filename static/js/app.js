@@ -15,8 +15,8 @@ $(function() {
             file_avatar.setAttribute('value', 'Selectionner le fichier');
         }
 
-    }, false);
-    
+    }, false);    
+
 
     // User options
     // Show
@@ -34,6 +34,7 @@ $(function() {
         $('#user_infos').css('border', '');
     });
 
+
     // Animation to post a new sheet
     // Show
     $('#post_new_sheet_link').click(function() {
@@ -46,6 +47,7 @@ $(function() {
         $('nav').slideDown('fast');
         $('#new_sheet_form').slideUp('fast');
     });
+
 
     //Animation for getting a code
     $('#get_code').click(function() {
@@ -152,6 +154,24 @@ $(function() {
         }
     });
     
+
+    // Reveals informations about a lesson
+    $('.lesson').hover(function() {
+        $('a', this).addClass('revealed');
+
+        $('.name_container', this).slideUp('fast');
+        $('.info_container', this).slideDown('fast');
+    }, function() {
+        $('.name_container', this).stop(true, false);
+        $('.name_container', this).slideDown('fast');
+
+        $('.info_container, this').stop(true, false);
+        $('.info_container, this').slideUp('fast');
+
+        $('a', this).removeClass('revealed');
+    });
+
+
     // Reveals informations about a sheet 
     $('.sheet').hover(function () {
         $('.sheet_info', this).show('fast');

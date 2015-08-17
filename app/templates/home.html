@@ -81,18 +81,24 @@
         {% for lesson in lessons %}
         <div class="lesson">
             <a class="full-container-size" href="{% url 'app.views.lessonPage' lesson_name=lesson.name %}">
-                <h5>{{ lesson.name }}</h5>
-                <p>
-                    {{ lesson.teacher.gender }}
-                    {{ lesson.teacher.lastName }}
-                </p>
+                <div class="name_container">
+                    <h5>{{ lesson.name }}</h5>
+                    <p>
+                        {{ lesson.teacher.gender }}
+                        {{ lesson.teacher.lastName }}
+                    </p>
+                </div>
 
                 <!-- TODO: Write the css and think about the layout for the recent sheets -->
-                {% for sheet in lesson.getLastSheets %}
-                    <p>{{ sheet.name }}</p>
-                {% empty %}
-                    <p>Aucun ficher récent</p>
-                {% endfor %}
+                <div class="info_container">
+                    <h5>Derniers partages:</h5>
+
+                    {% for sheet in lesson.getLastSheets %}
+                        {{ sheet.name }}<br />
+                    {% empty %}
+                        Arghh aucun partage récent :'(
+                    {% endfor %}
+                </div>
             </a> 
         </div>
         {% empty %}
