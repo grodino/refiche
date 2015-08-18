@@ -147,7 +147,7 @@ $(function() {
                     if (status.sucess) {
                         location.reload();
                     } else {
-                        alert('Oh non :( Je crois que j\'ai avalé de travers');
+                        alert('Le fichier est trop gros ou il n\'est pas autorisé :/');
                     }
                 }
             }, false);

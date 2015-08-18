@@ -34,10 +34,8 @@ header .logo {
 /*  CONTENT
 ------------------------------------------- */
 #content {
-    flex-grow: 1;
     flex-shrink: 0;
     margin: 1em;
-    margin-top: -0.5em;
 }
 
 #content header {
@@ -92,9 +90,14 @@ footer {
 
 /*  MESSAGES
 ------------------------------------------- */
+.messages {
+    flex-shrink: 0;
+}
+
 .success {
     display: block;
     padding: 0.5em;
+    z-index: 9999;
     
     background-color: #2bd123;
     cursor: pointer;

@@ -41,16 +41,17 @@
 
 </header>
 
-	<ul class="messages">
-        {% if messages %}
+    {% if messages %}
+        <ul class="messages">
             {% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
                 {{ message }} <br/>
                 <span class="helper">Cliquez la notification pour la faire disparaitre</span>
                 </li>
             {% endfor %}
-        {% endif %}
-	</ul>
+        </ul>
+    {% endif %}
+
 
   {% if error %}
     {{ error }}

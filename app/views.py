@@ -120,7 +120,7 @@ def downloadSheetPage(request, pk):
 		raise Http404("Sorry this file does not exist :(")
 	
 	# Check if the user can have access to it (if he is part of the lesson)
-	if sheet.lesson not in student.lessons.all():
+	if sheet.lesson not in student.classroom.lessons.all():
 		raise PermissionDenied()
 
 	data = sheet.sheetFile.read()

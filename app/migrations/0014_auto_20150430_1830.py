@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='sheet',
             name='sheetFile',
-            field=models.FileField(upload_to=app.models.renameFile),
+            field=models.FileField(upload_to='sheets/'),
         ),
     ]

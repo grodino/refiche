@@ -12,14 +12,16 @@
 
     <div class=flex-container>
     {% for sheet in sheets %}
-        <div class="sheet" style="  {% if sheet.sheetType == 'SHEET' %}
-                                        background-image: url('{% static 'img/icons/note.png' %}');
-                                    {% elif sheet.sheetType == 'NOTES' %}
-                                        background-image: url('{% static 'img/icons/note.png' %}');
-                                    {% elif sheet.sheetType == 'TEST' %}
-                                        background-image: url('{% static 'img/icons/test.png' %}');
-                                    {% elif sheet.sheetType == 'TEST_CORRECTION' %}
-                                        background-image: url('{% static 'img/icons/test_correction.png' %}');
+
+        {# TODO: Change the icons for each extension #}
+        <div class="sheet" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
+                                    {% elif sheet.extension == '.pdf' %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
+                                    {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
+                                        background-image: url('{% url 'app.views.downloadSheetPage' sheet.pk %}');
+                                    {% else %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
                                     {% endif %}
                                     ">
             <a href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">

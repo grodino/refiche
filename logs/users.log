@@ -1192,3 +1192,17 @@
 [2015-08-16 23:54:14] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
 [2015-08-17 11:18:00] INFO [users.userConnected:8] User AGODINOT has connected !
 [2015-08-17 23:33:21] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-18 09:40:47] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-18 10:27:55] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-18 10:28:08] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-18 10:29:50] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-18 10:30:04] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-18 10:30:05] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-18 22:58:18] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-18 22:58:59] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-18 23:05:39] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-18 23:05:52] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-18 23:43:50] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-18 23:44:08] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-18 23:46:41] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-18 23:46:54] INFO [users.userConnected:8] User AGODINOT has connected !
