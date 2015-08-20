@@ -1,4 +1,6 @@
+from os.path import splitext
 from django import forms
+from django.conf import settings
 from app.models import School, Level
 from registration.models import StudentRegistrationCode
 
@@ -40,6 +42,8 @@ class RegistrationForm(forms.Form):
 								widget=forms.PasswordInput(attrs={'required': True, 'class': 'full-container-width'}))
 	email = forms.EmailField(max_length=100,
 							 widget=forms.EmailInput(attrs={'required': True, 'placeholder': 'Ex: jdupond@email.fr', 'class': 'full-container-width'}))
+	avatar = forms.FileField(label='Photo de profil (facultatif)',
+							 required=False)
 
 	def clean_password2(self):
 		password1 = self.cleaned_data.get('password1')
@@ -50,6 +54,26 @@ class RegistrationForm(forms.Form):
 										code='password_mismatch',)
 
 		return password2
+
+
+	def clean_avatar(self):
+		ALLOWED_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
+
+		avatar = self.cleaned_data['avatar']
+		avatarExtension = splitext(avatar.name)[1]
+		avatarSize = avatar.size
+
+		if avatarExtension not in ALLOWED_EXTENSIONS:
+			raise forms.ValidationError('Les photos dont le format de fichier est en'+avatarExtension+' ne sont pas acceptées :/',
+										 code='wrong_extension')
+		elif avatarSize > settings.MAX_PICTURE_SIZE:
+			raise forms.ValidationError("Argh le fichier est trop gros :( [%(size)o octets]",
+										params={'size': avatarSize},
+										code='to_big_picture')
+
+		return avatar
+
+
 
 
 class DelegateRegistrationForm(RegistrationForm):

@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MAX_SHEET_SIZE = 1048576 # 1MB
+MAX_PICTURE_SIZE = MAX_SHEET_SIZE
 ALLOWED_EXTENSIONS = ('.jpg', '.png', '.doc', '.docx')
 
 DEFAULT_CHARSET = 'utf-8'

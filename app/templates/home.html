@@ -6,9 +6,16 @@
 <nav class="container">
     <div class="row">
         <div id="user_infos" class="six columns left-cell full-container-size">
-            <div id="user_infos_content">
-                <a href="#" class="full-container-size"><img id="user-icon" src="{% static 'img/user_test_img.png' %}" /><br />
-                <span>{{ user.first_name }} {{ user.last_name|upper }}</span></a>
+            <div id="user_infos_content" class="full-container-size">
+                <a href="#" class="full-container-size">
+                    <img id="user-icon" src="{% if student.avatar %}
+                                                {% url 'app.views.downloadRessource' ressource='avatars' url=student.avatar.name|cut:'avatars/' %}
+                                             {% else %}
+                                                {% static 'img/icons/default_avatar.png' %}
+                                             {% endif %}" />
+
+                    <div>{{ user.first_name }} {{ user.last_name|upper }}</div>
+                </a>
             </div>
 
             <div id="user_options" class="full-container-size">

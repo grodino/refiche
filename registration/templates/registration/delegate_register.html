@@ -8,7 +8,7 @@
 {% block content %}
 
 
-    <form id="delegate_form" action="{% url 'registration.views.delegateRegister' %}" method="POST">
+    <form id="delegate_form" action="{% url 'registration.views.delegateRegister' %}" method="POST" enctype="multipart/form-data" >
         {% csrf_token %}
 
         <h3 class="full-container-width">Inscription délégué</h3>
@@ -21,14 +21,16 @@
                     {{ field.errors }}
                     {{ field.label_tag }}
                     {{ field }}
-                </div>
 
-                {% if forloop.revcounter0 == 0 %}
-                    <div class="six columns">
-                        <input class="button-primary full-container-size"type="submit" value="S'inscrire !">
-                    </div>
-                {% endif %}
+                    {% if field.name == 'avatar' %}
+                        <div class="input-file-container">
+                            <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
+                        </div>
+                    {% endif %}
+                </div>
             {% cycle '' '</div>' %}
         {% endfor %}
+
+        <input class="button-primary full-container-size"type="submit" value="S'inscrire !">
     </form>
 {% endblock %}

@@ -1,5 +1,7 @@
 # coding=UTF-8
+from os.path import splitext
 from django.db import models
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
 from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson
@@ -59,6 +61,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
+	avatar = models.FileField(upload_to='avatars/', null=True)
 	# I will add some other things but now this is it
 
 	class Meta(object):

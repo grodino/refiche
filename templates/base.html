@@ -33,10 +33,10 @@
 <body>
 	{# The url specified is from django just to be able to include the login form in the index page #}
 <header id="banner">
-    <a id="header-link" href="{% url "django.contrib.auth.views.login" %}" class="full-container-size">
-    {% block header %}
-        <img id="logo" class="logo" src="{% static "img/logo_full.png" %}"/>
-    {% endblock %}
+    <a id="header-link" href="{% url "app.views.home" %}" class="full-container-size">
+        {% block header %}
+            <img id="logo" class="logo" src="{% static "img/logo_full.png" %}"/>
+        {% endblock %}
     </a>
 
 </header>

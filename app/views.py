@@ -129,3 +129,30 @@ def downloadSheetPage(request, pk):
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name+sheet.extension)
 
 	return response
+
+@login_required
+def downloadRessource(request, ressource, url):
+	""" View for serving ressources in the media folder 
+		It checks if the user has the rights before servings it """
+	student = getStudent(request.user)
+
+	if ressource == 'avatars':
+		if ressource+'/'+url == student.avatar.url: # If he is asking for his avatar
+			extension = splitext(student.avatar.name)[1]
+
+			if extension in ('.jpg', '.jpeg'):
+				contentType = 'image/jpeg'
+			elif extension == '.png':
+				contentType = 'image/png'
+			elif extension == '.gif':
+				contentType = 'image/gif'
+			else:
+				contentType = 'image'
+
+			data = student.avatar.read()
+			response = HttpResponse(data, content_type=contentType)
+			response['Content-Disposition'] = 'attachment; filename="{}"'.format(student.avatar.name)
+		else:
+			raise PermissionDenied()
+
+	return response

@@ -4,6 +4,10 @@ $(function() {
     var file_avatar = document.querySelector('#file_avatar'),
     input_file = document.querySelector('#id_sheetFile');
 
+    if (input_file === null) {
+        input_file = document.querySelector('#id_avatar');
+    }
+
     file_avatar.addEventListener('click', function() {
         input_file.click();
     }, false);

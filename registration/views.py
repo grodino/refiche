@@ -74,7 +74,7 @@ def studentRegister(request, code):
 		raise Http404('Votre code n\'est pas valide :\ ')
 
 	if request.method == 'POST':
-		form = RegistrationForm(request.POST)
+		form = RegistrationForm(data=request.POST, files=request.FILES)
 
 		if form.is_valid():
 			firstName = form.cleaned_data['firstName']
@@ -82,6 +82,7 @@ def studentRegister(request, code):
 			email = form.cleaned_data['email']
 			password = form.cleaned_data['password2']
 			username = firstName[0].lower()+lastName.lower()
+			avatar = form.cleaned_data['avatar']
 
 			if len(username) > 30:
 				username = username[:30]
@@ -121,7 +122,7 @@ def delegateRegister(request):
 	""" View for registration by the delegate of the classroom """
 
 	if request.method == 'POST':
-		form = DelegateRegistrationForm(request.POST)
+		form = DelegateRegistrationForm(data=request.POST, files=request.FILES)
 
 		if form.is_valid():
 			# Fetching user data and creating a username
@@ -130,6 +131,7 @@ def delegateRegister(request):
 			email = form.cleaned_data['email']
 			password = form.cleaned_data['password2']
 			username = firstName[0].lower()+lastName.lower()
+			avatar = form.cleaned_data['avatar']
 
 			if len(username) > 30:
 				username = username[:30]
@@ -163,12 +165,13 @@ def delegateRegister(request):
 
 			newDelegate = Student.objects.create(user=newUser,
 												 school=school,
-												 classroom=newClassroom)
+												 classroom=newClassroom,
+												 avatar=avatar)
 			newDelegate.save()
 
-			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
-																   Nom d\'utilisateur: {}
-																   Mot de passe: {}""".format(username, password))
+			# newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
+			# 													   Nom d\'utilisateur: {}
+			# 													   Mot de passe: {}""".format(username, password))
 
 			return render(request, 'registration/register_success.html', locals())
 	else:
