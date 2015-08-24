@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+	<h3>
+		{{ code.classroom.name|upper }}
+		<h5>{{ code.classroom.school.name }}</h5>
+	</h3>
+
+	<form method="POST" action="{% url 'registration.views.studentRegister' code.code %}">
+		{% csrf_token %}
+		
+		{{ form.as_p }}
+
+		<input class="button-primary full-container-size" type="submit" value="S'inscrire !">
+	</form>
+{% endblock %}

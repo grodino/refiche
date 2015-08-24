@@ -16,8 +16,8 @@
 }
 
 #content nav #user-icon {
-    display: inline;
-    width: 12em;
+    min-width: 15em;
+    max-height: 13em;
     
     border: 3px solid #2EA490;
 }
@@ -33,9 +33,15 @@
     text-transform: uppercase;
 }
 
-#content #user_infos_content {
-    margin-bottom: 1em;
-    margin-top: 1em;
+#content #user_infos {
+    height: 16.5em;
+}
+
+#content #user_infos_content a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #content #user_options {
@@ -87,7 +93,7 @@
 }
 
 #lessons a {
-    margin-left: 0.25em;
+    padding-left: 0.25em;
     
     text-transform: uppercase;
     font-weight: 300;
@@ -108,6 +114,15 @@
     
     background-color: #D9D9D9;
     text-transform: uppercase;
+}
+
+#lessons .info_container {
+    display: none;
+    color: #2f2f2f;
+}
+
+#lessons .revealed {
+    border: 1px solid #3A6BAA;
 }
 
 @media(max-width: 550px) {
@@ -196,7 +211,6 @@ form .error {
 ------------------------------------------- */
 #sheets header {
     background-color: #FFB948;
-    margin-bottom: 0.5em;
 }
 
 #sheets header h3 {
@@ -215,8 +229,8 @@ form .error {
 #sheets .sheet{
     display: block;
     
-    width: 25em;
-    height: 23em;
+    width: 20em;
+    height: 18em;
     margin-bottom: 1em;
     
     border: 1px solid #3A6BAA;
@@ -254,3 +268,23 @@ form .error {
 }
 
 
+/*  CLASSROOM PAGE
+------------------------------------------- */
+#classroom_infos header,
+#students_list header {
+    background-color: #FFB948;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+#classroom_infos .columns {
+    background-color: #D9D9D9;
+
+    margin-bottom: 1em;
+    padding-left: 0.3em;
+}
+
+
+#classroom_infos .columns h5 {
+    text-transform: uppercase;
+}

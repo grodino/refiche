@@ -2,8 +2,10 @@
 import logging
 from os import remove, popen
 from os.path import splitext, join
+from datetime import timedelta
 from django.conf import settings
 from django.http import Http404
+from django.utils import timezone
 
 def getStudent(instance):
 	""" /!\ Not a view, it fetches the user and verifiy if there
@@ -20,6 +22,18 @@ def getStudent(instance):
 		raise Http404("Your user account is not linked to a profile account !")
 
 	return student
+
+
+def getLastSheetsForLesson(instance, numberOfSheets):
+	""" Get the [numberOfSheets] most recents sheets in the lesson
+		instance and return them as an array, returns an empty array 
+		if there are no sheets or if they are too old (>2 weeks) """
+	from app.models import Sheet
+
+	timeLimit = timezone.now() - timedelta(weeks=2)
+	sheets = Sheet.objects.filter(lesson=instance, uploadDate__gte=timeLimit).order_by('-uploadDate')[:numberOfSheets]
+
+	return sheets
 
 
 def renameFile(instance, name):

@@ -12,15 +12,17 @@
 {% block content %}
     {# TODO: Check if the user is connected. If yes just say that he doesn't need to go here #}
     <div id="intro">
-        <h3>Inscription</h3>
-
         <p>
             Vous êtes délégué de votre classe et vous souhaitez inscrire votre classe?
             Rien de plus simple ! Il vous suffit d'envoyer votre demande à travers ce formulaire.
-            Vous recevrez un email de confirmation contenant un code pour que chacun des élèves de la classe s'inscrive.
-            Si votre établissement n'est pas présent dans la liste suivantes, veuillez me contacter par mail à <a href="mailto:admin@refiche.fr">admin@refiche.fr</a>
+            Vous recevrez un email de confirmation contenant vos identifiants. Vous pourrez ensuite générer un code d'inscription pour inscrire les autres membres de votre classe.
+            Si votre établissement n'est pas présent dans la liste proposée, veuillez me contacter par mail à <a href="mailto:admin@refiche.fr">admin@refiche.fr</a>
         </p>
     </div>
+
+    <header>
+        <h3>Inscription</h3>
+    </header>
 
     <div id="menu" class="container">
         <div class="row">
@@ -46,7 +48,7 @@
             <a id="hide_student_form" href="#">RETOUR</a>
         </h5>
 
-        <form action="{% url 'registration.views.register' %}" method="POST" class="container">
+        <form id="student_registration" action="#" method="POST" class="container">
             {% csrf_token %}
 
             <div class="row">
@@ -55,7 +57,7 @@
                 </div>
 
                 <div class="four columns">
-                    <input id="submit_form" class="button button-primary u-pull-right" readonly="true" value="A faire en JS">
+                    <input id="submit_form" class="button button-primary u-pull-right" type="submit" value="continuer">
                 </div>
             </div>
         </form>

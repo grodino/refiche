@@ -1,18 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Article(models.Model):
-	titre = models.CharField(max_length=100)
-	auteur = models.CharField(max_length=42)
-	contenu = models.DateTimeField(auto_now_add=True, auto_now=False,
+class Post(models.Model):
+	title = models.CharField(max_length=100)
+	author = models.ForeignKey(User)
+	pubDate = models.DateTimeField(auto_now=True,
 								   verbose_name="Date de parution")
+	content = models.CharField(max_length=10000)
 
 	def __str__(self):
-		""" Permet de reconnaitre l'objet dans l'administration """
-
-		return self.titre
-
-class Categorie(models.Model):
-	nom = models.CharField(max_length=30)
-
-	def __str__(self):
-		return self.titre
+		return self.title

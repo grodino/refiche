@@ -6,5 +6,6 @@ urlpatterns = patterns('app.views',
 	url(r'^lesson/(?P<lesson_name>.+)$', 'lessonPage'),
 	url(r'^upload/$', 'newSheetPage'),
 	url(r'^download/(?P<pk>\d+)$', 'downloadSheetPage'),
-	url(r'^classroom/(?P<classroom_name>.+)$', 'underConstruction')
+	url(r'^classroom/$', 'classroomPage'),
+	url(r'^media/(?P<ressource>.+)/(?P<url>.+)$', 'downloadRessource'),
 )

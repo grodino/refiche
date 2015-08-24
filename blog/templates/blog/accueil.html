@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block add_stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
 {% block title %}BLOG | REFICHE {% endblock %}
 
-{% block header%} BLOG {% endblock %}
+{% block header %}{{ block.super }} <h1>Blog</h1> {% endblock %}
 
 {% block content %}
-<p>Ceci est une page qui n'a rien à voir avec le Hacking !</p>
+	{% for post in posts %}
+		<h5>{{ post.title }}, publié le {{ post.pubDate }} par {{ post.author }}</h5>
+		<p>{{ post.content }}</p>
+	{% endfor %}
 {% endblock %}

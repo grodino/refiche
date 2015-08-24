@@ -15,6 +15,15 @@ class StudentAdmin(admin.ModelAdmin):
 	list_display = ('user', 'classroom', 'school')
 	list_filter = ('school',)
 
+	def get_queryset(self, request):
+		qs = super(StudentAdmin, self).get_queryset(request)
+
+		if request.user.is_superuser:
+			return qs
+		else:
+			student = getStudent(request.user)
+			return qs.filter(classroom=student.classroom)
+
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):

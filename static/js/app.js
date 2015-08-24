@@ -4,6 +4,10 @@ $(function() {
     var file_avatar = document.querySelector('#file_avatar'),
     input_file = document.querySelector('#id_sheetFile');
 
+    if (input_file === null) {
+        input_file = document.querySelector('#id_avatar');
+    }
+
     file_avatar.addEventListener('click', function() {
         input_file.click();
     }, false);
@@ -15,7 +19,7 @@ $(function() {
             file_avatar.setAttribute('value', 'Selectionner le fichier');
         }
 
-    }, false);
+    }, false);    
 
 
     // User options
@@ -34,6 +38,7 @@ $(function() {
         $('#user_infos').css('border', '');
     });
 
+
     // Animation to post a new sheet
     // Show
     $('#post_new_sheet_link').click(function() {
@@ -46,6 +51,7 @@ $(function() {
         $('nav').slideDown('fast');
         $('#new_sheet_form').slideUp('fast');
     });
+
 
     //Animation for getting a code
     $('#get_code').click(function() {
@@ -131,7 +137,7 @@ $(function() {
         } else {
             var sheetFormData = new FormData(sheetForm);
 
-            formResponse.open('POST', 'http://refiche.dev:8000/app/upload/');
+            formResponse.open('POST', 'http://127.0.0.1:8000/app/upload/'); //Changed refiche.dev to 127.0.0.1. TODO: change it back
             formResponse.send(sheetFormData);
 
             formResponse.addEventListener('readystatechange', function() {
@@ -139,19 +145,37 @@ $(function() {
                     if (!formResponse.getResponseHeader('Content-type') === 'application/json') {
                         alert('Oh non :( Une erreur est survenue')
                     }
-
-                    var status = $.parseJSON(formResponse.responseText);
+                    
+                    var status = JSON.parse(formResponse.responseText);
 
                     if (status.sucess) {
                         location.reload();
                     } else {
-                        alert('Oh non :( Je crois que j\'ai avalé de travers');
+                        alert('Le fichier est trop gros ou il n\'est pas autorisé :/');
                     }
                 }
             }, false);
         }
     });
     
+
+    // Reveals informations about a lesson
+    $('.lesson').hover(function() {
+        $('a', this).addClass('revealed');
+
+        $('.name_container', this).slideUp('fast');
+        $('.info_container', this).slideDown('fast');
+    }, function() {
+        $('.name_container', this).stop(true, false);
+        $('.name_container', this).slideDown('fast');
+
+        $('.info_container, this').stop(true, false);
+        $('.info_container, this').slideUp('fast');
+
+        $('a', this).removeClass('revealed');
+    });
+
+
     // Reveals informations about a sheet 
     $('.sheet').hover(function () {
         $('.sheet_info', this).show('fast');

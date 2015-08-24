@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.contrib.auth.models import User
+from registration.models import StudentRegistrationCode
 
 def checkUniqueEmail(email):
 	""" Check if the email address doesnt' exists (can't do it in the User model) """
@@ -25,3 +26,15 @@ def checkAndFixUniqueUsername(username):
 		pass
 
 	return username
+
+
+def checkStudentRegistrationCode(code):
+	""" Check if the code submitted by the user exists
+		If yes it returns the classroom object if not it returns None """
+
+	try:
+		verifiedCode = StudentRegistrationCode.objects.get(code=code)
+	except StudentRegistrationCode.DoesNotExist:
+		return None
+
+	return verifiedCode.classroom

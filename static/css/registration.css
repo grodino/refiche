@@ -1,6 +1,11 @@
-#intro h3 {
+#content header {
+    width: 100%;
+
+    font-weight: 300;
+    color: #FFFFFF;
     text-transform: uppercase;
-    margin-bottom: 0.2em;
+
+    background-color: #FFB948;
 }
 
 #intro p {

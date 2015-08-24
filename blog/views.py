@@ -1,10 +1,9 @@
 from django.shortcuts import render
-import logging
+from blog.models import Post
 
 def home(request):
-	""" Test d'affiche de templates cours OpenClassrooms """
+	""" Small blog to announce things about the website """
 
-	logger = logging.getLogger('django')
-	logger.info('------------- A non-logged visitor is checking the Blog ! -------------')
+	posts = Post.objects.all().order_by('-pubDate')
 
 	return render(request, 'blog/accueil.html', locals())

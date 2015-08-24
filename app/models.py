@@ -1,8 +1,10 @@
 # coding=UTF-8
+from os.path import splitext
 from django.db import models
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
-from app.functions import renameFile, addFile, deleteFile, deleteUser
+from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson
 
 
 class Lesson(models.Model):
@@ -13,6 +15,10 @@ class Lesson(models.Model):
 
 	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
+
+	def getLastSheets(self):
+		""" Return the 2 last sheets for the lesson """
+		return getLastSheetsForLesson(self, 2)
 
 
 class Level(models.Model):
@@ -55,6 +61,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
+	avatar = models.FileField(upload_to='avatars/', null=True)
 	# I will add some other things but now this is it
 
 	class Meta(object):
@@ -108,7 +115,7 @@ class Sheet(models.Model):
 						  ('TEST', 'sujetDeContrôle'),
 						  ('TEST_CORRECTION', 'corrigéDeContrôle'))
 
-	name = models.CharField(max_length=50)
+	name = models.CharField(max_length=100)
 	extension = models.CharField(max_length=50)
 	chapter = models.ForeignKey('Chapter', null=True, verbose_name="chapitre")
 	lesson = models.ForeignKey('Lesson', verbose_name="matière")

@@ -4,9 +4,10 @@ from os.path import splitext
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Lesson, Sheet
+from app.models import Lesson, Sheet, Classroom, Student
 from app.forms import UploadSheetForm
 from app.functions import getStudent
 from registration.models import StudentRegistrationCode
@@ -21,6 +22,7 @@ def home(request):
 	classroom = student.classroom
 	lessons = classroom.lessons.all()
 
+	# Construct the menu for the delegate
 	if request.user.has_perm('registration.add_studentregistrationcode'):
 		try:
 			code = StudentRegistrationCode.objects.get(classroom=student.classroom).code
@@ -54,8 +56,40 @@ def lessonPage(request, lesson_name):
 
 
 @login_required
+def classroomPage(request):
+	""" View to display informations about the classroom 
+		like the students, the teachers, the school and so on """
+
+	# TODO: If the student is delegate, allow him to modify stuff like delete students or name of the classroom
+	student = getStudent(request.user)
+	classroom = student.classroom
+
+	classmates = Student.objects.filter(classroom=classroom).order_by('user__last_name')
+
+	# Get the Users who are in the classroom and who are part of the group delegates
+	delegatesGroup = Group.objects.filter(name='delegates')
+	delegates = Student.objects.filter(classroom=classroom,
+									   user__groups=delegatesGroup)
+
+	numberOfStudents = Student.objects.filter(classroom=classroom).count()
+	numberOfLessons = classroom.lessons.all().count()
+
+	return render(request, 'app/classroom.html', locals())
+
+
+@login_required
+def accountPage(request):
+	""" View made for the students to check their account informations and update them """
+
+	student = getStudent(request.user)
+
+	return render(request, 'app/account.html', locals())
+
+
+@login_required
 def newSheetPage(request):
 	""" NewSheet view to show the UploadSheetForm """
+	# TODO: Create an option to upload a new version of a file
 
 	student = getStudent(request.user)
 
@@ -96,12 +130,39 @@ def downloadSheetPage(request, pk):
 		raise Http404("Sorry this file does not exist :(")
 	
 	# Check if the user can have access to it (if he is part of the lesson)
-	if sheet.lesson not in student.lessons.all():
+	if sheet.lesson not in student.classroom.lessons.all():
 		raise PermissionDenied()
 
 	data = sheet.sheetFile.read()
 
 	response = HttpResponse(data, content_type=sheet.contentType)
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name+sheet.extension)
+
+	return response
+
+@login_required
+def downloadRessource(request, ressource, url):
+	""" View for serving ressources in the media folder 
+		It checks if the user has the rights before servings it """
+	student = getStudent(request.user)
+
+	if ressource == 'avatars':
+		if ressource+'/'+url == student.avatar.url: # If he is asking for his avatar
+			extension = splitext(student.avatar.name)[1]
+
+			if extension in ('.jpg', '.jpeg'):
+				contentType = 'image/jpeg'
+			elif extension == '.png':
+				contentType = 'image/png'
+			elif extension == '.gif':
+				contentType = 'image/gif'
+			else:
+				contentType = 'image'
+
+			data = student.avatar.read()
+			response = HttpResponse(data, content_type=contentType)
+			response['Content-Disposition'] = 'attachment; filename="{}"'.format(student.avatar.name)
+		else:
+			raise PermissionDenied()
 
 	return response

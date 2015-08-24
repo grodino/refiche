@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+
+
+{# By default, the menu not included but I'll make it in a way that it's possible to reveal it #}
+{# TODO: Make something practical be able to reveal the menu #}
+
+{% block content %}
+	<div id="classroom_infos" class="container">
+		<header>
+			<h3>Informations</h3>
+		</header>
+
+		<div class="row">
+			<div class="eight columns">
+				<h5>Classe:</h5>
+				<p>{{ classroom.name }}</p>
+			</div>
+
+			<div class="four columns">
+				<h5>Effectif:</h5>
+				<p>{{ numberOfStudents }} élèves</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="four columns">
+				<h5>Matières étudiées:</h5>
+				<p>{{ numberOfLessons }} matières</p>
+			</div>
+
+			<div class="eight columns">
+				<h5>Délégué(e)(s):</h5>
+				<p>
+					{% for delegate in delegates %}
+						{{ delegate.user.first_name }} {{ delegate.user.last_name|upper }}
+					{% endfor %}
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="students_list">
+		<header>
+			<h3>élèves de la classe</h3>
+		</header>
+
+		<div>
+			{% for classmate in classmates %}
+				<div>
+					<strong>{{ classmate.user.last_name|upper }} {{ classmate.user.first_name }}</strong>
+
+					<span class="u-pull-right">a partagé {{ classmate.numberOfSheetsUploaded }} documents</span>
+				</div>
+			{% endfor %}
+		</div>
+{% endblock %}
