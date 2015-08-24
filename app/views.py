@@ -78,8 +78,18 @@ def classroomPage(request):
 
 
 @login_required
+def accountPage(request):
+	""" View made for the students to check their account informations and update them """
+
+	student = getStudent(request.user)
+
+	return render(request, 'app/account.html', locals())
+
+
+@login_required
 def newSheetPage(request):
 	""" NewSheet view to show the UploadSheetForm """
+	# TODO: Create an option to upload a new version of a file
 
 	student = getStudent(request.user)
 
