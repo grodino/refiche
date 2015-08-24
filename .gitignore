@@ -1,4 +1,7 @@
 media/sheets/*
-db.sqlite3
+*/migrations/*
+logs/*
 .idea/
+db.sqlite3
 *.pyc
+*/__pycache__/*
