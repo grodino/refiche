@@ -1,0 +1,27 @@
+{% load static app_extras %}
+
+<div class="sheet" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
+                                    {% elif sheet.extension == '.pdf' %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
+                                    {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
+                                        background-image: url('{% url 'app.views.downloadSheetPage' sheet.pk %}');
+                                    {% else %}
+                                        background-image: url('{% static 'img/icons/Word.png' %}');
+                                    {% endif %}
+                                    ">
+    <div class="info_container">
+        <a class="title" href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
+            <h5>{{ sheet.name }}</h5>
+        </a>
+
+        <div class="sheet_info">
+            #{{ sheet.get_sheetType_display }}<br />
+            {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }}
+            ({{ sheet.uploadedBy.classroom.shortName }})
+
+            {{ sheet.uploadDate|naturaltime_addon }} <br />
+            {% block delete_link %}{% endblock %}
+        </div>
+    </div>
+</div>

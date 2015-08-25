@@ -33,7 +33,7 @@
                     {% endif %}
 
                     <div>
-                        <a href="#">Mon compte</a>
+                        <a href="{% url 'app.views.accountPage' %}">Mon compte</a>
                     </div>
 
                     <div>
@@ -101,7 +101,7 @@
                     <h5>Derniers partages:</h5>
 
                     {% for sheet in lesson.getLastSheets %}
-                        {{ sheet.name }}<br />
+                        {{ sheet.name|truncatechars:25}}<br />
                     {% empty %}
                         Arghh aucun partage récent :'(
                     {% endfor %}

@@ -7,6 +7,7 @@ from django.conf import settings
 from django.http import Http404
 from django.utils import timezone
 
+
 def getStudent(instance):
 	""" /!\ Not a view, it fetches the user and verifiy if there
 		is a profile account logged to it. RETURNS THE STUDENT """
@@ -22,6 +23,20 @@ def getStudent(instance):
 		raise Http404("Your user account is not linked to a profile account !")
 
 	return student
+
+
+def getSheetInstance(pk):
+	""" Get a specific sheet without any checks,
+	 	basically just to see if it exists """
+	from app.models import Sheet
+
+	# Get the file
+	try:
+		sheet = Sheet.objects.get(pk=pk)
+	except Sheet.DoesNotExist:
+		raise Http404("Sorry this file does not exist :(")
+
+	return sheet
 
 
 def getLastSheetsForLesson(instance, numberOfSheets):

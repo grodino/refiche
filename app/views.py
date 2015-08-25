@@ -9,10 +9,10 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from app.models import Lesson, Sheet, Classroom, Student
 from app.forms import UploadSheetForm
-from app.functions import getStudent
+from app.functions import getStudent, getSheetInstance
 from registration.models import StudentRegistrationCode
-# _____________________________________________________________________
-# VIEWS
+from registration.forms import RegistrationForm
+
 
 @login_required
 def home(request):
@@ -44,6 +44,13 @@ def lessonPage(request, lesson_name):
 		the lesson and all it's components """
 	
 	student = getStudent(request.user)
+
+	# Construct the menu for the delegate
+	if request.user.has_perm('registration.add_studentregistrationcode'):
+		try:
+			code = StudentRegistrationCode.objects.get(classroom=student.classroom).code
+		except StudentRegistrationCode.DoesNotExist:
+			code = 'NONE'
 	
 	try:
 		lesson = student.classroom.lessons.get(name=lesson_name)
@@ -82,6 +89,12 @@ def accountPage(request):
 	""" View made for the students to check their account informations and update them """
 
 	student = getStudent(request.user)
+	form = RegistrationForm(initial={'firstName': student.user.first_name,
+									 'lastName': student.user.last_name,
+									 'email': student.user.email,
+									 'avatar': student.avatar })
+	sheets = sheets = Sheet.objects.filter(uploadedBy=student).order_by('-uploadDate')
+
 
 	return render(request, 'app/account.html', locals())
 
@@ -122,12 +135,7 @@ def downloadSheetPage(request, pk):
 	""" View for dowloading a sheet """
 
 	student = getStudent(request.user)
-
-	# Get the file
-	try:
-		sheet = Sheet.objects.get(pk=pk)
-	except Sheet.DoesNotExist:
-		raise Http404("Sorry this file does not exist :(")
+	sheet = getSheetInstance(pk) # Get the file
 	
 	# Check if the user can have access to it (if he is part of the lesson)
 	if sheet.lesson not in student.classroom.lessons.all():
@@ -138,7 +146,30 @@ def downloadSheetPage(request, pk):
 	response = HttpResponse(data, content_type=sheet.contentType)
 	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name+sheet.extension)
 
+	sheet.sheetFile.close()
+
 	return response
+
+
+@login_required
+def deleteSheetPage(request, pk):
+	""" View for deleting a sheet """
+
+	student = getStudent(request.user)
+	sheet = getSheetInstance(pk)
+
+	if student == sheet.uploadedBy:
+		sheet.delete()
+		JsonResponse = {'success': 'true'}
+	else:
+		JsonResponse = {'success': 'false',
+						'error': 'PermissionDenied'}
+
+	messages.add_message(request, messages.SUCCESS, 'Votre fiche a bien été supprimée !')
+
+	return HttpResponse(json.dumps(JsonResponse), content_type='application/json')
+
+
 
 @login_required
 def downloadRessource(request, ressource, url):

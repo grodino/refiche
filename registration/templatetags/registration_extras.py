@@ -1,5 +1,5 @@
 from django import template
-from registration.forms import StudentRegistrationForm
+from registration.forms import StudentCodeForm
 
 register = template.Library()
 
@@ -7,6 +7,6 @@ register = template.Library()
 def getStudentRegistrationForm(request):
 	""" Get the form for the generation of a code """
 
-	form = StudentRegistrationForm()
+	form = StudentCodeForm()
 
 	return {'form': form }

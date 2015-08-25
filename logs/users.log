@@ -1224,3 +1224,27 @@
 [2015-08-20 10:03:46] INFO [users.userConnected:8] User AGODINOT1 has connected !
 [2015-08-20 19:29:48] INFO [users.userDisconnected:13] User AGODINOT1 has disconnected !
 [2015-08-20 19:30:11] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-24 17:20:02] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-24 17:29:32] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-24 17:30:14] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-24 17:34:21] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-24 17:36:45] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-24 19:09:54] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-24 19:09:56] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-24 19:09:57] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-24 19:10:37] ERROR [users.getStudent:21] ingegus's account is not linked to a profile account! id = 1
+[2015-08-24 19:10:39] ERROR [users.getStudent:21] ingegus's account is not linked to a profile account! id = 1
+[2015-08-24 19:10:42] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-24 19:10:46] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-24 19:53:04] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-24 19:53:07] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-24 19:53:23] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-24 19:53:28] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-25 18:16:47] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-25 18:17:04] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-25 18:17:46] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-25 18:17:51] INFO [users.userConnected:8] User AGODINOT has connected !
+[2015-08-25 19:17:10] INFO [users.userDisconnected:13] User AGODINOT has disconnected !
+[2015-08-25 19:17:13] INFO [users.userConnected:8] User INGEGUS has connected !
+[2015-08-25 19:17:25] INFO [users.userDisconnected:13] User INGEGUS has disconnected !
+[2015-08-25 19:17:40] INFO [users.userConnected:8] User AGODINOT has connected !

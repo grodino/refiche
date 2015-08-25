@@ -111,6 +111,7 @@
     height: 7em;
     
     margin-bottom: 0.7em;
+    overflow: hidden;
     
     background-color: #D9D9D9;
     text-transform: uppercase;
@@ -119,6 +120,8 @@
 #lessons .info_container {
     display: none;
     color: #2f2f2f;
+
+    word-wrap: break-word;
 }
 
 #lessons .revealed {
@@ -236,9 +239,10 @@ form .error {
     border: 1px solid #3A6BAA;
     background-color: #D9D9D9;
     background-size: cover;
+    overflow: hidden;
 }
 
-#sheets a {
+#sheets .sheet {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -251,6 +255,8 @@ form .error {
     border-top: 1px solid #3A6BAA;
     background-color: #D9D9D9;
     font-weight: 300;
+
+    word-wrap: break-word;
 }
 
 #sheets .sheet h5 {
@@ -288,3 +294,49 @@ form .error {
 #classroom_infos .columns h5 {
     text-transform: uppercase;
 }
+
+
+/*  ACCOUNT PAGE
+------------------------------------------- */
+#user_info_display header,
+#sheets header {
+    background-color: #FFB948;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+#user_info_display .columns {
+    background-color: #D9D9D9;
+
+    margin-bottom: 1em;
+    padding-left: 0.3em;
+}
+
+#user_info_display .columns h5 {
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

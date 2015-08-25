@@ -12,32 +12,13 @@
 
     <div class=flex-container>
     {% for sheet in sheets %}
-
         {# TODO: Change the icons for each extension #}
-        <div class="sheet" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
-                                        background-image: url('{% static 'img/icons/Word.png' %}');
-                                    {% elif sheet.extension == '.pdf' %}
-                                        background-image: url('{% static 'img/icons/Word.png' %}');
-                                    {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
-                                        background-image: url('{% url 'app.views.downloadSheetPage' sheet.pk %}');
-                                    {% else %}
-                                        background-image: url('{% static 'img/icons/Word.png' %}');
-                                    {% endif %}
-                                    ">
-            <a href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
-                <div class="info_container">
-                    <h5>{{ sheet.name }}</h5> 
-                    <div class="sheet_info">
-                        #{{ sheet.get_sheetType_display }}<br />
-                        {{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name|upper }}
-                        ({{ sheet.uploadedBy.classroom.shortName }})
 
-                        {{ sheet.uploadDate|naturaltime_addon }} <br />
-                        Cliquez pour télécharger
-                    </div>
-                </div>
-            </a>
-        </div>
+        {% if sheet.uploadedBy == student %}
+            {% include 'app/student_sheet_template.html' %}
+        {% else %}
+            {% include 'app/sheet_template.html' %}
+        {% endif %}
     {% empty %}
         <div class="full-container-size">
             <h5>Personne n'a publié ici :(</h5>

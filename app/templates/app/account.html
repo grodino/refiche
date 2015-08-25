@@ -1,0 +1,58 @@
+{% extends 'home.html' %}
+{% load static app_extras %}
+
+{% block content %}
+    <div id="user_info_display" class="container">
+        <header>
+            <h3>Informations</h3>
+        </header>
+
+        <div class="row">
+            <div class="three columns">
+                <h5>Prénom:</h5>
+                <p>{{ student.user.first_name }}</p>
+            </div>
+
+            <div class="three columns">
+                <h5>Nom:</h5>
+                <p>{{ student.user.last_name }}</p>
+            </div>
+
+            <div class="six columns">
+                <h5>Date d'inscription:</h5>
+                <p>Le {{ student.user.date_joined|date:'d F o' }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="eight columns">
+                <h5>établissement:</h5>
+                <p>{{ student.school }}</p>
+            </div>
+
+            <div class="four columns">
+                <h5>Documents:</h5>
+                <p>{{ student.numberOfSheetsUploaded }} partagée{{ student.numberOfSheetsUploaded|pluralize }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="sheets">
+        <header>
+            <h3>Mes documents</h3>
+        </header>
+
+        <div class=flex-container>
+            {% for sheet in sheets %}
+                {# TODO: Change the icons for each extension #}
+                {% include 'app/student_sheet_template.html' %}
+            {% empty %}
+                <div class="full-container-size">
+                    <h5>Vous n'avez rien publié :(</h5>
+                    <p>Commencez dès maintenant !</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

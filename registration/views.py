@@ -8,14 +8,14 @@ from app.models import Student, Classroom
 from app.functions import getStudent
 from registration.models import StudentRegistrationCode
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
-from registration.forms import StudentRegistrationForm, DelegateRegistrationForm, RegistrationForm, StudentCodeRegistrationForm
+from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm
 
 
 def register(request):
 	""" View for signing up, also includes a form for the students who have a link """
 
 	if request.method == 'POST':
-		form = StudentCodeRegistrationForm(request.POST)
+		form = StudentRegistrationForm(request.POST)
 
 		if form.is_valid():
 			classroom = checkStudentRegistrationCode(form.cleaned_data['code'])
@@ -30,7 +30,7 @@ def register(request):
 
 			return HttpResponse(json.dumps({'success': success,	'url': formUrl }), content_type='application/json')
 	else:
-		form = StudentCodeRegistrationForm()
+		form = StudentRegistrationForm()
 
 	return render(request, 'registration.html', locals())
 
@@ -43,7 +43,7 @@ def getCode(request):
 	student = getStudent(request.user)
 
 	if request.method == 'POST':
-		form = StudentRegistrationForm(request.POST)
+		form = StudentCodeForm(request.POST)
 
 		if form.is_valid():
 			code = form.save(commit=False)

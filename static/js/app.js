@@ -137,7 +137,7 @@ $(function() {
         } else {
             var sheetFormData = new FormData(sheetForm);
 
-            formResponse.open('POST', 'http://127.0.0.1:8000/app/upload/'); //Changed refiche.dev to 127.0.0.1. TODO: change it back
+            formResponse.open('POST', '/app/upload/'); //Changed refiche.dev to 127.0.0.1. TODO: change it back
             formResponse.send(sheetFormData);
 
             formResponse.addEventListener('readystatechange', function() {
@@ -183,6 +183,19 @@ $(function() {
         $('.sheet_info', this).stop(true, false);
         $('.sheet_info', this).hide('fast');
     }).delay(5000);
+
+    $('.delete_sheet_link').click(function(e) {
+        e.preventDefault();
+
+        if (confirm('Etes vous sûr(e) de vouloir supprimer ce document ?')) {
+            $.get(url = $(this).attr('href'),
+                success = function () {
+                    location.reload();
+                },
+                dataType = 'json'
+            );
+        }
+    });
 });
 
 

@@ -4,8 +4,8 @@ from django.conf import settings
 from app.models import School, Level
 from registration.models import StudentRegistrationCode
 
-# TODO: rename this form into StudentCodeForm
-class StudentRegistrationForm(forms.ModelForm):
+
+class StudentCodeForm(forms.ModelForm):
 	class Meta:
 		model = StudentRegistrationCode
 		fields = ('numberOfStudents',)
@@ -21,8 +21,7 @@ class StudentRegistrationForm(forms.ModelForm):
 		return self.cleaned_data.get('numberOfStudents')
 
 
-# TODO: rename this form into StudentRegistrationForm
-class StudentCodeRegistrationForm(forms.Form):
+class StudentRegistrationForm(forms.Form):
 	code = forms.CharField(max_length=20,
 						   label='Code d\'inscription')
 
@@ -60,6 +59,10 @@ class RegistrationForm(forms.Form):
 		ALLOWED_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
 
 		avatar = self.cleaned_data['avatar']
+
+		if avatar == None:
+			return avatar
+
 		avatarExtension = splitext(avatar.name)[1]
 		avatarSize = avatar.size
 
