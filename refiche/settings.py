@@ -27,13 +27,13 @@ DEFAULT_CHARSET = 'utf-8'
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dj1u-*030t9=!72+5od=056q_#*sp-g0(*$z^0f(w7o2&hh(c)'
+SECRET_KEY = '$ik2b%_wa$+63ptmab8yk^$6yp-v&za@6!nyv)r5=i!5^0y!t9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1', 'refiche.dev']
+ALLOWED_HOSTS = ['127.0.0.1', '.refiche.fr', '51.254.96.114']
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/app/home/'
 LOGOUT_REDIRECT_URL = '/'
@@ -161,6 +161,7 @@ EMAIL_HOST_PASSWORD = SECRET_KEY
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'sfiles'),
     )
