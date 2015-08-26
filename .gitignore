@@ -1,8 +1,8 @@
 media/sheets/*
 refiche/settings.py
-*/migrations/*
 */__pycache__/*
 logs/*
 .idea/
 db.sqlite3
 *.pyc
+/sfiles/*

@@ -11,30 +11,34 @@
 
 {% block header %}
     {{ block.super }}
-    <h5 id="catchphrase">PARTAGEZ | ORGANISEZ | PROGRESSEZ</h5>
-{% endblock %}
+    <h3 id="catchphrase">
+        PARTAGEZ | ORGANISEZ | PROGRESSEZ
+    </h3>
 
-{% block content %}
     <div id="quick-infos" class="container">
         <div class="row">
             <div class="twelve columns">
-                <h3>APPRENEZ PLUS SIMPLEMENT AVEC <strong>REFICHE !</strong></h3>
                 <div class="icons-flex-list">
                     <div class="icon-flex-listed">
-                        <img src="{% static 'img/icons/share.png' %}" width="100"/>
+                        <img src="{% static 'img/icons/share.png' %}" />
                         <p>Retrouvez tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
                     </div>
 
                     <div class="icon-flex-listed">
+                        <img src="{% static 'img/icons/discuss.png' %}" />
                         <p>Discutez, échangez avec votre classe.</p>
                     </div>
 
                     <div class="icon-flex-listed">
-                        <p>Retrouvez et partagez les sujets de DST et contrôles des années précédentes.</p>
+                        <img src="{% static 'img/icons/study.png' %}" />
+                        <p>Profitez des sujets de DST et contrôles des années précédentes.</p>
                     </div>
                 </div>
-                yay
             </div>
         </div>
-    
+    </div>
+{% endblock %}
+
+{% block content %}
+    <img src="{% static 'img/screenshot_home.jpg' %}" />
 {% endblock %}

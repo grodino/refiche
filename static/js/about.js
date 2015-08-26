@@ -15,11 +15,13 @@ $(function() {
             $('header a').css('background-color', 'rgba(58, 107, 170, 0.35)');
             
             $('#catchphrase').show();
+            $('#quick-infos').show();
             $('header img').removeClass('img-fixed');
         } else { //Small header
             $('header a').css('background-color', '#3A6BAA');
             
-            $('#catchphrase').hide();            
+            $('#catchphrase').hide();
+            $('#quick-infos').hide();
             $('header img').addClass('img-fixed');
             $('header').height($('header img').height()+10);
         }
