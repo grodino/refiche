@@ -1,3 +1,4 @@
+
 $(function() {
     // make the logo bigger and the link to the home page smaller
     $('header #logo').removeClass('logo');
@@ -5,56 +6,23 @@ $(function() {
     
     var headerInitialHeight = $('header').height(),
         logoInitialHeight = $('#logo').height();
-    
+
     $(window).scroll(function() {
         var windowHeight = $(window).height(),
             currentScroll = $(window).scrollTop();
-        
-        if (headerInitialHeight-currentScroll >= logoInitialHeight + 10){ // Big header
+
+        if (currentScroll < 1){ // Big header
             $('header').height(headerInitialHeight-currentScroll);
             $('header a').css('background-color', 'rgba(58, 107, 170, 0.35)');
-            
+
             $('#catchphrase').show();
-            $('#quick-infos').show();
             $('header img').removeClass('img-fixed');
         } else { //Small header
             $('header a').css('background-color', '#3A6BAA');
-            
+
             $('#catchphrase').hide();
-            $('#quick-infos').hide();
             $('header img').addClass('img-fixed');
             $('header').height($('header img').height()+10);
         }
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -14,31 +14,44 @@
     <h3 id="catchphrase">
         PARTAGEZ | ORGANISEZ | PROGRESSEZ
     </h3>
-
-    <div id="quick-infos" class="container">
-        <div class="row">
-            <div class="twelve columns">
-                <div class="icons-flex-list">
-                    <div class="icon-flex-listed">
-                        <img src="{% static 'img/icons/share.png' %}" />
-                        <p>Retrouvez tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
-                    </div>
-
-                    <div class="icon-flex-listed">
-                        <img src="{% static 'img/icons/discuss.png' %}" />
-                        <p>Discutez, échangez avec votre classe.</p>
-                    </div>
-
-                    <div class="icon-flex-listed">
-                        <img src="{% static 'img/icons/study.png' %}" />
-                        <p>Profitez des sujets de DST et contrôles des années précédentes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block content %}
-    <img src="{% static 'img/screenshot_home.jpg' %}" />
+    <div>
+        <img id="screenshot" src="{% static 'img/screenshot_home.jpg' %}"/>
+
+        <div class="key_point" style="background-color: #2EA490;">
+            <h3>Une interface claire pour ...</h3>
+        </div>
+    </div>
+
+    <div id="quick-infos">
+        <div class="icons-flex-list">
+
+            <div class="icon-flex-listed" style="background-color: #133B6F;">
+                <img src="{% static 'img/icons/study.png' %}" />
+                <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+            </div>
+
+            <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                <img src="{% static 'img/icons/discuss.png' %}" />
+                <p>... Discuter, échanger avec votre classe.</p>
+            </div>
+
+            <div class="icon-flex-listed" style="background-color: #FFE448;">
+                <img src="{% static 'img/icons/share.png' %}" />
+                <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+            </div>
+
+            <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                <p>... Être facilement au courant des derniers partages</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="register" class="key_point">
+        <h3>
+            <a href="{% url 'registration.views.register' %}">--> Inscription <--</a>
+        </h3>
+    </div>
 {% endblock %}
