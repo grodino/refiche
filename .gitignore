@@ -6,3 +6,7 @@ logs/*
 .idea/
 db.sqlite3
 *.pyc
+*.sh
+*.log
+static/admin/
+venv/

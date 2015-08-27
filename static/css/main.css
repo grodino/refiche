@@ -1,8 +1,5 @@
-/* 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,300,400);
 
-Commented for convenience and to be able to work offline
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,300,400); 
-*/
 
 body, html {
     display: flex;
