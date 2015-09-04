@@ -123,6 +123,10 @@
     word-wrap: break-word;
 }
 
+#lesson .info_container h5 {
+    line-break: loose;
+}
+
 #lessons .revealed {
     border: 1px solid #3A6BAA;
 }
@@ -142,12 +146,17 @@
     }
 }
 
-@media(min-width: 750px) {    
+@media(max-width: 750px) and (min-width:550px) {
+    #lessons .flex-container .lesson {
+        width: 45%;
+    }
+}
+
+@media(min-width: 750px) {
     #lessons .flex-container .lesson {
         width: 30%;
     }
 }
-
 
 /*  NEW FORM
 ------------------------------------------- */

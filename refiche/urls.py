@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^app/', include('app.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^register/', include('registration.urls')),
+    url(r'^facebook/', include('facebook.urls')),
 ]

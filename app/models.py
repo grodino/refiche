@@ -1,9 +1,8 @@
 # coding=UTF-8
-from os.path import splitext
 from django.db import models
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
+from facebook.models import ClassGroup
 from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson
 
 
@@ -49,6 +48,7 @@ class Classroom(models.Model):
 	name = models.CharField(max_length=100)  # Name of the classroom (ex: Première S-3)
 	shortName = models.CharField(max_length=8)  # Name of the classroom shortened (ex: 1-S3)
 	lessons = models.ManyToManyField(Lesson)
+	facebookGroup = models.OneToOneField(ClassGroup, null=True)
 
 	def __str__(self):
 		return self.name
@@ -62,6 +62,8 @@ class Profile(models.Model):
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
 	avatar = models.FileField(upload_to='avatars/', null=True)
+	facebookId = models.CharField(max_length=200, null=True)
+
 	# I will add some other things but now this is it
 
 	class Meta(object):

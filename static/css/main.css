@@ -140,6 +140,16 @@ a {
     display: none;
 }
 
+.end-line-wrap {
+    word-wrap: normal;
+    word-break: keep-all;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /*  FONTS
 ------------------------------------------- */
 @font-face {

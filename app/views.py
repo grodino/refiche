@@ -22,6 +22,8 @@ def home(request):
 	classroom = student.classroom
 	lessons = classroom.lessons.all()
 
+	# TODO : Implement a last_sheets before the lessons
+
 	# Construct the menu for the delegate
 	if request.user.has_perm('registration.add_studentregistrationcode'):
 		try:

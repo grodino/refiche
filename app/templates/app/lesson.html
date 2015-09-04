@@ -12,8 +12,6 @@
 
     <div class=flex-container>
     {% for sheet in sheets %}
-        {# TODO: Change the icons for each extension #}
-
         {% if sheet.uploadedBy == student %}
             {% include 'app/student_sheet_template.html' %}
         {% else %}

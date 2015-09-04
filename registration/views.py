@@ -1,11 +1,11 @@
 import json, logging, random, string
 from django.http import Http404, HttpResponse
-from django.shortcuts import render, get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
+from facebook.models import CreateGroupToken
 from registration.models import StudentRegistrationCode
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
 from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm
@@ -21,7 +21,6 @@ def register(request):
 			classroom = checkStudentRegistrationCode(form.cleaned_data['code'])
 
 			if classroom is None: # If the code does not exist
-				# TODO: return an error message probably in JSON
 				formUrl = None
 				success = None
 			else:
@@ -111,6 +110,9 @@ def studentRegister(request, code):
 			#													   Nom d\'utilisateur: {}
 			#													   Mot de passe: {}""".format(username, password))
 
+
+			is_delegate = False
+
 			return render(request, 'registration/register_success.html', locals())
 	else: 
 		form = RegistrationForm()
@@ -168,6 +170,13 @@ def delegateRegister(request):
 												 classroom=newClassroom,
 												 avatar=avatar)
 			newDelegate.save()
+
+
+			is_delegate = True
+
+			token = CreateGroupToken()
+			token.delegate = newUser
+			token.save()
 
 			# newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
 			# 													   Nom d\'utilisateur: {}

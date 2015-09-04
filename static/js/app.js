@@ -24,20 +24,22 @@ $(function() {
 
     // User options
     // Show
-    $('#user_infos_content').click(function(){
+    $('#user_infos_content').parent().hover(function(){
         $('#user_infos').css('height', $('#user_infos').outerHeight());
+
         $('#user_infos_content').slideUp('fast');
         $('#user_options').slideDown('fast');
+
         $('#user_infos').css('border', '1px solid #3A6BAA');
-    });
+    }, function(){
+        $('#user_infos_content').stop(true, false).slideDown('fast');
+        $('#user_options').stop(true, false).slideUp('fast');
 
-    // Hide
-    $('#hide_user_options').click(function(){
-        $('#user_infos_content').slideDown('fast');
-        $('#user_options').slideUp('fast');
         $('#user_infos').css('border', '');
-    });
 
+        $('#new_code_form').hide();
+        $('#new_code_form_success').hide();
+    });
 
     // Animation to post a new sheet
     // Show
@@ -188,7 +190,8 @@ $(function() {
         e.preventDefault();
 
         if (confirm('Etes vous sûr(e) de vouloir supprimer ce document ?')) {
-            $.get(url = $(this).attr('href'),
+            $.get(
+                url = $(this).attr('href'),
                 success = function () {
                     location.reload();
                 },

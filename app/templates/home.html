@@ -39,10 +39,6 @@
                     <div>
                         <a href="{% url 'django.contrib.auth.views.logout' %}">Déconnexion</a>
                     </div>
-
-                    <div>
-                        <a id="hide_user_options" href="#">RETOUR</a>
-                    </div>
                 </div>
             </div>
 
@@ -96,12 +92,11 @@
                     </p>
                 </div>
 
-                <!-- TODO: Write the css and think about the layout for the recent sheets -->
                 <div class="info_container">
                     <h5>Derniers partages:</h5>
 
                     {% for sheet in lesson.getLastSheets %}
-                        {{ sheet.name|truncatechars:25}}<br />
+                        <div class="end-line-wrap">{{ sheet.name}}</div>
                     {% empty %}
                         Arghh aucun partage récent :'(
                     {% endfor %}

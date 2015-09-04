@@ -1,4 +1,5 @@
 media/sheets/*
+media/avatars/*
 refiche/settings.py
 */migrations/*
 */__pycache__/*
