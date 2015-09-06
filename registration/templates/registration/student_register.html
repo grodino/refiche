@@ -14,8 +14,24 @@
 	<form method="POST" action="{% url 'registration.views.studentRegister' code.code %}">
 		{% csrf_token %}
 		
-		{{ form.as_p }}
+		{{ form.non_field_errors }}
 
-		<input class="button-primary full-container-size" type="submit" value="S'inscrire !">
+        {% for field in form %}
+            {% cycle '<div class="row">' silent%}
+                <div class="six columns">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.name == 'avatar' %}
+                        <div class="input-file-container">
+                            <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
+                        </div>
+                    {% endif %}
+                </div>
+            {% cycle '' '</div>' %}
+        {% endfor %}
+
+        <input class="button-primary full-container-size"type="submit" value="S'inscrire !">
 	</form>
 {% endblock %}
