@@ -74,6 +74,7 @@ class ClassGroup(FacebookAPIConnexion):
 		status = r.status_code
 
 		if status >= 400:
+			print(r.text)
 			raise Http404('Je n\'arrive pas à parler avec Facebook :/ la connexion passe mal :\'(')
 
 		return r.text.replace('{"id":"', '').replace('"}', '')
