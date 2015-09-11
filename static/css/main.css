@@ -110,6 +110,36 @@ footer {
     font-weight: 300;
 }
 
+
+/*  POP UP
+------------------------------------------- */
+.full-size-popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999;
+    overflow: hidden;
+
+    background-color: rgba(58, 107, 170, 0.25);
+    color: white;
+}
+
+.no-scroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+.blur {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+
+
 /*  MICELLANEOUS
 ------------------------------------------- */
 a {

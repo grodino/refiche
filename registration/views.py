@@ -105,10 +105,9 @@ def studentRegister(request, code):
 												classroom=code.classroom)
 			newStudent.save()
 
-			# TODO: uncomment it, I did it to be able to run it offline
-			#newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
-			#													   Nom d\'utilisateur: {}
-			#													   Mot de passe: {}""".format(username, password))
+			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
+																   Nom d\'utilisateur: {}
+																   Mot de passe: {}""".format(username, password), from_email='contact@refiche.fr')
 
 
 			is_delegate = False
@@ -178,9 +177,9 @@ def delegateRegister(request):
 			token.delegate = newUser
 			token.save()
 
-			# newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
-			# 													   Nom d\'utilisateur: {}
-			# 													   Mot de passe: {}""".format(username, password))
+			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
+			 													   Nom d\'utilisateur: {}
+			 													   Mot de passe: {}""".format(username, password), from_email='contact@refiche.fr')
 
 			return render(request, 'registration/register_success.html', locals())
 	else:

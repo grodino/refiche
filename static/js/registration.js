@@ -32,6 +32,19 @@ $(function() {
                 },
                 'json'
             );
-    }); 
+    });
+
+    // Dealing with the choice to register with facebook or not
+    if ($('.registration_form')) {
+        $('body').addClass('no-scroll');
+        $('body').bind('touchmove', function(e){e.preventDefault()}); // For mobile devices
+
+        $('#content, #banner, footer').addClass('blur');
+        $('#registering_method').removeClass('hidden').addClass('full-size-popup');
+
+
+
+        $('body').unbind('touchmove');
+    }
 
 });

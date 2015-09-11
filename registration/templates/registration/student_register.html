@@ -1,37 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'registration/delegate_register.html' %}
 {% load static %}
 
-{% block add_stylesheets %}
-    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% block form_title %}
+    <h3>
+        {{ code.classroom.name|upper }}
+        <h5>{{ code.classroom.school.name }}</h5>
+    </h3>
 {% endblock %}
 
-{% block content %}
-	<h3>
-		{{ code.classroom.name|upper }}
-		<h5>{{ code.classroom.school.name }}</h5>
-	</h3>
 
-	<form method="POST" action="{% url 'registration.views.studentRegister' code.code %}">
-		{% csrf_token %}
-		
-		{{ form.non_field_errors }}
-
-        {% for field in form %}
-            {% cycle '<div class="row">' silent%}
-                <div class="six columns">
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    {{ field }}
-
-                    {% if field.name == 'avatar' %}
-                        <div class="input-file-container">
-                            <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
-                        </div>
-                    {% endif %}
-                </div>
-            {% cycle '' '</div>' %}
-        {% endfor %}
-
-        <input class="button-primary full-container-size"type="submit" value="S'inscrire !">
-	</form>
+{% block action %}
+    {% url 'registration.views.studentRegister' code.code %}
 {% endblock %}

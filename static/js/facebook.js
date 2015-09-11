@@ -67,7 +67,7 @@ $(function() {
     $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
         FB.init({
           appId: '413837768813785',
-          version: 'v2.3'
+          version: 'v2.4'
         });
 
         $('#facebook_button').removeAttr('disabled');
