@@ -66,7 +66,7 @@ $(function() {
 
     $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
         FB.init({
-          appId: '415432081987687',
+          appId: '413837768813785',
           version: 'v2.4'
         });
 
