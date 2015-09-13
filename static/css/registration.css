@@ -55,3 +55,25 @@
 #delegate_form .row {
     margin-bottom: 0.7em;
 }
+
+
+/* FACEBOOK REGISTERING
+-------------------------------------------- */
+#registering_method {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#registering_method h3 {
+    text-transform: uppercase;
+}
+
+#registering_method div[class=center-vertical] {
+    padding: 1em;
+
+    background-color: rgba(58, 107, 170, 0.7);
+    text-align: center;
+}

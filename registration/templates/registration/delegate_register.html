@@ -8,6 +8,7 @@
 {% block add_js %}
     {{ block.super }}
     <script src="{% static 'js/registration.js' %}"></script>
+    <script src="{% static 'js/facebook.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -44,7 +45,19 @@
 
 {% block hidden %}
     <div id="registering_method" class="hidden">
-        <h3>Inscription avec facebook</h3>
-        <p>Pour gagner du temps, vous pouvez vous inscrire avec facebook et ne modifier ensuite que les champs erronés</p>
+        <div class="center-vertical">
+            <h3>Inscription avec facebook</h3>
+            <p>Pour gagner du temps, vous pouvez vous inscrire avec facebook et ne modifier ensuite que les champs erronés</p>
+
+            <div class="row">
+                <div class="six columns">
+                    <button id="with_facebook" class="button-primary full-container-width">S'inscrire avec facebook</button>
+                </div>
+
+                <div class="six columns">
+                    <button id="without_facebook" class="button full-container-width">S'inscrire sans facebook</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

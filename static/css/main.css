@@ -124,7 +124,6 @@ footer {
     z-index: 9999;
     overflow: hidden;
 
-    background-color: rgba(58, 107, 170, 0.25);
     color: white;
 }
 
@@ -179,6 +178,7 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 
 /*  FONTS
 ------------------------------------------- */

@@ -35,16 +35,52 @@ $(function() {
     });
 
     // Dealing with the choice to register with facebook or not
-    if ($('.registration_form')) {
+    if ($('.registration_form').length) {
+        showPopup();
+
+        $('#without_facebook').click(function() {
+            hidePopup();
+        });
+
+        $('#with_facebook').click(function() {
+            FB.login(
+                function(response){
+                    if (response.status == 'connected') {
+                        FB.api(
+                            '/me',
+                            'get',
+                            {fields: 'id,first_name,last_name,email'},
+                            function(response) {
+                                $('#id_firstName').val(response.first_name);
+                                $('#id_lastName').val(response.last_name);
+                                $('#id_email').val(response.email);
+
+                                hidePopup();
+                            }
+                        );
+                    } else {
+                        alert('Une erreur est survenue');
+                    }
+                },
+                {scope: 'email'}
+            );
+        })
+    }
+
+    function showPopup() {
         $('body').addClass('no-scroll');
         $('body').bind('touchmove', function(e){e.preventDefault()}); // For mobile devices
 
         $('#content, #banner, footer').addClass('blur');
         $('#registering_method').removeClass('hidden').addClass('full-size-popup');
+    }
 
-
-
+    function hidePopup() {
+        $('body').removeClass('no-scroll');
         $('body').unbind('touchmove');
+
+        $('#content, #banner, footer').removeClass('blur');
+        $('#registering_method').removeClass('full-size-popup').hide();
     }
 
 });
