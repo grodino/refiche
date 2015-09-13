@@ -15,8 +15,13 @@ body, html {
 header {
     margin: 0px;
     flex-shrink: 0;
+    z-index: 99999;
     
     background-color: #3a6baa;
+}
+
+#banner {
+    box-shadow: 0px 0px 5px #333333;
 }
 
 header .logo {
@@ -30,9 +35,18 @@ header .logo {
 
 /*  CONTENT
 ------------------------------------------- */
-#content {
+#main_wrapper {
+    display: flex;
+    align-items: stretch;
+
     flex-shrink: 0;
+    flex-grow: 1;
+}
+
+
+#content {
     margin: 1em;
+    flex-grow: 1;
 }
 
 #content header {
@@ -79,9 +93,9 @@ header .logo {
 ------------------------------------------- */
 footer {
     display: block;
-    position: relative;
+    flex-shrink: 0;
+
     text-align: center;
-    
     margin-bottom: 0.7em;
 }
 
@@ -109,6 +123,50 @@ footer {
     font-size: 0.8em;
     font-weight: 300;
 }
+
+
+/*  LEFT-BAR
+------------------------------------------- */
+#left-bar {
+    display: none;
+    position: fixed;
+    flex-shrink: 0;
+
+    max-height: 100%;
+    min-height: 100%;
+    width: 22em;
+
+    background-color: #3a6baa;
+    color: #FFFFFF;
+
+    overflow: auto;
+}
+
+#left-bar header {
+    text-transform: uppercase;
+    height: 3.5em;
+    position: fixed;
+}
+
+#left-bar #feed {
+    padding-top: 3.5em;
+    padding-bottom: 1em;
+}
+
+@media(min-width:1100px) {
+    #content {
+        margin-left: 23em;
+    }
+
+    footer {
+        display: none;
+    }
+
+    #left-bar {
+        display: block;
+    }
+}
+
 
 
 /*  POP UP

@@ -57,9 +57,9 @@ header #catchphrase {
 
 /*  THE WHOLE ABOUT PAGE
 ------------------------------------------- */
-#content {
+#main_wrapper {
     position: relative;
-    top: 25%;
+    top: 30%;
 
     width: 100%;
     margin: 0;

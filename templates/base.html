@@ -54,17 +54,23 @@
 
 
   {% if error %}
-    {{ error }}
+      {{ error }}
   {% endif %}
 
-   <section id="content">
-       {% block content %}{% endblock %}
-   </section>
+    <div id="main_wrapper">
+        <aside id="left-bar">
+            {% block left-bar %}{% endblock %}
+        </aside>
+
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+    </div>
 
     <section id="hidden">
         {% block hidden %}{% endblock %}
     </section>
-    
+
 <footer>&copy;Ingegus  ||  All Rights Reserved @2015  ||  <a class="" href="/admin">Admin  </a></footer>
 </body>
 
