@@ -4,6 +4,7 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('app.views',
 	url(r'^home/$', 'home'),
 	url(r'^lesson/(?P<lesson_name>.+)$', 'lessonPage'),
+	url(r'^feed/$', 'classroomSheetsFeed'),
 	url(r'^upload/$', 'newSheetPage'),
 	url(r'^download/(?P<pk>\d+)$', 'downloadSheetPage'),
 	url(r'^delete/(?P<pk>\d+)$', 'deleteSheetPage'),

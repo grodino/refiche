@@ -84,6 +84,48 @@
     justify-content: center;
 }
 
+
+/*  LEFT-BAR
+------------------------------------------- */
+#left-bar {
+    display: none;
+    position: fixed;
+    flex-shrink: 0;
+
+    max-height: 100%;
+    min-height: 100%;
+    width: 22em;
+
+    background-color: #3a6baa;
+    color: #FFFFFF;
+
+    overflow: auto;
+}
+
+#left-bar header {
+    text-transform: uppercase;
+}
+
+#left-bar #feed {
+    padding-bottom: 1.5em;
+}
+
+@media(min-width:110px) {
+    #content {
+        margin-left: 23em;
+    }
+
+    /* TODO: réafficher le footer dans le content */
+    footer {
+        display: none;
+    }
+
+    #left-bar {
+        display: block;
+    }
+}
+
+
 /*  LESSONS LIST
 ------------------------------------------- */
 #lessons header {

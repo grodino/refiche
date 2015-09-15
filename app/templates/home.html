@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% load static app_extras admin_urls %}
 
+{% block add_js %}
+{{ block.super }}
+<script src="{% static 'js/sheets_feed.js' %}"></script>
+{% endblock %}
+
+{% block add_stylesheets %}
+<link rel="stylesheet" href="{% static 'css/app.css' %}" />
+{% endblock %}
+
+
 {% block left-bar %}
     <header>
         <h3>Dernières fiches</h3>
     </header>
 
     <div id="feed">
-        Chargement ...<p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p><p>blablabla</p>
+        Chargement ...
     </div>
 {% endblock %}
 

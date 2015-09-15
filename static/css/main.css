@@ -125,50 +125,6 @@ footer {
 }
 
 
-/*  LEFT-BAR
-------------------------------------------- */
-#left-bar {
-    display: none;
-    position: fixed;
-    flex-shrink: 0;
-
-    max-height: 100%;
-    min-height: 100%;
-    width: 22em;
-
-    background-color: #3a6baa;
-    color: #FFFFFF;
-
-    overflow: auto;
-}
-
-#left-bar header {
-    text-transform: uppercase;
-    height: 3.5em;
-    position: fixed;
-}
-
-#left-bar #feed {
-    padding-top: 3.5em;
-    padding-bottom: 1em;
-}
-
-@media(min-width:1100px) {
-    #content {
-        margin-left: 23em;
-    }
-
-    footer {
-        display: none;
-    }
-
-    #left-bar {
-        display: block;
-    }
-}
-
-
-
 /*  POP UP
 ------------------------------------------- */
 .full-size-popup {

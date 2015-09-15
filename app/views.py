@@ -2,14 +2,16 @@
 import json
 from os.path import splitext
 from django.shortcuts import render
+from django.core.urlresolvers import reverse_lazy
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.models import Lesson, Sheet, Classroom, Student
 from app.forms import UploadSheetForm
-from app.functions import getStudent, getSheetInstance
+from app.templatetags.app_extras import naturaltime_addon
+from app.models import Lesson, Sheet, Classroom, Student
+from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom
 from registration.models import StudentRegistrationCode
 from registration.forms import RegistrationForm
 
@@ -169,6 +171,28 @@ def deleteSheetPage(request, pk):
 
 	return HttpResponse(json.dumps(JsonResponse), content_type='application/json')
 
+
+@login_required
+def classroomSheetsFeed(request):
+	""" View made to return the last sheets for the user's classroom """
+
+	student = getStudent(request.user)
+	classroom = student.classroom
+
+	sheets = getLastSheetsForClassroom(classroom, 10)
+
+
+	# TODO: Séparer le cas ou le script js demande multiple (quand il appelle la vue pour le premier chargement de la page
+	# TODO: et quand il ne le demande pas (lorsqu'il veut s'actualiser, à ce moment il compare la dernière fiche affichée et celle retournée.
+	# TODO: si celle retournée est différente, il recharge tout
+	return HttpResponse(json.dumps(
+		[{'name': sheet.name,
+		  'sheetType': sheet.get_sheetType_display(),
+		  'firstName': sheet.uploadedBy.user.first_name,
+		  'last_name': sheet.uploadedBy.user.last_name,
+		  'pk': sheet.pk,
+		  'uploadDate': naturaltime_addon(sheet.uploadDate),}for sheet in sheets]),
+		content_type='application/json')
 
 
 @login_required

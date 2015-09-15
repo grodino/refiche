@@ -51,6 +51,16 @@ def getLastSheetsForLesson(instance, numberOfSheets):
 	return sheets
 
 
+def getLastSheetsForClassroom(instance, numberOfSheets):
+	""" Get the last sheets published in a classroom in the numberOfSheets range
+	 	There is no time limit for now """
+	from app.models import Sheet
+
+	sheets = Sheet.objects.filter(lesson__in=instance.lessons.all()).order_by('-uploadDate')[:numberOfSheets]
+
+	return sheets
+
+
 def renameFile(instance, name):
 	""" It's a function made to modify the name
 		of the file like this it won't be executed """
