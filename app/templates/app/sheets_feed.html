@@ -1,0 +1,31 @@
+{% load static app_extras %}
+
+{% for sheet in sheets %}
+    <div class="sheet_in_feed">
+        {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+            <img src="{% static 'img/icons/Word.png' %}" />
+        {% elif sheet.extension == '.pdf' %}
+            <img src="{% static 'img/icons/Pdf.png' %}" />
+        {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
+            <img src="{% url 'app.views.downloadSheetPage' sheet.pk %}" />
+        {% else %}
+            <img src="{% static 'img/icons/Word.png' %}" />
+        {% endif %}
+
+        <div class="feed_info_container">
+            <a class="title" href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}">
+                <h5 class="end-line-wrap">{{ sheet.name }}</h5>
+            </a>
+
+            <div class="feed_sheet_info">
+                #{{ sheet.get_sheetType_display }}<br />
+                ({{ sheet.uploadedBy.classroom.shortName }})
+
+                {{ sheet.uploadDate|naturaltime_addon }} <br />
+                {% block delete_link %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <p>Aucune fiche n'a été publiée récemment</p>
+{% endfor %}

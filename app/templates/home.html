@@ -10,9 +10,14 @@
 <link rel="stylesheet" href="{% static 'css/app.css' %}" />
 {% endblock %}
 
+{% block header-nolink %}
+    <div class="nav-icon">
+        <div></div>
+    </div>
+{% endblock %}
 
 {% block left-bar %}
-    <header>
+    <header id="left-bar-header">
         <h3>Dernières fiches</h3>
     </header>
 

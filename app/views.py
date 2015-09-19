@@ -181,18 +181,11 @@ def classroomSheetsFeed(request):
 
 	sheets = getLastSheetsForClassroom(classroom, 10)
 
-
-	# TODO: Séparer le cas ou le script js demande multiple (quand il appelle la vue pour le premier chargement de la page
-	# TODO: et quand il ne le demande pas (lorsqu'il veut s'actualiser, à ce moment il compare la dernière fiche affichée et celle retournée.
-	# TODO: si celle retournée est différente, il recharge tout
-	return HttpResponse(json.dumps(
-		[{'name': sheet.name,
-		  'sheetType': sheet.get_sheetType_display(),
-		  'firstName': sheet.uploadedBy.user.first_name,
-		  'last_name': sheet.uploadedBy.user.last_name,
-		  'pk': sheet.pk,
-		  'uploadDate': naturaltime_addon(sheet.uploadDate),}for sheet in sheets]),
-		content_type='application/json')
+	if request.GET['initial_fetch'] == 'true':
+		return render(request, 'app/sheets_feed.html', locals())
+	else:
+		sheets = sheets[:1]
+		return render(request, 'app/sheets_feed.html', locals())
 
 
 @login_required
