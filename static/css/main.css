@@ -155,6 +155,17 @@ header .logo {
     height: 15em;
 }
 
+@media (max-width: 549px) {
+    #content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #main_wrapper {
+        padding: 0;
+    }
+}
+
 
 /*  FOOTER
 ------------------------------------------- */

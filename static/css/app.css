@@ -4,6 +4,10 @@
     min-height: 15em;
 }
 
+#content nav .columns {
+    overflow: hidden;
+}
+
 #content nav .right-cell,
 #content nav .left-cell {
     background-color: #D9D9D9;
@@ -131,6 +135,17 @@
     justify-content: center;
 }
 
+@media (max-width: 550px) {
+    #content nav .container,
+    #content nav {
+        padding: 0;
+        margin: 0;
+    }
+
+    #content nav .row {
+        width: 100%;
+    }
+}
 
 /*  LEFT-BAR
 ------------------------------------------- */
