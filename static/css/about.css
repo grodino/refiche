@@ -10,13 +10,27 @@ header {
     height: 100%;
 
     background-image: url('/static/img/about_header_background.jpg');
+    -webkit-transition: height 0.5s;
     transition: height 0.5s;
 }
 
 #header-link {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
     align-items: center;
 
     height: 100%;
@@ -28,6 +42,7 @@ header {
 }
 
 header img {
+    -webkit-transition: width 0.5s;
     transition: width 0.5s;
 }
 
@@ -37,6 +52,9 @@ header .img-fixed {
 }
 
 header #catchphrase {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
     display: inline-flex;
     margin-top: 1em;
     
@@ -50,6 +68,7 @@ header #catchphrase {
     }
 
     header img {
+        -webkit-transition: width 0.5s;
         transition: width 0.5s;
         width: 17em;
     }
@@ -84,6 +103,7 @@ header #catchphrase {
 
     border-top: 1px solid #2f2f2f;
     border-bottom: 1px solid #2f2f2f;
+    -webkit-transition: background-color 1s;
     transition: background-color 1s;
 }
 
@@ -91,6 +111,8 @@ header #catchphrase {
     border: none;
     background-color: #3A6BAA;
     color: #FFFFFF;
+
+    -webkit-transition: background-color 1s;
 
     transition: background-color 1s;
 }
@@ -117,10 +139,24 @@ header #catchphrase {
 /*  TO AVOID <ul>
 ------------------------------------------- */
 .icons-flex-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
     align-items: center;
 
     width: 90%;
@@ -129,8 +165,18 @@ header #catchphrase {
 }
 
 .icon-flex-listed {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
 
     width: 50%;
@@ -181,3 +227,4 @@ footer {
     position: relative;
     top: 33%;
 }
+s
