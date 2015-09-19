@@ -1,6 +1,10 @@
 {% extends 'home.html' %}
 {% load static app_extras %}
 
+{% block add_js %}
+    {{ block.super }}
+{% endblock %}
+
 {% block content %}
     <div id="user_info_display" class="container">
         <header>

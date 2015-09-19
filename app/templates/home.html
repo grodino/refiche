@@ -2,8 +2,8 @@
 {% load static app_extras admin_urls %}
 
 {% block add_js %}
-{{ block.super }}
-<script src="{% static 'js/sheets_feed.js' %}"></script>
+    {{ block.super }}
+    <script src="{% static 'js/sheets_feed.js' %}"></script>
 {% endblock %}
 
 {% block add_stylesheets %}
