@@ -22,6 +22,12 @@ $(function() {
         $('.nav-icon').addClass('nav-icon-selected');
     }
 
+    if ($('.messages').length === 0) {
+        $('#main_wrapper').css('margin-top', $('#banner').height() + 'px');
+    } else {
+        $('.messages').css('margin-top', $('#banner').height() + 'px');
+    }
+
 // Handle the reveal and hide actions for the menu
     $('.nav-icon').click(function () {
         if ($('#left-bar').is(':visible')) {
@@ -52,12 +58,11 @@ $(function() {
         }
     });
 
-    $('#main_wrapper').css('margin-top', $('#banner').height() + 'px');
     getSheets('true');
 
     setTimeout(
         function () {
-            setInterval(getSheets('false'), 10 * 60 * 1000);
+            setInterval(getSheets('true'), 10 * 60 * 1000);
         },
         10 * 60 * 1000
     );

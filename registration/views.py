@@ -1,6 +1,7 @@
 import json, logging, random, string
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
+from django.core.mail import send_mail
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
@@ -108,6 +109,12 @@ def studentRegister(request, code):
 			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
 																   Nom d\'utilisateur: {}
 																   Mot de passe: {}""".format(username, password), from_email='contact@refiche.fr')
+
+			classroomDelegates = Student.objects.filter(user__is_staff=True).filter(classroom=newStudent.classroom)
+			send_mail('REFICHE ' + newStudent.classroom.name + 'administration',
+					  'Une personne s\'est inscrite à votre classe : ' + newUser.first_name + newUser.last_name.upper(),
+					  'contact@refiche.fr',
+					  [delegate.user.email for delegate in classroomDelegates])
 
 
 			is_delegate = False

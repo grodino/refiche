@@ -13,8 +13,7 @@
         {% endif %}
 
         <div class="feed_info_container">
-            {# TODO: Créer un système d'ancres avec les id : sheet_52 par ex #}
-            <a class="title" href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}">
+            <a class="title" href="{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">
                 <h5 class="end-line-wrap">{{ sheet.name }}</h5>
             </a>
 

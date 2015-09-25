@@ -29,12 +29,17 @@
         </div>
 
         <div class="row">
-            <div class="eight columns">
+            <div class="five columns">
+                <h5>Email:</h5>
+                <p>{{ student.user.email|cut:" " }}</p>
+            </div>
+
+            <div class="four columns">
                 <h5>établissement:</h5>
                 <p>{{ student.school }}</p>
             </div>
 
-            <div class="four columns">
+            <div class="three columns">
                 <h5>Documents:</h5>
                 <p>{{ student.numberOfSheetsUploaded }} partagée{{ student.numberOfSheetsUploaded|pluralize }}</p>
             </div>

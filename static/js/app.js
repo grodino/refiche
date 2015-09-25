@@ -1,24 +1,17 @@
 $(function() {
 // File input button more beautiful
-    var file_avatar = $('#file_avatar'),
-        input_file = $('#id_sheetFile');
+   $('#file_avatar').click(function () {
+        $('#id_sheetFile').click();
+    });
 
-    if (input_file === null) {
-        input_file = document.querySelector('#id_avatar');
-    }
-
-    file_avatar.click(function () {
-        input_file.click();
-    }, false);
-
-    input_file.click(function () {
-        if (input_file.value !== '') {
-            file_avatar.setAttribute('value', input_file.value.replace("C:\\fakepath\\", ""));
+    $('#id_sheetFile').click(function () {
+        if ($('#id_sheetFile').val() !== '') {
+            $('#file_avatar').val($('#id_sheetFile').val().replace("C:\\fakepath\\", ""));
         } else {
-            file_avatar.setAttribute('value', 'Selectionner le fichier');
+            $('#file_avatar').val('Selectionner le fichier');
         }
 
-    }, false);
+    });
 
 
 // User options
@@ -138,7 +131,7 @@ $(function() {
         } else {
             var sheetFormData = new FormData(sheetForm);
 
-            formResponse.open('POST', '/app/upload/'); //Changed refiche.dev to 127.0.0.1. TODO: change it back
+            formResponse.open('POST', '/app/upload/');
             formResponse.send(sheetFormData);
 
             formResponse.addEventListener('readystatechange', function () {

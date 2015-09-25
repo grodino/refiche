@@ -1,7 +1,6 @@
 {% load static app_extras %}
 
-{# TODO: In production, allow the .pdf extension #}
-<div class="sheet" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+<div id="sheet_{{ sheet.pk }}" class="sheet" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
                                         background-image: url('{% static 'img/icons/Word.png' %}');
                                     {% elif sheet.extension == '.pdf' %}
                                         background-image: url('{% static 'img/icons/Pdf.png' %}');

@@ -179,7 +179,7 @@ def classroomSheetsFeed(request):
 	student = getStudent(request.user)
 	classroom = student.classroom
 
-	sheets = getLastSheetsForClassroom(classroom, 10)
+	sheets = getLastSheetsForClassroom(classroom, 20)
 
 	if request.GET['initial_fetch'] == 'true':
 		return render(request, 'app/sheets_feed.html', locals())
