@@ -3,14 +3,17 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
 from facebook.models import CreateGroupToken
 from registration.models import StudentRegistrationCode
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
-from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm
+from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
 
+
+# TODO: Transform all the register views in one object to be more readable
 
 def register(request):
 	""" View for signing up, also includes a form for the students who have a link """
@@ -65,9 +68,6 @@ def getCode(request):
 
 def studentRegister(request, code):
 	""" View made to let the students register themselves to their own classroom """
-
-	# TODO: send an email to the delegate telling him that someone subscribed
-
 	try:
 		code = StudentRegistrationCode.objects.get(code=code)
 	except StudentRegistrationCode.DoesNotExist:
@@ -194,8 +194,15 @@ def delegateRegister(request):
 
 	return render(request, 'registration/delegate_register.html', locals())
 
+@login_required
+def changeUserInfos(request):
+	""" Ajax view where the user can modify his information """
+	student = getStudent(request.user)
 
+	form = ChangeUserInfosForm()
+	passwordForm = PasswordChangeForm(request.user)
 
+	return render(request, 'registration/change_user_infos.html', locals())
 
 
 

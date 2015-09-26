@@ -1,0 +1,22 @@
+<form method="POST" action="{% url 'registration.views.changeUserInfos' %}" enctype="multipart/form-data" >
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+        {% cycle '<div class="row">' silent %}
+            <div class="six columns">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {{ field }}
+
+                {% if field.name == 'avatar' %}
+                    <div class="input-file-container">
+                        <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
+                    </div>
+                {% endif %}
+            </div>
+        {% cycle '' '</div>' %}
+    {% endfor %}
+    </div>
+
+    {{ passwordForm.as_p }}
+</form>

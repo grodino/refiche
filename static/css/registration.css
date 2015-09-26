@@ -56,6 +56,9 @@
     margin-bottom: 0.7em;
 }
 
+input [type=file] {
+    display: none;
+}
 
 /* FACEBOOK REGISTERING
 -------------------------------------------- */

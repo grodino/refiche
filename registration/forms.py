@@ -96,3 +96,10 @@ class DelegateRegistrationForm(RegistrationForm):
 											label='Degré',
 											widget=forms.Select(attrs={'required': True, 'class': 'full-container-width'}),
 											empty_label=None)
+
+
+class ChangeUserInfosForm(RegistrationForm):
+	""" Extends the basic registration form but exclude the password and email fields """
+	email = None
+	password1 = None
+	password2 = None

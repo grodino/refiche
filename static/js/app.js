@@ -1,6 +1,6 @@
 $(function() {
 // File input button more beautiful
-   $('#file_avatar').click(function () {
+    $('#file_avatar').click(function () {
         $('#id_sheetFile').click();
     });
 
@@ -178,6 +178,7 @@ $(function() {
         $('.sheet_info', this).hide('fast');
     }).delay(5000);
 
+    // Deleting sheet action
     $('.delete_sheet_link').click(function (e) {
         e.preventDefault();
 
@@ -190,6 +191,17 @@ $(function() {
                 dataType = 'json'
             );
         }
+    });
+
+    // Deal with modifying the user infos
+    $('#user_info_display .settings').click(function() {
+        $.get(
+            url = '/register/change-infos',
+            success = function success(response) {
+                alert('hello!')
+            },
+            dataType = 'html'
+        )
     });
 });
 

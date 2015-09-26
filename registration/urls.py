@@ -5,4 +5,5 @@ urlpatterns = patterns('registration.views',
     url(r'^get-student-code/', 'getCode'),
     url(r'^delegate/$', 'delegateRegister'),
     url(r'^code/(?P<code>.+)$', 'studentRegister'),
+    url(r'^change-infos', 'changeUserInfos'),
 )

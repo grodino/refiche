@@ -234,6 +234,39 @@ footer {
 }
 
 
+/*  STYLE FOR HEADER WITH A SETTINGS IMG
+------------------------------------------- */
+.header-with-settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-with-settings h1,
+.header-with-settings h3,
+.header-with-settings h5 {
+    flex-grow: 1;
+}
+
+/* The settings image */
+.settings {
+    flex-shrink: 0;
+    cursor: pointer;
+
+    margin-right: 0.5em;
+    height: 2.5em;
+
+    -webkit-transition: 0.2s ease-out;
+}
+
+.settings:hover {
+    height: 2.8em;
+    margin-right: 0.3em;
+
+    -webkit-transition: 0.2s ease-out;
+}
+
 
 /*  MICELLANEOUS
 ------------------------------------------- */
