@@ -101,5 +101,3 @@ class DelegateRegistrationForm(RegistrationForm):
 class ChangeUserInfosForm(RegistrationForm):
 	""" Extends the basic registration form but exclude the password and email fields """
 	email = None
-	password1 = None
-	password2 = None

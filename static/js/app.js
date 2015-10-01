@@ -195,13 +195,8 @@ $(function() {
 
     // Deal with modifying the user infos
     $('#user_info_display .settings').click(function() {
-        $.get(
-            url = '/register/change-infos',
-            success = function success(response) {
-                alert('hello!')
-            },
-            dataType = 'html'
-        )
+        $('#user_info_content').slideToggle('fast');
+        $('#account_form').slideToggle('fast');
     });
 });
 

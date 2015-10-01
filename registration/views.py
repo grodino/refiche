@@ -200,7 +200,6 @@ def changeUserInfos(request):
 	student = getStudent(request.user)
 
 	form = ChangeUserInfosForm()
-	passwordForm = PasswordChangeForm(request.user)
 
 	return render(request, 'registration/change_user_infos.html', locals())
 

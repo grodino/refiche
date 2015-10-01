@@ -1,9 +1,10 @@
 {% extends 'home.html' %}
-{% load static app_extras %}
+{% load static app_extras registration_extras %}
 
 {% block add_js %}
     {{ block.super }}
 {% endblock %}
+
 
 {% block content %}
     <div id="user_info_display" class="container">
@@ -14,39 +15,43 @@
             <img class="settings" src="{% static 'img/icons/settings.png' %}" />
         </header>
 
-        <div class="row">
-            <div class="three columns">
-                <h5>Prénom:</h5>
-                <p>{{ student.user.first_name }}</p>
+        <div id="user_info_content">
+            <div class="row">
+                <div class="three columns">
+                    <h5>Prénom:</h5>
+                    <p>{{ student.user.first_name }}</p>
+                </div>
+
+                <div class="three columns">
+                    <h5>Nom:</h5>
+                    <p>{{ student.user.last_name }}</p>
+                </div>
+
+                <div class="six columns">
+                    <h5>Date d'inscription:</h5>
+                    <p>Le {{ student.user.date_joined|date:'d F o' }}</p>
+                </div>
             </div>
 
-            <div class="three columns">
-                <h5>Nom:</h5>
-                <p>{{ student.user.last_name }}</p>
-            </div>
+            <div class="row">
+                <div class="five columns">
+                    <h5>Email:</h5>
+                    <p>{{ student.user.email|cut:" " }}</p>
+                </div>
 
-            <div class="six columns">
-                <h5>Date d'inscription:</h5>
-                <p>Le {{ student.user.date_joined|date:'d F o' }}</p>
+                <div class="four columns">
+                    <h5>établissement:</h5>
+                    <p>{{ student.school }}</p>
+                </div>
+
+                <div class="three columns">
+                    <h5>Documents:</h5>
+                    <p>{{ student.numberOfSheetsUploaded }} partagée{{ student.numberOfSheetsUploaded|pluralize }}</p>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="five columns">
-                <h5>Email:</h5>
-                <p>{{ student.user.email|cut:" " }}</p>
-            </div>
-
-            <div class="four columns">
-                <h5>établissement:</h5>
-                <p>{{ student.school }}</p>
-            </div>
-
-            <div class="three columns">
-                <h5>Documents:</h5>
-                <p>{{ student.numberOfSheetsUploaded }} partagée{{ student.numberOfSheetsUploaded|pluralize }}</p>
-            </div>
-        </div>
+        {% getStudentAccountForm request %}
     </div>
 
     <div id="sheets">

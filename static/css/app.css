@@ -504,6 +504,13 @@ form .error {
     text-transform: uppercase;
 }
 
+#account_form {
+    display: none;
+}
+
+#account_form input {
+    width: 95%;
+}
 
 
 

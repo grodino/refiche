@@ -1,22 +1,41 @@
-<form method="POST" action="{% url 'registration.views.changeUserInfos' %}" enctype="multipart/form-data" >
+<form id="account_form" method="POST" action="{% url 'registration.views.changeUserInfos' %}" enctype="multipart/form-data" >
     {{ form.non_field_errors }}
 
-    {% for field in form %}
-        {% cycle '<div class="row">' silent %}
-            <div class="six columns">
-                {{ field.errors }}
-                {{ field.label_tag }}
-                {{ field }}
+    <div class="row">
+        <div class="four columns">
+            {{ form.firstName.errors }}
+            {{ form.firstName.label_tag }}
+            {{ form.firstName }}
+        </div>
 
-                {% if field.name == 'avatar' %}
-                    <div class="input-file-container">
-                        <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
-                    </div>
-                {% endif %}
+        <div class="four columns">
+            {{ form.lastName.errors }}
+            {{ form.lastName.label_tag }}
+            {{ form.lastName }}
+        </div>
+
+        <div class="four columns">
+            {{ form.avatar.errors }}
+            {{ form.avatar.label_tag }}
+            {{ form.avatar }}
+
+            <div class="input-file-container">
+                <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
             </div>
-        {% cycle '' '</div>' %}
-    {% endfor %}
+        </div>
     </div>
 
-    {{ passwordForm.as_p }}
+    <div class="row">
+        <div class="six columns">
+            {{ form.password1.errors }}
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+        </div>
+
+        <div class="six columns">
+            {{ form.password2.errors }}
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+        </div>
+    </div>
 </form>
