@@ -57,7 +57,7 @@ def getCode(request):
 			code.numberOfStudentsLeft = code.numberOfStudents
 			code.save()
 
-			JSONResponse = json.dumps({'sucess': 'true', 'code': code.code})
+			JSONResponse = json.dumps({'success': 'true', 'code': code.code})
 		else:
 			JSONResponse = json.dumps(form.errors)
 	else:
@@ -199,7 +199,34 @@ def changeUserInfos(request):
 	""" Ajax view where the user can modify his information """
 	student = getStudent(request.user)
 
-	form = ChangeUserInfosForm()
+	if request.method == 'POST':
+		form = ChangeUserInfosForm(request.POST)
+
+		if form.is_valid():
+			firstName = form.cleaned_data['firstName']
+			lastName = form.cleaned_data['lastName']
+			password = form.cleaned_data['password2']
+			avatar = form.cleaned_data['avatar']
+
+			student.user.last_name = lastName
+			student.user.first_name = firstName
+			student.user.set_password(password)
+			student.user.save()
+
+			student.avatar = avatar
+			student.save()
+
+			JSONResponse = json.dumps({'success': 'true'})
+		else:
+			JSONResponse = json.dumps(form.errors)
+
+		return HttpResponse(JSONResponse, content_type='application/json')
+	else:
+		form = ChangeUserInfosForm(
+			initial={ 'firstName': student.user.first_name,
+					  'lastName': student.user.last_name,
+					  'avatar': student.avatar }
+		)
 
 	return render(request, 'registration/change_user_infos.html', locals())
 

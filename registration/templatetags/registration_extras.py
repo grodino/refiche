@@ -21,7 +21,9 @@ def getStudentAccountForm(request):
 
 	student = getStudent(request.user)
 
-	form = ChangeUserInfosForm()
-	passwordForm = PasswordChangeForm(request.user)
+	form = ChangeUserInfosForm(
+			initial={ 'firstName': student.user.first_name,
+					  'lastName': student.user.last_name }
+		)
 
 	return locals()

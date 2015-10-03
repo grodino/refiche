@@ -508,8 +508,13 @@ form .error {
     display: none;
 }
 
-#account_form input {
+#account_form input[type="text"],
+#account_form input[type="password"]{
     width: 95%;
+}
+
+#account_form input[type="submit"] {
+    margin-top: 0;
 }
 
 

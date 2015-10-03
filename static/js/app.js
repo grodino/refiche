@@ -76,7 +76,6 @@ $(function() {
 // Dealing with the get code form
     $('#new_code_form').submit(function (e) {
         e.preventDefault();
-        jQuery.ajaxSettings.traditional = true;
 
         // If the form is not empty
         if ($('#id_numberOfStudents').val() >= 1) {
@@ -88,7 +87,7 @@ $(function() {
 
                 },
                 function (data) {
-                    if (data.sucess === 'true') {
+                    if (data.success === 'true') {
                         $('#new_code_form').slideToggle('fast');
                         $('#new_code_form_success').slideToggle('fast');
 
@@ -197,6 +196,47 @@ $(function() {
     $('#user_info_display .settings').click(function() {
         $('#user_info_content').slideToggle('fast');
         $('#account_form').slideToggle('fast');
+
+        $('#account_form').submit(function(e) {
+            e.preventDefault();
+
+            if ($('id_firstName').val() === '' || $('id_firstName').val() === '' || $('id_password1').val() === '' || $('id_password2').val() === '') {
+                if ($('id_firstName').val() === '') {
+                    $('id_firstName').addClass('error');
+                }
+                if ($('id_firstName').val() === '') {
+                    $('id_lastName').addClass('error');
+                }
+                if ($('id_password1').val() === '') {
+                    $('id_password1').addClass('error');
+                }
+                if ($('id_password2').val() === '') {
+                    $('id_password2').addClass('error');
+                }
+
+                alert('Oops je crois que tu as oublié quelque chose :/');
+            } else {
+                $.post(
+                    "/register/change-infos/",
+                    {
+                        'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                        'firstName': $('#id_firstName').val(),
+                        'lastName': $('#id_lastName').val(),
+                        'password1': $('#id_password1').val(),
+                        'password2': $('#id_password2').val()
+                    },
+                    function(response) {
+                        if (response.success === 'true') {
+                            alert('Pour des raisons de sécurité vous allez être déconnecté');
+                            location.reload();
+                        }
+                    },
+                    'json'
+                );
+            }
+
+
+        });
     });
 });
 
