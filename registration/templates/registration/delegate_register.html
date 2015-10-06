@@ -30,11 +30,11 @@
                     {{ field.label_tag }}
                     {{ field }}
 
-                    {% if field.name == 'avatar' %}
+                   {% comment %} {% if field.name == 'avatar' %}
                         <div class="input-file-container">
                             <input class="button" type="text" readonly="readonly" value="Selectionner le fichier" id="file_avatar"/>
                         </div>
-                    {% endif %}
+                    {% endif %}{% endcomment %}
                 </div>
             {% cycle '' '</div>' %}
         {% endfor %}
