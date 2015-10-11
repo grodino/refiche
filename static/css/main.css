@@ -312,6 +312,13 @@ a {
 /*  LOADING
 ------------------------------------------- */
 .spinner {
+    position: absolute;
+    top: 47%;
+    left: 47%;
+    z-index: 9999;
+
+    display: none;
+
     width: 100px;
     height: 100px;
     background-size: contain;

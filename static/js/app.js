@@ -108,6 +108,9 @@ $(function() {
         var formResponse = new XMLHttpRequest(),
             sheetForm = document.querySelector('#id_sheet_form');
 
+        $('#main_wrapper').addClass('blur');
+        $('.spinner').css('display', 'block');
+
         //clean errors
         $('#id_name').removeClass('error');
         $('#id_lesson').removeClass('error');
@@ -141,6 +144,7 @@ $(function() {
                     var status = JSON.parse(formResponse.responseText);
 
                     if (status.sucess) {
+                        $('.spinner').css('display', 'none');
                         location.reload();
                     } else {
                         alert('Le fichier est trop gros ou il n\'est pas autorisé :/');
