@@ -309,6 +309,63 @@ a {
 }
 
 
+/*  LOADING
+------------------------------------------- */
+.spinner {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+
+    -webkit-animation: sk-rotateplane 4.5s infinite cubic-bezier(.09,.57,.49,.9) ;
+    animation: sk-rotateplane 4.5s infinite cubic-bezier(.09,.57,.49,.9) ;
+}
+
+@-webkit-keyframes sk-rotateplane {
+    0% {
+        -webkit-transform: perspective(120px);
+        transform: perspective(120px)
+    }
+    25% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+        transform: perspective(120px) rotateY(180deg)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+        transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    }
+    75% {
+        -webkit-transform: perspective(120px) rotateY(0deg) rotateX(180deg);
+        transform: perspective(120px) rotateY(0deg) rotateX(180deg)
+    }
+    100%{
+        -webkit-transform: perspective(120px) rotateY(0deg) rotateX(0deg);
+        transform: perspective(120px) rotateY(0deg) rotateX(0deg)
+    }
+}
+@keyframes sk-rotateplane {
+    0% {
+        -webkit-transform: perspective(120px);
+        transform: perspective(120px)
+    }
+    25% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+        transform: perspective(120px) rotateY(180deg)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+        transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    }
+    75% {
+        -webkit-transform: perspective(120px) rotateY(0deg) rotateX(180deg);
+        transform: perspective(120px) rotateY(0deg) rotateX(180deg)
+    }
+    100%{
+        -webkit-transform: perspective(120px) rotateY(0deg) rotateX(0deg);
+        transform: perspective(120px) rotateY(0deg) rotateX(0deg)
+    }
+}
+
+
 /*  FONTS
 ------------------------------------------- */
 @font-face {

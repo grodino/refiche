@@ -4,13 +4,12 @@ $(function() {
         $('#id_sheetFile').click();
     });
 
-    $('#id_sheetFile').click(function () {
+    $('#id_sheetFile').change(function() {
         if ($('#id_sheetFile').val() !== '') {
-            $('#file_avatar').val($('#id_sheetFile').val().replace("C:\\fakepath\\", ""));
+           $('#file_avatar').val($('#id_sheetFile').val().substring($('#id_sheetFile').val().lastIndexOf('/') + 1 || $('#id_sheetFile').val().lastIndexOf('\\') + 1));
         } else {
             $('#file_avatar').val('Selectionner le fichier');
         }
-
     });
 
 
