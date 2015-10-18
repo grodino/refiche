@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from app.forms import UploadSheetForm
+from app.forms import UploadSheetForm, UploadLinkForm
 from app.templatetags.app_extras import naturaltime_addon
 from app.models import Lesson, Sheet, Classroom, Student
 from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom
@@ -130,6 +130,15 @@ def newSheetPage(request):
 		raise Http404('Hey :/ I wasn\'t expecting you here !')
 
 	return HttpResponse(localVarsJSON, content_type='application/json')
+
+
+@login_required
+def newLinkPage(request):
+	""" View made to handle the links submitting process """
+
+	form = UploadLinkForm()
+
+	return render(request, 'app/new_link.html', locals())
 
 
 @login_required

@@ -1,0 +1,9 @@
+{% extends 'home.html' %}
+
+{% block in_content %}
+    <form method="post" action="{% url 'app.views.newLinkPage' %}" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="envoyer!"/>
+    </form>
+{% endblock %}

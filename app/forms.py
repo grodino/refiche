@@ -2,7 +2,7 @@
 from os.path import splitext
 from django import forms
 from django.conf import settings
-from app.models import Sheet, Lesson, Teacher
+from app.models import Sheet, Lesson, Teacher, Link
 
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):
@@ -25,3 +25,11 @@ class UploadSheetForm(forms.ModelForm):
 	class Meta:
 		model = Sheet
 		exclude = ('name', 'chapter', 'extension', 'uploadedBy', 'contentType', 'uploadDate')
+
+
+class UploadLinkForm(forms.ModelForm):
+	#TODO: Change the lesson queryset + handle the form in the view
+
+	class Meta:
+		model = Link
+		exclude = ('chapter', 'uploadedBy', 'uploadDate', 'webSiteName', 'thumbnail')

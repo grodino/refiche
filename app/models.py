@@ -1,5 +1,9 @@
 # coding=UTF-8
+from os import system
+import random
+import string
 from django.db import models
+from django.core.exceptions import FieldError
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
 from facebook.models import ClassGroup
@@ -109,7 +113,20 @@ class Chapter(models.Model):
 		return '{}. {}'.format(self.number, self.name)
 
 
-class Sheet(models.Model):
+class AbstractUploadedContent(models.Model):
+	""" Class made to be inherited by models that are made to handle user content """
+
+	chapter = models.ForeignKey('Chapter', null=True, verbose_name="chapitre")
+	lesson = models.ForeignKey('Lesson', verbose_name="matière")
+
+	uploadedBy = models.ForeignKey(Student)
+	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+
+	class Meta(object):
+		abstract = True
+
+class Sheet(AbstractUploadedContent):
 	""" Sheet model (card, notes about a lesson etc) """
 
 	SHEET_TYPE_CHOICES = (('SHEET', 'fiche'),
@@ -119,17 +136,40 @@ class Sheet(models.Model):
 
 	name = models.CharField(max_length=100)
 	extension = models.CharField(max_length=50)
-	chapter = models.ForeignKey('Chapter', null=True, verbose_name="chapitre")
-	lesson = models.ForeignKey('Lesson', verbose_name="matière")
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET', verbose_name="catégorie")
 
 	sheetFile = models.FileField(upload_to=renameFile, verbose_name="fichier")
-	uploadedBy = models.ForeignKey(Student)
 	contentType = models.CharField(max_length=255)
-	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):
 		return '{}{}'.format(self.name, self.extension)
+
+
+class Link(AbstractUploadedContent):
+	""" Link model made to allow link import like a normal sheet """
+	# TODO : before reloading prod, install http://wkhtmltopdf.org/downloads.html for websites thumbnailing
+
+	url = models.URLField(verbose_name='adresse du site')
+	webSiteName = models.CharField(max_length=50)
+	thumbnail = models.FilePathField(path='/media/webpage-thumbnails/', recursive=False, allow_folders=False)
+
+	def __str__(self):
+		return '{}: {}'.format(self.webSiteName, self.url)
+
+	def createThumbnail(self):
+		""" Create the thumbnail of the website with a library """
+
+		if self.url is None:
+			raise FieldError('The thumbnail can\'t be created if the url is not set')
+
+		thumbnailId = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20))
+		response = system('wkhtmltoimage' + ' ' + self.url + ' ' + '/media/webpage-thumbnails/' + thumbnailId + '.png').read()
+
+		if response != 0:
+			raise FieldError('The thumbnail could not be created, please check the url')
+		else:
+			self.thumbnail = thumbnailId + '.png'
+
 
 
 # _____________________________________________________________________

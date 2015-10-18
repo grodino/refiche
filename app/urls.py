@@ -11,4 +11,5 @@ urlpatterns = patterns('app.views',
 	url(r'^classroom/$', 'classroomPage'),
 	url(r'^account/$', 'accountPage'),
 	url(r'^media/(?P<ressource>.+)/(?P<url>.+)$', 'downloadRessource'),
+	url(r'^link/$', 'newLinkPage')
 )
