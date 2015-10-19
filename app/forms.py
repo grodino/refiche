@@ -30,6 +30,11 @@ class UploadSheetForm(forms.ModelForm):
 class UploadLinkForm(forms.ModelForm):
 	#TODO: Change the lesson queryset + handle the form in the view
 
+	def __init__(self, student, *args, **kwargs):
+		super(UploadLinkForm, self).__init__(*args, **kwargs)
+		self.fields['lesson'] = forms.ModelChoiceField(queryset=student.classroom.lessons.all(), label="Matière", empty_label=None)
+
+
 	class Meta:
 		model = Link
 		exclude = ('chapter', 'uploadedBy', 'uploadDate', 'webSiteName', 'thumbnail')

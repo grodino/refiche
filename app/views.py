@@ -1,16 +1,18 @@
 # coding=UTF-8
 import json
+from os.path import join
+from itertools import chain
+from operator import attrgetter
 from os.path import splitext
+from  django.conf import settings
 from django.shortcuts import render
-from django.core.urlresolvers import reverse_lazy
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from app.forms import UploadSheetForm, UploadLinkForm
-from app.templatetags.app_extras import naturaltime_addon
-from app.models import Lesson, Sheet, Classroom, Student
+from app.models import Lesson, Sheet, Student, Link
 from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom
 from registration.models import StudentRegistrationCode
 from registration.forms import RegistrationForm
@@ -59,7 +61,14 @@ def lessonPage(request, lesson_name):
 	except Lesson.DoesNotExist:
 		raise Http404("This lesson does not exist or you are not registered to it !")
 
-	sheets = Sheet.objects.filter(lesson=lesson).order_by('-uploadDate')
+	sheets = Sheet.objects.filter(lesson=lesson)
+	links = Link.objects.filter(lesson=lesson)
+
+	items = sorted(
+		chain(sheets, links),
+		key=attrgetter('uploadDate'),
+		reverse=True
+	)
 
 	return render(request, 'app/lesson.html', locals())
 
@@ -136,7 +145,17 @@ def newSheetPage(request):
 def newLinkPage(request):
 	""" View made to handle the links submitting process """
 
-	form = UploadLinkForm()
+	student = getStudent(request.user)
+
+	if request.method == 'POST':
+		form = UploadLinkForm(student=student, data=request.POST)
+
+		if form.is_valid():
+			link = form.save(commit=False)
+			link.uploadedBy = student
+			link.save()
+	else:
+		form = UploadLinkForm(student=student)
 
 	return render(request, 'app/new_link.html', locals())
 
@@ -217,9 +236,27 @@ def downloadRessource(request, ressource, url):
 				contentType = 'image'
 
 			data = student.avatar.read()
+
 			response = HttpResponse(data, content_type=contentType)
 			response['Content-Disposition'] = 'attachment; filename="{}"'.format(student.avatar.name)
+
+			student.avatar.close()
 		else:
 			raise PermissionDenied()
+	elif ressource == 'webpage-thumbnails':
+		try:
+			link = Link.objects.get(thumbnail=ressource + '/' + url)
+		except Link.DoesNotExist:
+			raise Http404('This thumbnail doesn\'t exist :/')
+
+		if link.lesson in student.classroom.lessons.all():
+			data = open(join(settings.MEDIA_ROOT, link.thumbnail), 'rb')
+
+			response = HttpResponse(data, content_type='image/png')
+			response['Content-Disposition'] = 'attachment; filename="{}"'.format(link.webSiteName + '.png')
+
+			data.close()
+	else:
+		response = Http404('The ressource you\'re looking for doesn\'t exist')
 
 	return response
