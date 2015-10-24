@@ -172,12 +172,12 @@ $(function() {
     });
 
 
-// Reveals informations about a sheet
-    $('.sheet').hover(function () {
-        $('.sheet_info', this).show('fast');
+// Reveals informations about a sheet and a link
+    $('.item').hover(function () {
+        $('.info', this).show('fast');
     }, function () {
-        $('.sheet_info', this).stop(true, false);
-        $('.sheet_info', this).hide('fast');
+        $('.info', this).stop(true, false);
+        $('.info', this).hide('fast');
     }).delay(5000);
 
     // Deleting sheet action

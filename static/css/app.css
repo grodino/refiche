@@ -376,17 +376,17 @@ form .error {
     margin-bottom: 0;
 }
 
-/*  SHEET LIST
+/*  ITEMS LIST
 ------------------------------------------- */
-#sheets header {
+#items_list header {
     background-color: #FFB948;
 }
 
-#sheets header h3 {
+#items_list header h3 {
     max-width: 70%;
 }
 
-#sheets .flex-container {
+#items_list .flex-container {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -407,7 +407,7 @@ form .error {
     overflow: hidden;
 }
 
-#sheets .sheet{
+#items_list .item {
     display: block;
     
     width: 20em;
@@ -420,7 +420,7 @@ form .error {
     overflow: hidden;
 }
 
-#sheets .sheet {
+#items_list .item {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -436,7 +436,7 @@ form .error {
     justify-content: flex-end;
 }
 
-#sheets .info_container {  
+#items_list .item .info_container {
     margin: 0;
     padding-left: 0.5em;
     
@@ -447,20 +447,24 @@ form .error {
     word-wrap: break-word;
 }
 
-#sheets .sheet h5 {
+#items_list .item h5 {
     margin-bottom: 0px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     font-size: 1.6em;
 }
 
-#sheets .sheet_info {
+#items_list .item .info {
     display: none;
     margin-bottom: 0.5em;
     
     color: #2F2F2F;
 }
 
+#items_list .link {
+    background-size: cover;
+    background-position: center;
+}
 
 /*  CLASSROOM PAGE
 ------------------------------------------- */

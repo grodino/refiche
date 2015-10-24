@@ -52,13 +52,21 @@ def getLastSheetsForLesson(instance, numberOfSheets):
 
 
 def getLastSheetsForClassroom(instance, numberOfSheets):
-	""" Get the last sheets published in a classroom in the numberOfSheets range
-	 	There is no time limit for now """
+	""" Get the last sheets published in a classroom in the numberOfSheets range """
 	from app.models import Sheet
 
 	sheets = Sheet.objects.filter(lesson__in=instance.lessons.all()).order_by('-uploadDate')[:numberOfSheets]
 
 	return sheets
+
+
+def getLastLinksForClassroom(instance, numberOfLinks):
+	""" Get the last sheets published in a classroom in the numberOfSheets range """
+	from app.models import Link
+
+	links = Link.objects.filter(lesson__in=instance.lessons.all()).order_by('-uploadDate')[:numberOfLinks]
+
+	return links
 
 
 def renameFile(instance, name):
@@ -81,6 +89,7 @@ def deleteFile(sender, instance, **kwargs):
 
 	remove(join(settings.MEDIA_ROOT, instance.sheetFile.name))
 
+# TODO: Delete Link and add Link
 
 def addFile(sender, instance, **kwargs):
 	""" Function made to add 1 to the user's numberOfSheetsUploaded """

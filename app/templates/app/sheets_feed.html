@@ -1,31 +1,55 @@
 {% load static app_extras %}
 
-{% for sheet in sheets %}
+{% for item in items %}
     <div class="sheet_in_feed">
-        {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
-            <img src="{% static 'img/icons/Word.png' %}" />
-        {% elif sheet.extension == '.pdf' %}
-            <img src="{% static 'img/icons/Pdf.png' %}" />
-        {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
-            <img src="{% url 'app.views.downloadSheetPage' sheet.pk %}" />
-        {% else %}
-            <img src="{% static 'img/icons/Word.png' %}" />
+        {% if item.name %}
+            {% with item as sheet %}
+                {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+                    <img src="{% static 'img/icons/Word.png' %}" />
+                {% elif sheet.extension == '.pdf' %}
+                    <img src="{% static 'img/icons/Pdf.png' %}" />
+                {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
+                    <img src="{% url 'app.views.downloadSheetPage' sheet.pk %}" />
+                {% else %}
+                    <img src="{% static 'img/icons/Word.png' %}" />
+                {% endif %}
+
+                <div class="feed_info_container">
+                    <a class="title" href="{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">
+                        <h5 class="end-line-wrap">{{ sheet.name }}</h5>
+                    </a>
+
+                    <div class="feed_sheet_info">
+                        #{{ sheet.get_sheetType_display }}<br />
+                        ({{ sheet.uploadedBy.classroom.shortName }})
+
+                        {{ sheet.uploadDate|naturaltime_addon }} <br />
+                    </div>
+                </div>
+            {% endwith %}
         {% endif %}
 
-        <div class="feed_info_container">
-            <a class="title" href="{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">
-                <h5 class="end-line-wrap">{{ sheet.name }}</h5>
-            </a>
+        {% if item.webSiteName %}
+            {% with item as link %}
+                <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail|cut:'webpage-thumbnails/' %}" />
 
-            <div class="feed_sheet_info">
-                #{{ sheet.get_sheetType_display }}<br />
-                ({{ sheet.uploadedBy.classroom.shortName }})
+                <div class="feed_info_container">
+                    <a class="title" href="{% url 'app.views.lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
+                        <h5 class="end-line-wrap">{{ link.webSiteName }}</h5>
+                    </a>
 
-                {{ sheet.uploadDate|naturaltime_addon }} <br />
-                {% block delete_link %}{% endblock %}
-            </div>
-        </div>
+                    <div class="feed_item_info">
+                        #lien<br />
+                        ({{ link.uploadedBy.classroom.shortName }})
+
+                        {{ link.uploadDate|naturaltime_addon }} <br />
+                    </div>
+                </div>
+            {% endwith %}
+        {% endif %}
     </div>
 {% empty %}
-    <p>Aucune fiche n'a été publiée récemment</p>
+    <div class="full-container-size">
+        <p>Aucune fiche n'a été publiée récemment</p>
+    </div>
 {% endfor %}

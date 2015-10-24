@@ -1,9 +1,18 @@
-<div id="link_{{ link.pk }}" style="background-image: url('{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail|cut:'webpage-thumbnails/' %}')">
-    {{ link.webPageName }}
-    sdfsdf
-    sdf
-    sdf
-    sd
-    f
-    sdf
+{% load app_extras %}
+
+<div id="link_{{ link.pk }}" class="link item" style="background-image: url('{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail|cut:'webpage-thumbnails/' %}')">
+    <div class="info_container">
+        <a class="title" href="{{ link.url }}" target="_blank" class="full-container-size">
+            <h5>{{ link.webSiteName }}</h5>
+        </a>
+
+        <div class="info">
+            #lien<br />
+            {{ link.uploadedBy.user.first_name }} {{ link.uploadedBy.user.last_name|upper }}
+            ({{ link.uploadedBy.classroom.shortName }})
+
+            {{ link.uploadDate|naturaltime_addon }} <br />
+            {% block delete_link %}{% endblock %}
+        </div>
+    </div>
 </div>

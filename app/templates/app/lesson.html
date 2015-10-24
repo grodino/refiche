@@ -3,7 +3,7 @@
 
 {% block in_content %}
 
-<div id="sheets">
+<div id="items_list">
     <header>
         <h3 class="full-container-size">
             {{ lesson.name|upper }} :  {{ lesson.teacher.gender }} {{ lesson.teacher.lastName }}
@@ -24,7 +24,11 @@
 
         {% if item.webSiteName %}
             {% with item as link %}
-                {% include 'app/link_template.html' %}
+                {% if item.uploadedBy == student %}
+                    {% include 'app/student_link_template.html' %}
+                {% else %}
+                    {% include 'app/link_template.html' %}
+                {% endif %}
             {% endwith %}
         {% endif %}
     {% empty %}

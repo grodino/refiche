@@ -1,0 +1,6 @@
+{% extends 'app/link_template.html' %}
+{% load app_extras %}
+
+{% block delete_link %}
+    <a class="delete_link" href="{% url 'app.views.deleteLinkPage' pk=link.pk %}">Cliquez pour supprimer</a>
+{% endblock %}

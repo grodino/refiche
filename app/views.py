@@ -7,13 +7,14 @@ from os.path import splitext
 from  django.conf import settings
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from app.forms import UploadSheetForm, UploadLinkForm
 from app.models import Lesson, Sheet, Student, Link
-from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom
+from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom, getLastLinksForClassroom
 from registration.models import StudentRegistrationCode
 from registration.forms import RegistrationForm
 
@@ -104,8 +105,14 @@ def accountPage(request):
 									 'lastName': student.user.last_name,
 									 'email': student.user.email,
 									 'avatar': student.avatar })
-	sheets = sheets = Sheet.objects.filter(uploadedBy=student).order_by('-uploadDate')
+	sheets = Sheet.objects.filter(uploadedBy=student)
+	links = Link.objects.filter(uploadedBy=student)
 
+	items = sorted(
+		chain(sheets, links),
+		key=attrgetter('uploadDate'),
+		reverse=True
+	)
 
 	return render(request, 'app/account.html', locals())
 
@@ -201,6 +208,25 @@ def deleteSheetPage(request, pk):
 
 
 @login_required
+def deleteLinkPage(request, pk):
+	""" View for deleting a link """
+
+	student = getStudent(request.user)
+	link = get_object_or_404(Link, pk=pk)
+
+	if student == link.uploadedBy:
+		link.delete()
+		JsonResponse = {'success': 'true'}
+	else:
+		JsonResponse = {'success': 'false',
+						'error': 'PermissionDenied'}
+
+	messages.add_message(request, messages.SUCCESS, 'Votre lien a bien été supprimée !')
+
+	return HttpResponse(json.dumps(JsonResponse), content_type='application/json')
+
+
+@login_required
 def classroomSheetsFeed(request):
 	""" View made to return the last sheets for the user's classroom """
 
@@ -208,6 +234,13 @@ def classroomSheetsFeed(request):
 	classroom = student.classroom
 
 	sheets = getLastSheetsForClassroom(classroom, 20)
+	links = getLastLinksForClassroom(classroom, 20)
+
+	items = sorted(
+		chain(sheets, links),
+		key=attrgetter('uploadDate'),
+		reverse=True
+	)[:20]
 
 	if request.GET['initial_fetch'] == 'true':
 		return render(request, 'app/sheets_feed.html', locals())

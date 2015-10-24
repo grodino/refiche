@@ -54,14 +54,32 @@
         {% getStudentAccountForm request %}
     </div>
 
-    <div id="sheets">
+    <div id="items_list">
         <header>
             <h3>Mes documents</h3>
         </header>
 
         <div class=flex-container>
-            {% for sheet in sheets %}
-                {% include 'app/student_sheet_template.html' %}
+            {% for item in items %}
+                {% if item.name %}
+                    {% with item as sheet %}
+                        {% if item.uploadedBy == student %}
+                            {% include 'app/student_sheet_template.html' %}
+                        {% else %}
+                            {% include 'app/sheet_template.html' %}
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+
+                {% if item.webSiteName %}
+                    {% with item as link %}
+                        {% if item.uploadedBy == student %}
+                            {% include 'app/student_link_template.html' %}
+                        {% else %}
+                            {% include 'app/link_template.html' %}
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
             {% empty %}
                 <div class="full-container-size">
                     <h5>Vous n'avez rien publié :(</h5>
