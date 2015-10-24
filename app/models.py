@@ -179,7 +179,7 @@ class Link(AbstractUploadedContent):
 
 		thumbnailId = ''.join(
 			random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
-		savePath = settings.MEDIA_ROOT_DEV_WIN + '/webpage-thumbnails/' + thumbnailId  # TODO: use MEDIA_ROOT instead, I use this here because the dev is running virtually with the IDE
+		savePath = settings.MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
 
 		response = system('wkhtmltoimage' + ' ' + self.url + ' ' + savePath)
 
