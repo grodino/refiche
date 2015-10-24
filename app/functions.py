@@ -51,6 +51,15 @@ def getLastSheetsForLesson(instance, numberOfSheets):
 	return sheets
 
 
+def getLastLinksForLesson(instance, numberOfLinks):
+	from app.models import Link
+
+	timeLimit = timezone.now() - timedelta(weeks=2)
+	links = Link.objects.filter(lesson=instance, uploadDate__gte=timeLimit).order_by('-uploadDate')[:numberOfLinks]
+
+	return links
+
+
 def getLastSheetsForClassroom(instance, numberOfSheets):
 	""" Get the last sheets published in a classroom in the numberOfSheets range """
 	from app.models import Sheet

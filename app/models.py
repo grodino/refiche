@@ -3,6 +3,8 @@ from os import system
 from os.path import join
 import random
 import string
+from itertools import chain
+from operator import attrgetter
 
 from django.db import models
 from django.conf import settings
@@ -12,7 +14,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
 
 from facebook.models import ClassGroup
-from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson
+from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson, getLastLinksForLesson
 
 
 class Lesson(models.Model):
@@ -24,9 +26,19 @@ class Lesson(models.Model):
 	def __str__(self):
 		return "{0} ({1})".format(self.name, self.teacher)
 
-	def getLastSheets(self):
-		""" Return the 2 last sheets for the lesson """
-		return getLastSheetsForLesson(self, 2)
+	def getLastItems(self):
+		""" Return the 2 last items (sheet or link) for the lesson """
+
+		sheets = getLastSheetsForLesson(self, 2)
+		links = getLastLinksForLesson(self, 2)
+
+		items = sorted(
+			chain(sheets, links),
+			key=attrgetter('uploadDate'),
+			reverse=True
+		)[:2]
+
+		return items
 
 
 class Level(models.Model):

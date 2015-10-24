@@ -123,8 +123,18 @@
                 <div class="info_container">
                     <h5>Derniers partages:</h5>
 
-                    {% for sheet in lesson.getLastSheets %}
-                        <div class="end-line-wrap">{{ sheet.name}}</div>
+                    {% for item in lesson.getLastItems %}
+                        {% if item.name %}
+                            {% with item as sheet %}
+                                <div class="end-line-wrap">{{ sheet.name }}</div>
+                            {% endwith %}
+                        {% endif %}
+
+                        {% if item.webSiteName %}
+                            {% with item as link %}
+                                <div class="end-line-wrap">{{ link.webSiteName }}</div>
+                            {% endwith %}
+                        {% endif %}
                     {% empty %}
                         Arghh aucun partage récent :'(
                     {% endfor %}
