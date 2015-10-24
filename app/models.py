@@ -179,7 +179,7 @@ class Link(AbstractUploadedContent):
 
 		thumbnailId = ''.join(
 			random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
-		savePath = settings.MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
+		savePath = settings.OS_MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
 
 		response = system('wkhtmltoimage' + ' ' + self.url + ' ' + savePath)
 
