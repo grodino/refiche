@@ -1,0 +1,93 @@
+{% load static app_extras admin_urls %}
+
+<nav class="container">
+    <div class="row">
+        <div id="user_infos" class="six columns left-cell full-container-size">
+            <div id="user_infos_content" class="full-container-size">
+                <a href="#" class="full-container-size">
+                    <img id="user-icon" src="{% if student.avatar %}
+                                                {% url 'app.views.downloadRessource' ressource='avatars' url=student.avatar.name|cut:'avatars/' %}
+                                             {% else %}
+                                                {% static 'img/icons/default_avatar.png' %}
+                                             {% endif %}" />
+
+                    <div>{{ user.first_name }} {{ user.last_name|upper }}</div>
+                </a>
+            </div>
+
+            <div id="user_options" class="full-container-size">
+                <div class="full-container-size" style="background-image: url('{% static 'img/icons/settings.png' %}');">
+                    <h5>Options</h5>
+
+                    {% if request.user.is_staff %}
+                    <div>
+                        <a id="add_lesson" href="{% url 'admin:index' %}">Administration</a>
+                    </div>
+
+                    <div>
+                        <a id="get_code" href="#">Code d'inscription</a>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <a href="{% url 'app.views.accountPage' %}">Mon compte</a>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'django.contrib.auth.views.logout' %}">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
+
+            {% if request.user.is_staff %}
+                <div id="new_code_form" class="new_form">
+                    {% load registration_extras %}
+                    {% getStudentRegistrationForm request %}
+                </div>
+
+                <div id="new_code_form_success" class="full-container-size">
+                    <div class="full-container-size">
+                        <h5>Votre code : </h5>
+                        <input type="text" readonly="true" value="{{ code }}">
+                        <a href="#" id="hide_new_code_success">RETOUR</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div id="left_cell" class="six columns">
+            <div class="container">
+                <div id="classroom_profile" class="row right-cell">
+                    <a href="{% url 'app.views.classroomPage' %}" class="full-container-size">
+                        <h5>{{ student.classroom.name }}</h5>
+                    </a>
+                </div>
+
+                <div class="row" id="new_sheet_div" >
+                    <div class="six columns right-cell">
+                        <a id="post_new_sheet_link" href="#" class="full-container-size post_new_sheet_link">
+                            <h5>nouvelle fiche</h5>
+                        </a>
+                    </div>
+
+                    <div class="six columns right-cell">
+                        <a id="post_new_link_link" href="#" class="full-container-size post_new_sheet_link">
+                            <h5>nouveau lien</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="new_link_form" class="new_form">
+    <h5>Poster un nouveau lien !<a id="hide_new_link_form" class="u-pull-right">Retour</a></h5>
+    {% getNewLinkForm request %}
+</div>
+
+<div id="new_sheet_form" class="new_form">
+    <h5>Poster une nouvelle fiche ! <a id="hide_new_sheet_form" class="u-pull-right">Retour</a></h5>
+    {% getNewSheetForm request %}
+</div>
+

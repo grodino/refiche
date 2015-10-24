@@ -136,7 +136,7 @@ def newSheetPage(request):
 			sheet.sheetType = form.cleaned_data['sheetType']
 			sheet.save()
 
-			localVarsJSON = json.dumps({'sucess': 'true',})
+			localVarsJSON = json.dumps({'success': 'true',})
 			messages.add_message(request, messages.SUCCESS, 'Votre fiche a bien été envoyée !')
 
 			return HttpResponse(localVarsJSON, content_type='application/json')
@@ -161,10 +161,15 @@ def newLinkPage(request):
 			link = form.save(commit=False)
 			link.uploadedBy = student
 			link.save()
-	else:
-		form = UploadLinkForm(student=student)
 
-	return render(request, 'app/new_link.html', locals())
+			localVarsJSON = json.dumps({'success': 'true',})
+			messages.add_message(request, messages.SUCCESS, 'Votre lien a bien été envoyée !')
+		else:
+			localVarsJSON = json.dumps(form.errors)
+	else:
+		raise Http404('Hey :/ I wasn\'t expecting you here !')
+
+	return HttpResponse(localVarsJSON, content_type='application/json')
 
 
 @login_required

@@ -12,6 +12,16 @@ $(function() {
         }
     });
 
+    // Add and remove a spinner
+    function showSpinner() {
+        $('#main_wrapper').addClass('blur');
+        $('.spinner').css('display', 'block');
+    }
+
+    function hideSpinner() {
+        $('#main_wrapper').removeClass('blur');
+        $('.spinner').css('display', 'none');
+    }
 
 // User options
 // Show
@@ -45,6 +55,52 @@ $(function() {
         $('#new_sheet_form').slideUp('fast');
     });
 
+    // Animation to post a new link
+    $('#post_new_link_link').click(function() {
+        $('nav').slideUp('fast');
+        $('#new_link_form').slideDown('fast');
+    });
+
+    $('#hide_new_link_form').click(function() {
+        $('nav').slideDown('fast');
+        $('#new_link_form').slideUp('fast');
+    });
+
+    // Handeling the link form
+    $('#new_link_form').submit(function(e) {
+        e.preventDefault();
+
+        $('#id_lesson').removeClass('error');
+        $('#id_url').removeClass('error');
+
+        if($('#id_lesson').val() == '' || $('#id_url').val() == '' ) {
+            if($('#id_lesson').val() == '') {
+                $('#id_lesson').addClass('error');
+            } else if($('#id_url').val() == '') {
+                $('#id_url').addClass('error');
+            }
+
+            alert('Je crois que tu as oublié quelque chose :(')
+        } else {
+            showSpinner();
+
+            $.post(
+            '/app/link/',
+            {   'csrfmiddlewaretoken': $('#new_link_form input[name="csrfmiddlewaretoken"]').val(),
+                'lesson': $('#id_lesson').val(),
+                'url': $('#id_url').val()    },
+            function(data) {
+                if(data.success == 'true') {
+                    location.reload()
+                } else {
+                    hideSpinner();
+                    alert('Une erreur est survenue lors de l\'enregistrement du lien :(')
+                }
+            },
+            'json'
+        )
+        }
+    });
 
 //Animation for getting a code
     $('#get_code').click(function () {
@@ -108,8 +164,7 @@ $(function() {
         var formResponse = new XMLHttpRequest(),
             sheetForm = document.querySelector('#id_sheet_form');
 
-        $('#main_wrapper').addClass('blur');
-        $('.spinner').css('display', 'block');
+        showSpinner()
 
         //clean errors
         $('#id_name').removeClass('error');
@@ -143,11 +198,11 @@ $(function() {
 
                     var status = JSON.parse(formResponse.responseText);
 
-                    if (status.sucess) {
-                        $('.spinner').css('display', 'none');
+                    if (status.success) {
                         location.reload();
                     } else {
                         alert('Le fichier est trop gros ou il n\'est pas autorisé :/');
+                        hideSpinner()
                     }
                 }
             }, false);
@@ -181,7 +236,7 @@ $(function() {
     }).delay(5000);
 
     // Deleting sheet action
-    $('.delete_sheet_link').click(function (e) {
+    $('.delete_link').click(function (e) {
         e.preventDefault();
 
         if (confirm('Etes vous sûr(e) de vouloir supprimer ce document ?')) {
@@ -219,6 +274,8 @@ $(function() {
 
                 alert('Oops je crois que tu as oublié quelque chose :/');
             } else {
+                showSpinner();
+
                 $.post(
                     "/register/change-infos/",
                     {
@@ -232,6 +289,9 @@ $(function() {
                         if (response.success === 'true') {
                             alert('Pour des raisons de sécurité vous allez être déconnecté');
                             location.reload();
+                        } else {
+                            hideSpinner();
+                            alert('Une erreur est survenue :(');
                         }
                     },
                     'json'

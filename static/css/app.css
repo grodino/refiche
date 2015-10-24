@@ -135,6 +135,10 @@
     justify-content: center;
 }
 
+#content #new_link_form {
+    margin: 0;
+}
+
 @media (max-width: 550px) {
     #content nav .container,
     #content nav {
@@ -407,7 +411,8 @@ form .error {
     overflow: hidden;
 }
 
-#items_list .item {
+#items_list .sheet,
+#items_list .link {
     display: block;
     
     width: 20em;
@@ -420,7 +425,8 @@ form .error {
     overflow: hidden;
 }
 
-#items_list .item {
+#items_list .sheet,
+#items_list .link {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

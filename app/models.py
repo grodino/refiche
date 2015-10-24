@@ -1,6 +1,5 @@
 # coding=UTF-8
 from os import system
-from os.path import join
 import random
 import string
 from itertools import chain
@@ -8,13 +7,14 @@ from operator import attrgetter
 
 from django.db import models
 from django.conf import settings
-from django.core.files import File
 from django.core.exceptions import FieldError
 from django.contrib.auth.models import User
+
 from django.db.models.signals import post_delete, post_save, pre_delete
 
 from facebook.models import ClassGroup
-from app.functions import renameFile, addFile, deleteFile, deleteUser, getLastSheetsForLesson, getLastLinksForLesson
+from app.functions import renameFile, addFile, addLink, deleteFile, deleteLink, deleteUser, getLastSheetsForLesson, \
+	getLastLinksForLesson
 
 
 class Lesson(models.Model):
@@ -96,8 +96,8 @@ class Student(Profile):
         model """
 
 	lessons = models.ManyToManyField(Lesson)
-	numberOfSheetsUploaded = models.IntegerField(default=0)
-	# TODO: Rename this to numberOfItemsUploaded to include links
+	numberOfItemsUploaded = models.IntegerField(default=0)
+
 
 	def __str__(self):
 		return "Profil de {0}".format(self.user.username)
@@ -140,9 +140,9 @@ class AbstractUploadedContent(models.Model):
 	uploadedBy = models.ForeignKey(Student)
 	uploadDate = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-
 	class Meta(object):
 		abstract = True
+
 
 class Sheet(AbstractUploadedContent):
 	""" Sheet model (card, notes about a lesson etc) """
@@ -177,8 +177,9 @@ class Link(AbstractUploadedContent):
 	def save(self, *args, **kwargs):
 		""" Set the name and the thumbnail of the website with a library """
 
-		thumbnailId = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
-		savePath = settings.MEDIA_ROOT_DEV_WIN + '/webpage-thumbnails/' + thumbnailId # TODO: use MEDIA_ROOT instead, I use this here because the dev is running virtually with the IDE
+		thumbnailId = ''.join(
+			random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
+		savePath = settings.MEDIA_ROOT_DEV_WIN + '/webpage-thumbnails/' + thumbnailId  # TODO: use MEDIA_ROOT instead, I use this here because the dev is running virtually with the IDE
 
 		response = system('wkhtmltoimage' + ' ' + self.url + ' ' + savePath)
 
@@ -192,10 +193,13 @@ class Link(AbstractUploadedContent):
 		super(Link, self).save(*args, **kwargs)
 
 
-
 # _____________________________________________________________________
 # SIGNALS
 
 post_save.connect(addFile, sender=Sheet)
+post_save.connect(addLink, sender=Link)
+
 post_delete.connect(deleteFile, sender=Sheet)
+post_delete.connect(deleteLink, sender=Link)
+
 pre_delete.connect(deleteUser, sender=User)

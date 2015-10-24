@@ -2,7 +2,7 @@ from datetime import timedelta
 from django import template
 from django.utils import timezone
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
-from app.forms import UploadSheetForm
+from app.forms import UploadSheetForm, UploadLinkForm
 from app.functions import getStudent
 
 register = template.Library()
@@ -16,6 +16,16 @@ def getNewSheetForm(request):
 
 	student = getStudent(request.user)
 	form = UploadSheetForm(student=student)
+
+	return {'form': form }
+
+
+@register.inclusion_tag('app/new_link.html')
+def getNewLinkForm(request):
+	""" Takes the context of the parent template and create a NewLinkForm with additional user data  """
+
+	student = getStudent(request.user)
+	form = UploadLinkForm(student=student)
 
 	return {'form': form }
 

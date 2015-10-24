@@ -1,9 +1,22 @@
-{% extends 'home.html' %}
+<form method="post" action="{% url 'app.views.newLinkPage' %}" >
+    {% csrf_token %}
+    {{ form.non_field_errors }}
 
-{% block in_content %}
-    <form method="post" action="{% url 'app.views.newLinkPage' %}" >
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="envoyer!"/>
-    </form>
-{% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                {{ form.lesson.errors }}
+                {{ form.lesson.label_tag }}
+                {{ form.lesson }}
+            </div>
+
+            <div class="six columns">
+                {{ form.url.errors }}
+                {{ form.url.label_tag }}
+                {{ form.url }}
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" class="button-primary align-center" value="envoyer!"/>
+</form>

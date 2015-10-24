@@ -89,23 +89,40 @@ def renameFile(instance, name):
 
 
 def deleteFile(sender, instance, **kwargs):
-	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded"""
+	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded """
 
 	# Deduct 1 from the user's numberOfSheetsUploaded
-	user = instance.uploadedBy
-	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded - 1
-	user.save()
+	student = instance.uploadedBy
+	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
+	student.save()
 
 	remove(join(settings.MEDIA_ROOT, instance.sheetFile.name))
 
-# TODO: Delete Link and add Link
+
+def deleteLink(sender, instance, **kwargs):
+	""" Function made to delete the link's thumbnail form the os """
+
+	student = instance.uploadedBy
+	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
+	student.save()
+
+	remove(join(settings.MEDIA_ROOT, instance.thumbnail))
+
 
 def addFile(sender, instance, **kwargs):
 	""" Function made to add 1 to the user's numberOfSheetsUploaded """
 
-	user = instance.uploadedBy
-	user.numberOfSheetsUploaded = user.numberOfSheetsUploaded + 1
-	user.save()
+	student = instance.uploadedBy
+	student.numberOfItemsUploaded = student.numberOfItemsUploaded + 1
+	student.save()
+
+
+def addLink(sender, instance, **kwargs):
+	""" Function made to add 1 to the user's numberOfItemsUploaded """
+
+	student = instance.uploadedBy
+	student.numberOfItemsUploaded = student.numberOfItemsUploaded + 1
+	student.save()
 
 
 def deleteUser(sender, instance, **kwargs):
