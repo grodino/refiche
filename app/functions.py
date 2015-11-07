@@ -106,7 +106,8 @@ def deleteLink(sender, instance, **kwargs):
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
 	student.save()
 
-	remove(join(settings.MEDIA_ROOT, instance.thumbnail))
+	if instance.hasThumbnail():
+		remove(join(settings.MEDIA_ROOT, instance.thumbnail))
 
 
 def addFile(sender, instance, **kwargs):

@@ -1,11 +1,13 @@
 # coding=UTF-8
 from os import system
+from os.path import join
 import random
 import string
 from itertools import chain
 from operator import attrgetter
 
 from django.db import models
+from django.core.files import File
 from django.conf import settings
 from django.core.exceptions import FieldError
 from django.contrib.auth.models import User
@@ -165,32 +167,22 @@ class Sheet(AbstractUploadedContent):
 
 class Link(AbstractUploadedContent):
 	""" Link model made to allow link import like a normal sheet """
-	# TODO : before reloading prod, install http://wkhtmltopdf.org/downloads.html for websites thumbnailing
 
 	url = models.URLField(verbose_name='adresse du site')
 	webSiteName = models.CharField(max_length=50)
-	thumbnail = models.FilePathField(path='/media/webpage-thumbnails/', allow_folders=False)
+	thumbnail = models.FileField(upload_to='webpage-thumbnails/', null=True)
 
 	def __str__(self):
 		return '{}: {}'.format(self.webSiteName, self.url)
 
-	def save(self, *args, **kwargs):
-		""" Set the name and the thumbnail of the website with a library """
-
-		thumbnailId = ''.join(
-			random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
-		savePath = settings.OS_MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
-
-		response = system('wkhtmltoimage' + ' ' + self.url + ' ' + savePath)
-
-		if response == 0:
-			self.thumbnail = 'webpage-thumbnails/' + thumbnailId
+	def hasThumbnail(self):
+		"""
+		Return True if the model has a thumbnail
+		"""
+		if self.thumbnail:
+			return True
 		else:
-			raise FieldError('The thumbnail could not be created, please check the url')
-
-		self.webSiteName = self.url[:self.url.rindex('.')].replace('http://', '').replace('https://', '')
-
-		super(Link, self).save(*args, **kwargs)
+			return False
 
 
 # _____________________________________________________________________

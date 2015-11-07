@@ -1,10 +1,12 @@
 # coding=UTF-8
 import json
+import string
 from os.path import join
 from itertools import chain
 from operator import attrgetter
 from os.path import splitext
 from  django.conf import settings
+from django.core.files import File
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -12,6 +14,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from os import system
+
+import random
+
 from app.forms import UploadSheetForm, UploadLinkForm
 from app.models import Lesson, Sheet, Student, Link
 from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom, getLastLinksForClassroom
@@ -160,6 +166,22 @@ def newLinkPage(request):
 		if form.is_valid():
 			link = form.save(commit=False)
 			link.uploadedBy = student
+
+			thumbnailId = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
+			savePath = settings.MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
+
+			response = system('wkhtmltoimage' + ' ' + link.url + ' ' + savePath)
+
+			if response == 0:
+				file = open(savePath, 'rb')
+				dfile = File(file)
+				link.thumbnail.save(thumbnailId, dfile)
+				file.close()
+			else:
+				link.thumbnail = None
+
+			link.webSiteName = link.url.replace('http://', '').replace('https://', '')[:link.url.rindex('/') + 1]
+
 			link.save()
 
 			localVarsJSON = json.dumps({'success': 'true',})
@@ -288,12 +310,9 @@ def downloadRessource(request, ressource, url):
 			raise Http404('This thumbnail doesn\'t exist :/')
 
 		if link.lesson in student.classroom.lessons.all():
-			data = open(join(settings.MEDIA_ROOT, link.thumbnail), 'rb')
-
-			response = HttpResponse(data, content_type='image/png')
-			response['Content-Disposition'] = 'attachment; filename="{}"'.format(link.webSiteName + '.png')
-
-			data.close()
+			with link.thumbnail as data:
+				response = HttpResponse(data.read(), content_type='image/png')
+				response['Content-Disposition'] = 'attachment; filename="{}"'.format(link.webSiteName + '.png')
 	else:
 		response = Http404('The ressource you\'re looking for doesn\'t exist')
 

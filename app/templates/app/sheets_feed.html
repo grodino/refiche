@@ -31,7 +31,11 @@
 
         {% if item.webSiteName %}
             {% with item as link %}
-                <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail|cut:'webpage-thumbnails/' %}" />
+                {% if link.hasThumbnail %}
+                    <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}"/>
+                {% else %}
+                    <img src="{% static 'img/icons/link.png' %}"/>
+                {% endif %}
 
                 <div class="feed_info_container">
                     <a class="title" href="{% url 'app.views.lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">

@@ -1,6 +1,12 @@
-{% load app_extras %}
+{% load static app_extras %}
 
-<div id="link_{{ link.pk }}" class="link item" style="background-image: url('{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail|cut:'webpage-thumbnails/' %}')">
+<div id="link_{{ link.pk }}" class="link item" style="
+        {% if link.hasThumbnail %}
+            background-image: url('{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}');
+        {% else %}
+            background-image: url('{% static 'img/icons/link.png' %}');
+        {% endif %}
+">
     <div class="info_container">
         <a class="title" href="{{ link.url }}" target="_blank" class="full-container-size">
             <h5>{{ link.webSiteName }}</h5>
