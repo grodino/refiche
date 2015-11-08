@@ -112,18 +112,30 @@ def deleteLink(sender, instance, **kwargs):
 
 def addFile(sender, instance, **kwargs):
 	""" Function made to add 1 to the user's numberOfSheetsUploaded """
+	from notifications.models import NotificationManager
 
 	student = instance.uploadedBy
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded + 1
 	student.save()
+
+	classroom = instance.uploadedBy.classroom
+
+	nm = NotificationManager()
+	nm.notifyClassroom(classroom, sender.__bases__[0], 'Un nouveau document a été partagé par ' + instance.uploadedBy.user.first_name)
 
 
 def addLink(sender, instance, **kwargs):
 	""" Function made to add 1 to the user's numberOfItemsUploaded """
+	from notifications.models import NotificationManager
 
 	student = instance.uploadedBy
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded + 1
 	student.save()
+
+	classroom = instance.uploadedBy.classroom
+
+	nm = NotificationManager()
+	nm.notifyClassroom(classroom, sender.__bases__[0], 'Un nouveau lien a été partagé par ' + instance.uploadedBy.user.first_name)
 
 
 def deleteUser(sender, instance, **kwargs):

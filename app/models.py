@@ -5,18 +5,16 @@ import random
 import string
 from itertools import chain
 from operator import attrgetter
-
 from django.db import models
 from django.core.files import File
 from django.conf import settings
 from django.core.exceptions import FieldError
 from django.contrib.auth.models import User
-
 from django.db.models.signals import post_delete, post_save, pre_delete
-
 from facebook.models import ClassGroup
 from app.functions import renameFile, addFile, addLink, deleteFile, deleteLink, deleteUser, getLastSheetsForLesson, \
 	getLastLinksForLesson
+from notifications.models import NotificationSettings
 
 
 class Lesson(models.Model):
@@ -82,6 +80,8 @@ class Profile(models.Model):
         and is made to become weather a student or a teacher etc.. """
 
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
+	notificationsSettings = models.OneToOneField(NotificationSettings) #TODO: in the production settings add the notifications app
+
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
 	avatar = models.FileField(upload_to='avatars/', null=True)
@@ -99,7 +99,6 @@ class Student(Profile):
 
 	lessons = models.ManyToManyField(Lesson)
 	numberOfItemsUploaded = models.IntegerField(default=0)
-
 
 	def __str__(self):
 		return "Profil de {0}".format(self.user.username)
