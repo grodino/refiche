@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
 from facebook.models import CreateGroupToken
+from notifications.models import NotificationSettings
 from registration.models import StudentRegistrationCode
 from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
 from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
@@ -101,9 +102,15 @@ def studentRegister(request, code):
 			newUser.is_staff = False
 			newUser.save()
 
+			notificationSettings = NotificationSettings(groupedMailsEnabled=True,
+														mailsEnabled=True)
+			notificationSettings.save()
+
 			newStudent = Student.objects.create(user=newUser,
 												school=code.classroom.school,
-												classroom=code.classroom)
+												classroom=code.classroom,
+												avatar=avatar,
+												notificationsSettings=notificationSettings)
 			newStudent.save()
 
 			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
@@ -171,10 +178,15 @@ def delegateRegister(request):
 									 shortName=classroomShortName)
 			newClassroom.save()
 
+			notificationSettings = NotificationSettings(groupedMailsEnabled=True,
+														mailsEnabled=True)
+			notificationSettings.save()
+
 			newDelegate = Student.objects.create(user=newUser,
 												 school=school,
 												 classroom=newClassroom,
-												 avatar=avatar)
+												 avatar=avatar,
+												 notificationsSettings=notificationSettings)
 			newDelegate.save()
 
 

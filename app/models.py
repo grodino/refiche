@@ -80,7 +80,10 @@ class Profile(models.Model):
         and is made to become weather a student or a teacher etc.. """
 
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
-	notificationsSettings = models.ForeignKey(NotificationSettings) #TODO: in the production settings add the notifications app
+	notificationsSettings = models.ForeignKey(NotificationSettings)
+
+	# TODO : In prod, assign a single NotificationsSettings to each user
+	# TODO: In registration, when someone register, create a Notification settings object for him
 
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)

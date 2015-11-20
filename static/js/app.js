@@ -250,6 +250,17 @@ $(function() {
         }
     });
 
+    // Handle the filter by chapter in the lesson view
+    $('.down-arrow').click(function() {
+        if($(this).hasClass('down-arrow-selected')) {
+            $(this).removeClass('down-arrow-selected');
+            $('#filters').addClass('hidden');
+        } else {
+            $('.down-arrow').addClass('down-arrow-selected');
+            $('#filters').removeClass('hidden');
+        }
+    });
+
     // Deal with modifying the user infos
     $('#user_info_display .settings').click(function() {
         $('#user_info_content').slideToggle('fast');

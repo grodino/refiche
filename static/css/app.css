@@ -320,6 +320,7 @@
     }
 }
 
+
 /*  NEW FORM
 ------------------------------------------- */
 .new_form {
@@ -380,14 +381,21 @@ form .error {
     margin-bottom: 0;
 }
 
+
 /*  ITEMS LIST
 ------------------------------------------- */
 #items_list header {
     background-color: #FFB948;
+    flex-wrap: wrap;
 }
 
-#items_list header h3 {
-    max-width: 70%;
+#filters {
+    margin-right: 0.5em;
+    height: 100%;
+}
+
+#filters button {
+    height: 100%;
 }
 
 #items_list .flex-container {

@@ -4,10 +4,21 @@
 {% block in_content %}
 
 <div id="items_list">
-    <header>
-        <h3 class="full-container-size">
-            {{ lesson.name|upper }} :  {{ lesson.teacher.gender }} {{ lesson.teacher.lastName }}
+    <header class="header-with-settings">
+        <h3>
+            {{ lesson.name|upper|cut:" " }} :  {{ lesson.teacher.gender|cut:" " }} {{ lesson.teacher.lastName|cut:" " }}
         </h3>
+
+        {% comment %}
+         <div class="down-arrow" >
+             <div></div>
+         </div>
+
+
+        <div id="filters" class="hidden">
+            <button type="reset">Filter</button>
+        </div>
+        {% endcomment %}
     </header>
 
     <div class=flex-container>

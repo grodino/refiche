@@ -6,10 +6,10 @@ from notifications.models import NotificationSettings, Notification
 
 @admin.register(NotificationSettings)
 class NotificationSettingsAdmin(admin.ModelAdmin):
-	list_display = ('student', 'mailsEnabled', 'groupedMailsEnabled',)
+	list_display = ('get_students', 'mailsEnabled', 'groupedMailsEnabled',)
 
-	def student(self, obj):
-		student = Student.objects.get(notificationsSettings=obj)
+	def get_students(self, obj):
+		student = Student.objects.filter(notificationsSettings=obj)
 
 		return student
 

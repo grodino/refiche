@@ -84,6 +84,35 @@ header .logo {
 }
 
 
+/*  DOWN ARROW
+------------------------------------------- */
+.down-arrow {
+    float: left;
+    margin-right: 1em;
+    width: 30px;
+}
+
+.down-arrow:before,
+.down-arrow:after {
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 5px;
+    margin: 7px 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.down-arrow-selected:before {
+    transform: translateY(-3px) rotate(45deg);
+}
+
+.down-arrow-selected:after {
+    transform: translateY(3px) rotate(-45deg);
+}
+
+
 /*  CONTENT
 ------------------------------------------- */
 #main_wrapper {
