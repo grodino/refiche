@@ -1,18 +1,25 @@
 # coding=UTF-8
 from django.contrib import admin
 from app.functions import getStudent
-from app.models import Student, Classroom, School, Level, Teacher, Lesson, Sheet, Chapter, Link
+from app.models import Student, Classroom, School, Level, Teacher, Lesson, Sheet, Chapter, Link, UploadedFile
 
 
 @admin.register(Sheet)
 class SheetAdmin(admin.ModelAdmin):
-	list_display = ('name', 'extension', 'uploadedBy', 'chapter', 'lesson', 'uploadDate', 'contentType')
+	list_display = ('name', 'uploadedBy', 'chapter', 'lesson', 'uploadDate')
 	list_filter = ('uploadedBy','uploadDate')
+
+
+@admin.register(UploadedFile)
+class UploadedFileAdmin(admin.ModelAdmin):
+	list_display = ('file', 'extension', 'relatedSheet')
+
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
 	list_display = ('webSiteName', 'url', 'thumbnail', 'uploadedBy', 'chapter', 'lesson', 'uploadDate')
 	list_filter = ('uploadedBy','uploadDate')
+
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):

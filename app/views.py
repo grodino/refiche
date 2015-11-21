@@ -1,7 +1,6 @@
 # coding=UTF-8
 import json
 import string
-from os.path import join
 from itertools import chain
 from operator import attrgetter
 from os.path import splitext
@@ -17,9 +16,14 @@ from django.core.exceptions import PermissionDenied
 from os import system
 
 import random
+from zipfile import ZipFile
+from io import BytesIO
 
-from app.forms import UploadSheetForm, UploadLinkForm
-from app.models import Lesson, Sheet, Student, Link
+from os import remove
+from os.path import join
+
+from app.forms import UploadSheetForm, UploadLinkForm, UploadFileForm
+from app.models import Lesson, Sheet, Student, Link, UploadedFile
 from app.functions import getStudent, getSheetInstance, getLastSheetsForClassroom, getLastLinksForClassroom
 from registration.models import StudentRegistrationCode
 from registration.forms import RegistrationForm
@@ -131,23 +135,33 @@ def newSheetPage(request):
 	student = getStudent(request.user)
 
 	if request.method == "POST":
-		form = UploadSheetForm(student=student, data=request.POST, files=request.FILES)
-		
-		if form.is_valid():
-			sheet = form.save(commit=False)
+		sheetForm = UploadSheetForm(student=student, data=request.POST)
+		fileForm = UploadFileForm(data=request.POST, files=request.FILES.getlist('file'))
+
+		if fileForm.is_valid() and sheetForm.is_valid():
+			files = request.FILES.getlist('file')
+
+			sheet = sheetForm.save(commit=False)
 			sheet.uploadedBy = student
-			sheet.contentType = form.cleaned_data['sheetFile'].content_type
-			sheet.name = splitext(form.cleaned_data['sheetFile'].name)[0]
-			sheet.extension = splitext(form.cleaned_data['sheetFile'].name)[1]
-			sheet.sheetType = form.cleaned_data['sheetType']
 			sheet.save()
+
+			for file in files:
+				uploadedFile = UploadedFile()
+				uploadedFile.file = file
+				uploadedFile.extension = splitext(file.name)[1]
+				uploadedFile.contentType = file.content_type
+				uploadedFile.relatedSheet = sheet
+				uploadedFile.save()
 
 			localVarsJSON = json.dumps({'success': 'true',})
 			messages.add_message(request, messages.SUCCESS, 'Votre fiche a bien été envoyée !')
 
 			return HttpResponse(localVarsJSON, content_type='application/json')
 		else:
-			localVarsJSON = json.dumps(form.errors)
+			localVarsJSON = json.dumps({})
+
+			if not fileForm.is_valid(): localVarsJSON += json.dumps(fileForm.errors)
+			if not sheetForm.is_valid(): localVarsJSON += json.dumps(sheetForm.errors)
 	else:
 		raise Http404('Hey :/ I wasn\'t expecting you here !')
 
@@ -205,13 +219,39 @@ def downloadSheetPage(request, pk):
 	if sheet.lesson not in student.classroom.lessons.all():
 		raise PermissionDenied()
 
-	data = sheet.sheetFile.read()
+	files = sheet.fileSet
 
-	response = HttpResponse(data, content_type=sheet.contentType)
-	response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name+sheet.extension)
+	if len(files) == 1:
+		uploadedFile = files[0]
 
-	sheet.sheetFile.close()
+		contentType = uploadedFile.contentType
+		fileName = sheet.name + uploadedFile.extension
+		data = uploadedFile.file
 
+		response = HttpResponse(data.read(), content_type=contentType)
+		response['Content-Disposition'] = 'attachment; filename="{}"'.format(fileName)
+
+		data.close()
+	else:
+		contentType = 'application/zip'
+		fileName = sheet.name + '.zip'
+
+		zipStream = BytesIO()
+		zipFile = ZipFile(zipStream, 'w')
+
+		for uploadedFile in files:
+			filePath = join(settings.MEDIA_ROOT, uploadedFile.file.name)
+			archiveName = uploadedFile.file.name.replace('sheets/', '').replace('-point-', '.')
+
+			zipFile.write(filePath, archiveName)
+
+		zipFile.close()
+		zipStream.seek(0)
+
+		response = HttpResponse(zipStream, content_type=contentType)
+		response['Content-Disposition'] = 'attachment; filename="{}"'.format(fileName)
+
+		zipStream.close()
 	return response
 
 

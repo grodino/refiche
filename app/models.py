@@ -1,19 +1,12 @@
 # coding=UTF-8
-from os import system
-from os.path import join
-import random
-import string
 from itertools import chain
 from operator import attrgetter
 from django.db import models
-from django.core.files import File
-from django.conf import settings
-from django.core.exceptions import FieldError
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete, post_save, pre_delete
 from facebook.models import ClassGroup
-from app.functions import renameFile, addFile, addLink, deleteFile, deleteLink, deleteUser, getLastSheetsForLesson, \
-	getLastLinksForLesson
+from app.functions import renameFile, addSheet, addLink, deleteSheet, deleteFile, deleteLink, deleteUser, getLastSheetsForLesson, \
+	getLastLinksForLesson, getFilesForSheet
 from notifications.models import NotificationSettings
 
 
@@ -81,9 +74,6 @@ class Profile(models.Model):
 
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
 	notificationsSettings = models.ForeignKey(NotificationSettings)
-
-	# TODO : In prod, assign a single NotificationsSettings to each user
-	# TODO: In registration, when someone register, create a Notification settings object for him
 
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)
@@ -156,15 +146,41 @@ class Sheet(AbstractUploadedContent):
 						  ('TEST', 'sujetDeContrôle'),
 						  ('TEST_CORRECTION', 'corrigéDeContrôle'))
 
-	name = models.CharField(max_length=100)
-	extension = models.CharField(max_length=50)
+	name = models.CharField(max_length=100, verbose_name='Titre')
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET', verbose_name="catégorie")
 
-	sheetFile = models.FileField(upload_to=renameFile, verbose_name="fichier")
-	contentType = models.CharField(max_length=255)
+	_fileSet = None
 
 	def __str__(self):
-		return '{}{}'.format(self.name, self.extension)
+		return '{}'.format(self.name)
+
+
+	# TODO: Change the file upload form to allow multiple files upload
+	@property
+	def fileSet(self):
+		"""
+		Execute a function that get all the files related to the sheet
+		"""
+
+		if self._fileSet is None:
+			self._fileSet = getFilesForSheet(self)
+
+		return self._fileSet
+
+
+class UploadedFile(models.Model):
+	"""
+	Sort of a 'low level' model to handle just a file uploaded by a user
+	"""
+
+	file = models.FileField(upload_to=renameFile, verbose_name="fichier")
+	extension = models.CharField(max_length=50)
+	contentType = models.CharField(max_length=255)
+
+	relatedSheet = models.ForeignKey(Sheet)
+
+	def __str__(self):
+		return "{} in {}".format(self.file.name, self.relatedSheet)
 
 
 class Link(AbstractUploadedContent):
@@ -189,11 +205,11 @@ class Link(AbstractUploadedContent):
 
 # _____________________________________________________________________
 # SIGNALS
-
-post_save.connect(addFile, sender=Sheet)
+post_save.connect(addSheet, sender=Sheet)
 post_save.connect(addLink, sender=Link)
 
-post_delete.connect(deleteFile, sender=Sheet)
+post_delete.connect(deleteSheet, sender=Sheet)
+post_delete.connect(deleteFile, sender=UploadedFile)
 post_delete.connect(deleteLink, sender=Link)
 
 pre_delete.connect(deleteUser, sender=User)

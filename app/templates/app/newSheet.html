@@ -1,33 +1,39 @@
-<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="">
+<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="/app/upload/">
     {% csrf_token %}
 
     {{ form.errors }}
     
-    <div class="container">
+   <div class="container">
         <div class="row">
             <div class="seven columns">
                  <div id="lesson_input_wrapper">
-                     {{ form.lesson.label_tag }}
-                     {{ form.lesson }}
+                     {{ sheetForm.lesson.label_tag }}
+                     {{ sheetForm.lesson }}
                  </div>
 
                 <div id="sheet_type_input_wrapper">
-                    {{ form.sheetType.label_tag }}
-                    {{ form.sheetType }}
+                    {{ sheetForm.sheetType.label_tag }}
+                    {{ sheetForm.sheetType }}
                 </div>
             </div>
 
             <div class="five columns">
                  <div id="sheetFile_input_wrapper">
-                    {{ form.sheetFile.label_tag }}
-                    {{ form.sheetFile }}
+                    {{ fileForm.file.label_tag }}
+                    {{ fileForm.file }}
 
                     <div class="input-file-container">
-                        <input class="button" type="text" readonly value="Selectionner le fichier" id="file_avatar"/>
+                        <input class="button full-container-width" type="text" readonly value="Selectionner le fichier" id="file_avatar"/>
                     </div>
-                    <input id="submit_new_sheet_form" class="button button-primary" readonly="true" value="Envoyer !"/>
                  </div>
+
+                <div>
+                    {{ sheetForm.name.label_tag }}
+                    {{ sheetForm.name }}
+                </div>
             </div>
         </div>
+
+        <input id="submit_new_sheet_form" class="button button-primary full-container-width" readonly="true" value="Envoyer !"/>
     </div>
 </form>

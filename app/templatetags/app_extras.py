@@ -2,7 +2,7 @@ from datetime import timedelta
 from django import template
 from django.utils import timezone
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
-from app.forms import UploadSheetForm, UploadLinkForm
+from app.forms import UploadSheetForm, UploadLinkForm, UploadFileForm
 from app.functions import getStudent
 
 register = template.Library()
@@ -16,8 +16,9 @@ def getNewSheetForm(request):
 
 	student = getStudent(request.user)
 	form = UploadSheetForm(student=student)
+	fileForm = UploadFileForm()
 
-	return {'form': form }
+	return {'sheetForm': form, 'fileForm': fileForm }
 
 
 @register.inclusion_tag('app/new_link.html')

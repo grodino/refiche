@@ -78,6 +78,17 @@ def getLastLinksForClassroom(instance, numberOfLinks):
 	return links
 
 
+def getFilesForSheet(instance):
+	"""
+	Get all the UploadedFiles related to a Sheet object
+	"""
+	from app.models import UploadedFile
+
+	fileSet = UploadedFile.objects.filter(relatedSheet=instance)
+
+	return fileSet
+
+
 def renameFile(instance, name):
 	""" It's a function made to modify the name
 		of the file like this it won't be executed """
@@ -88,15 +99,23 @@ def renameFile(instance, name):
 	return "sheets/{}-{}".format(fileName, extension)
 
 
-def deleteFile(sender, instance, **kwargs):
-	""" Function made to delete a file and deduct 1 from the user's numberOfSheetsUploaded """
+def deleteSheet(sender, instance, **kwargs):
+	""" Function made to deduct 1 from the user's numberOfSheetsUploaded """
 
 	# Deduct 1 from the user's numberOfSheetsUploaded
 	student = instance.uploadedBy
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
 	student.save()
 
-	remove(join(settings.MEDIA_ROOT, instance.sheetFile.name))
+
+def deleteFile(sender, instance, **kwargs):
+	"""
+	Function made to remove 'physically' the file file related to the
+	UploadedFile models
+	"""
+
+	remove(join(settings.MEDIA_ROOT, instance.file.name))
+	print('removed ', join(settings.MEDIA_ROOT, instance.file.name))
 
 
 def deleteLink(sender, instance, **kwargs):
@@ -110,7 +129,7 @@ def deleteLink(sender, instance, **kwargs):
 		remove(join(settings.MEDIA_ROOT, instance.thumbnail))
 
 
-def addFile(sender, instance, **kwargs):
+def addSheet(sender, instance, **kwargs):
 	""" Function made to add 1 to the user's numberOfSheetsUploaded """
 	from notifications.models import NotificationManager
 

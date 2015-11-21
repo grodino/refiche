@@ -1,12 +1,21 @@
 $(function() {
 // File input button more beautiful
     $('#file_avatar').click(function () {
-        $('#id_sheetFile').click();
+        $('input[type="file"]').click();
     });
 
-    $('#id_sheetFile').change(function() {
-        if ($('#id_sheetFile').val() !== '') {
-           $('#file_avatar').val($('#id_sheetFile').val().substring($('#id_sheetFile').val().lastIndexOf('/') + 1 || $('#id_sheetFile').val().lastIndexOf('\\') + 1));
+    $('input[type="file"]').change(function() {
+        var file = $('input[type="file"]').val();
+
+        if (file !== '') {
+            if ($('input[type="file"]')[0].files.length > 1) {
+                $('#file_avatar').val($('input[type="file"]')[0].files.length + ' fichiers');
+            } else {
+                $('#file_avatar').val(file.substring(file.lastIndexOf('/') + 1 || file.lastIndexOf('\\') + 1));
+            }
+
+            var fileName = $('input[type="file"]')[0].files[0].name;
+            $('#id_name').val(fileName.substring(0, fileName.lastIndexOf('.')))
         } else {
             $('#file_avatar').val('Selectionner le fichier');
         }
@@ -164,7 +173,7 @@ $(function() {
         var formResponse = new XMLHttpRequest(),
             sheetForm = document.querySelector('#id_sheet_form');
 
-        showSpinner()
+        showSpinner();
 
         //clean errors
         $('#id_name').removeClass('error');
@@ -179,7 +188,7 @@ $(function() {
             if ($('#id_lesson').val() === '') {
                 $('#id_lesson').addClass('error');
             }
-            if ($('#id_sheetFile').val() === '') {
+            if ($('#id_file').val() === '') {
                 $('#file_avatar').addClass('error');
             }
 

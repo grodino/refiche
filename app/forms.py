@@ -2,29 +2,31 @@
 from os.path import splitext
 from django import forms
 from django.conf import settings
-from app.models import Sheet, Lesson, Teacher, Link
+from app.models import Sheet, Link
+from app.custom_fields import MultiFileField
 
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):
 		super(UploadSheetForm, self).__init__(*args, **kwargs)
-		self.fields['lesson'] = forms.ModelChoiceField(queryset=student.classroom.lessons.all(), label="Matière", empty_label=None)
-
-	def clean_sheetFile(self):
-		sheet = self.cleaned_data['sheetFile']
-		sheetSize = sheet.size
-		sheetExtension = splitext(sheet.name)[1]
-
-		if sheetExtension not in settings.ALLOWED_EXTENSIONS:
-			raise forms.ValidationError("Argh je ne digère pas ce format de fichier :(  [%(extension)s]",params={'extension': sheetExtension}, code='wrongFileExtension')
-		elif sheetSize > settings.MAX_SHEET_SIZE:
-			raise forms.ValidationError("Argh le fichier est trop gros :( [%(size)o octets]",params={'size': sheetSize}, code='fileToBig')
-		
-
-		return self.cleaned_data['sheetFile']
+		self.fields['lesson'] = forms.ModelChoiceField(
+			queryset=student.classroom.lessons.all(),
+			label="Matière",
+			empty_label=None
+		)
 
 	class Meta:
 		model = Sheet
-		exclude = ('name', 'chapter', 'extension', 'uploadedBy', 'contentType', 'uploadDate')
+		exclude = ('chapter', 'uploadedBy', 'uploadDate', 'extension', 'contentType',)
+
+
+class UploadFileForm(forms.Form):
+	file = MultiFileField(
+		max_num=15,
+		min_num=1,
+		maximum_file_size=settings.MAX_SHEET_SIZE,
+		allowed_extensions=settings.ALLOWED_EXTENSIONS,
+		label='Fichier(s)'
+	)
 
 
 class UploadLinkForm(forms.ModelForm):
