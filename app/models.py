@@ -140,6 +140,7 @@ class AbstractUploadedContent(models.Model):
 
 class Sheet(AbstractUploadedContent):
 	""" Sheet model (card, notes about a lesson etc) """
+	# TODO: create pdf when images are downloaded ?
 
 	SHEET_TYPE_CHOICES = (('SHEET', 'fiche'),
 						  ('NOTES', 'cours'),
@@ -152,7 +153,7 @@ class Sheet(AbstractUploadedContent):
 		help_text='Le titre est généré automatiquement mais vous pouvez le modifier'
 	)
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET', verbose_name="catégorie")
-	thumbnail = models.ImageField(null=True, height_field=400, width_field=400)
+	thumbnail = models.ImageField(null=True, upload_to='sheet-thumbnails/')
 
 	_fileSet = None
 
@@ -170,6 +171,16 @@ class Sheet(AbstractUploadedContent):
 			self._fileSet = getFilesForSheet(self)
 
 		return self._fileSet
+
+	@property
+	def fileSetExtension(self):
+		"""
+		Return the extension of the first file in the fileSet
+		"""
+
+		file = self.fileSet[0]
+
+		return file.extension
 
 
 class UploadedFile(models.Model):

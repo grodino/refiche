@@ -4,8 +4,11 @@ import string
 from itertools import chain
 from operator import attrgetter
 from os.path import splitext
+
+from io import StringIO
 from  django.conf import settings
 from django.core.files import File
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -17,11 +20,12 @@ from os import system
 
 import random
 from zipfile import ZipFile
-from io import BytesIO
 from PIL import Image
 
 from os import remove
 from os.path import join
+
+from django.utils.six import BytesIO
 
 from app.forms import UploadSheetForm, UploadLinkForm, UploadFileForm
 from app.models import Lesson, Sheet, Student, Link, UploadedFile
@@ -143,8 +147,14 @@ def newSheetPage(request):
 			files = request.FILES.getlist('file')
 			sheet = sheetForm.save(commit=False)
 
+			if splitext(files[0].name)[1] in ('.jpeg', '.jpg', '.png'):
+				size = (300, 300)
+
+				sheet.thumbnail = files[0]
+			else:
+				sheet.thumbnail = None
+
 			sheet.uploadedBy = student
-			sheet.thumbnail = files[0].name
 			sheet.save()
 
 			for file in files:
@@ -323,6 +333,7 @@ def downloadRessource(request, ressource, url):
 	""" View for serving ressources in the media folder 
 		It checks if the user has the rights before servings it """
 	student = getStudent(request.user)
+	response = None
 
 	if ressource == 'avatars':
 		if ressource+'/'+url == student.avatar.url: # If he is asking for his avatar
@@ -355,7 +366,46 @@ def downloadRessource(request, ressource, url):
 			with link.thumbnail as data:
 				response = HttpResponse(data.read(), content_type='image/png')
 				response['Content-Disposition'] = 'attachment; filename="{}"'.format(link.webSiteName + '.png')
+	elif ressource == 'sheet-thumbnails':
+		try:
+			sheet = Sheet.objects.get(thumbnail=ressource + '/' + url)
+		except Sheet.DoesNotExist:
+			raise Http404('This sheet thumbnail doesn\'t exist :/')
+
+		if sheet.lesson in student.classroom.lessons.all():
+			with sheet.thumbnail as data:
+				response = HttpResponse(data.read(), content_type='image/png')
+				response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name + '.jpg')
 	else:
 		response = Http404('The ressource you\'re looking for doesn\'t exist')
 
 	return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

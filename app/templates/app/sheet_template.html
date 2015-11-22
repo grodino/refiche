@@ -1,11 +1,9 @@
 {% load static app_extras %}
 
-<div id="sheet_{{ sheet.pk }}" class="sheet item" style="  {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
-                                        background-image: url('{% static 'img/icons/Word.png' %}');
-                                    {% elif sheet.extension == '.pdf' %}
+<div id="sheet_{{ sheet.pk }}" class="sheet item" style="  {% if sheet.thumbnail %}
+                                        background-image: url('{% url 'app.views.downloadRessource' ressource='sheet-thumbnails' url=sheet.thumbnail.url|cut:'sheet-thumbnails/'  %}');
+                                    {% elif sheet.fileSetExtension == '.pdf' %}
                                         background-image: url('{% static 'img/icons/Pdf.png' %}');
-                                    {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
-                                        background-image: url('{% url 'app.views.downloadSheetPage' sheet.pk %}');
                                     {% else %}
                                         background-image: url('{% static 'img/icons/Word.png' %}');
                                     {% endif %}

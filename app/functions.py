@@ -107,6 +107,9 @@ def deleteSheet(sender, instance, **kwargs):
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
 	student.save()
 
+	if instance.thumbnail is not None:
+		remove(join(settings.MEDIA_ROOT, instance.thumbnail.name))
+
 
 def deleteFile(sender, instance, **kwargs):
 	"""
@@ -115,7 +118,6 @@ def deleteFile(sender, instance, **kwargs):
 	"""
 
 	remove(join(settings.MEDIA_ROOT, instance.file.name))
-	print('removed ', join(settings.MEDIA_ROOT, instance.file.name))
 
 
 def deleteLink(sender, instance, **kwargs):
