@@ -12,7 +12,7 @@ class SheetAdmin(admin.ModelAdmin):
 
 @admin.register(UploadedFile)
 class UploadedFileAdmin(admin.ModelAdmin):
-	list_display = ('file', 'extension', 'relatedSheet')
+	list_display = ('relatedSheet', 'file', 'extension',)
 	list_filter = ('relatedSheet',)
 
 

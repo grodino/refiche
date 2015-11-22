@@ -188,11 +188,11 @@ class UploadedFile(models.Model):
 	Sort of a 'low level' model to handle just a file uploaded by a user
 	"""
 
+	relatedSheet = models.ForeignKey(Sheet)
+
 	file = models.FileField(upload_to=renameFile, verbose_name="fichier")
 	extension = models.CharField(max_length=50)
 	contentType = models.CharField(max_length=255)
-
-	relatedSheet = models.ForeignKey(Sheet)
 
 	def __str__(self):
 		return "{} in {}".format(self.file.name, self.relatedSheet)
