@@ -10,11 +10,6 @@
                      {{ sheetForm.lesson.label_tag }}
                      {{ sheetForm.lesson }}
                  </div>
-
-                <div id="sheet_type_input_wrapper">
-                    {{ sheetForm.sheetType.label_tag }}
-                    {{ sheetForm.sheetType }}
-                </div>
             </div>
 
             <div class="five columns">
@@ -26,7 +21,18 @@
                         <input class="button full-container-width" type="text" readonly value="Selectionner le fichier" id="file_avatar"/>
                     </div>
                  </div>
+            </div>
+        </div>
 
+       <div class="row">
+            <div class="seven columns">
+                <div id="sheet_type_input_wrapper">
+                    {{ sheetForm.sheetType.label_tag }}
+                    {{ sheetForm.sheetType }}
+                </div>
+            </div>
+
+            <div class="five columns">
                 <div>
                     {{ sheetForm.name.label_tag }}
                     {{ sheetForm.name }}
@@ -34,6 +40,6 @@
             </div>
         </div>
 
-        <input id="submit_new_sheet_form" class="button button-primary full-container-width" readonly="true" value="Envoyer !"/>
+        <input id="submit_new_sheet_form" type="submit" class="full-container-width button button-primary" readonly="true" value="Envoyer !"/>
     </div>
 </form>

@@ -16,7 +16,11 @@ class UploadSheetForm(forms.ModelForm):
 
 	class Meta:
 		model = Sheet
-		exclude = ('chapter', 'uploadedBy', 'uploadDate', 'extension', 'contentType',)
+		exclude = ('chapter', 'uploadedBy', 'uploadDate', 'extension', 'contentType', 'thumbnail')
+
+		widgets = {
+			'name': forms.TextInput(attrs={'readonly': 'readonly', 'placeholder': 'Sélectionnez le fichier'})
+		}
 
 
 class UploadFileForm(forms.Form):

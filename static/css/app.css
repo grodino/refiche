@@ -352,9 +352,17 @@ form .button-primary {
 }
 
 form input,
-form select {
-    width: 18em;
+form select,
+form button,
+form .button{
+    width: 100%;
 }
+
+#submit_new_sheet_form {
+    width: 100%;
+    margin-right: 0;
+}
+
 
 form input[type="file"] {
     display: none;

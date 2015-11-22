@@ -146,8 +146,13 @@ class Sheet(AbstractUploadedContent):
 						  ('TEST', 'sujetDeContrôle'),
 						  ('TEST_CORRECTION', 'corrigéDeContrôle'))
 
-	name = models.CharField(max_length=100, verbose_name='Titre')
+	name = models.CharField(
+		max_length=100,
+		verbose_name='Titre',
+		help_text='Le titre est généré automatiquement mais vous pouvez le modifier'
+	)
 	sheetType = models.CharField(max_length=50, choices=SHEET_TYPE_CHOICES, default='SHEET', verbose_name="catégorie")
+	thumbnail = models.ImageField(null=True, height_field=400, width_field=400)
 
 	_fileSet = None
 
@@ -155,7 +160,6 @@ class Sheet(AbstractUploadedContent):
 		return '{}'.format(self.name)
 
 
-	# TODO: Change the file upload form to allow multiple files upload
 	@property
 	def fileSet(self):
 		"""

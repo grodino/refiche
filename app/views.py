@@ -18,6 +18,7 @@ from os import system
 import random
 from zipfile import ZipFile
 from io import BytesIO
+from PIL import Image
 
 from os import remove
 from os.path import join
@@ -140,9 +141,10 @@ def newSheetPage(request):
 
 		if fileForm.is_valid() and sheetForm.is_valid():
 			files = request.FILES.getlist('file')
-
 			sheet = sheetForm.save(commit=False)
+
 			sheet.uploadedBy = student
+			sheet.thumbnail = files[0].name
 			sheet.save()
 
 			for file in files:

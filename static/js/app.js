@@ -15,7 +15,9 @@ $(function() {
             }
 
             var fileName = $('input[type="file"]')[0].files[0].name;
-            $('#id_name').val(fileName.substring(0, fileName.lastIndexOf('.')))
+            $('#id_name')
+                .val(fileName.substring(0, fileName.lastIndexOf('.')))
+                .removeAttr('readonly');
         } else {
             $('#file_avatar').val('Selectionner le fichier');
         }
@@ -169,7 +171,7 @@ $(function() {
 
 
 // Dealing with the new sheet_form
-    $('#submit_new_sheet_form').click(function () {
+ /*   $('#submit_new_sheet_form').click(function () {
         var formResponse = new XMLHttpRequest(),
             sheetForm = document.querySelector('#id_sheet_form');
 
@@ -216,7 +218,7 @@ $(function() {
                 }
             }, false);
         }
-    });
+    });*/
 
 
 // Reveals informations about a lesson
