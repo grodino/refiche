@@ -148,8 +148,6 @@ def newSheetPage(request):
 			sheet = sheetForm.save(commit=False)
 
 			if splitext(files[0].name)[1] in ('.jpeg', '.jpg', '.png'):
-				size = (300, 300)
-
 				sheet.thumbnail = files[0]
 			else:
 				sheet.thumbnail = None
@@ -170,14 +168,14 @@ def newSheetPage(request):
 
 			return HttpResponse(localVarsJSON, content_type='application/json')
 		else:
-			localVarsJSON = json.dumps({})
+			errors = []
 
-			if not fileForm.is_valid(): localVarsJSON += json.dumps(fileForm.errors)
-			if not sheetForm.is_valid(): localVarsJSON += json.dumps(sheetForm.errors)
+			if not fileForm.is_valid(): errors.append(fileForm.errors)
+			if not sheetForm.is_valid(): errors.append(sheetForm.errors)
+
+			return HttpResponse(json.dumps(errors), content_type='application/json')
 	else:
 		raise Http404('Hey :/ I wasn\'t expecting you here !')
-
-	return HttpResponse(localVarsJSON, content_type='application/json')
 
 
 @login_required

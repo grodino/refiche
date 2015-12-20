@@ -107,7 +107,7 @@ def deleteSheet(sender, instance, **kwargs):
 	student.numberOfItemsUploaded = student.numberOfItemsUploaded - 1
 	student.save()
 
-	if instance.thumbnail is not None:
+	if instance.thumbnail.name is not None:
 		remove(join(settings.MEDIA_ROOT, instance.thumbnail.name))
 
 
