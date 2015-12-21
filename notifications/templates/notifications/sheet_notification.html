@@ -1,0 +1,20 @@
+{% extends 'notifications/basic_notification.html' %}
+{% load static %}
+
+{% block mail_content %}
+    <header>De nouvelles fiches vous attendent !</header>
+    <div>
+        <p>{{ sheet.UploadedBy.user.first_name }} {{ sheet.UploadedBy.user.last_name }} a posté:</p>
+        <div id="sheet">
+            {% if sheet.thumbnail %}
+                <img src="http://refiche.fr{% url 'app.views.downloadRessource' ressource='sheet-thumbnails' url=sheet.thumbnail.url|cut:'sheet-thumbnails/'%}" alt="Icone de la fiche"/>
+            {% elif sheet.fileSetExtension == '.pdf' %}
+                <img src="http://refiche.fr{% static 'img/icons/Pdf.png' %}" alt="Icone de la fiche"/>
+            {% else %}
+                <img src="http://refiche.fr{% static 'img/icons/Word.png' %}" alt="Icone de la fiche"/>
+            {% endif %}
+
+            {{ sheet.name }}
+        </div>
+    </div>
+{% endblock %}

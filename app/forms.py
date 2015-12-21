@@ -2,12 +2,13 @@
 from os.path import splitext
 from django import forms
 from django.conf import settings
-from app.models import Sheet, Link
+from app.models import Sheet, Link, Chapter
 from app.custom_fields import MultiFileField
 
 class UploadSheetForm(forms.ModelForm):
 	def __init__(self, student, *args, **kwargs):
 		super(UploadSheetForm, self).__init__(*args, **kwargs)
+
 		self.fields['lesson'] = forms.ModelChoiceField(
 			queryset=student.classroom.lessons.all(),
 			label="Matière",

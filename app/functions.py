@@ -142,7 +142,11 @@ def addSheet(sender, instance, **kwargs):
 	classroom = instance.uploadedBy.classroom
 
 	nm = NotificationManager()
-	nm.notifyClassroom(classroom, sender.__bases__[0], 'Un nouveau document a été partagé par ' + instance.uploadedBy.user.first_name)
+	nm.notifyClassroom(
+		classroom=classroom,
+		sender=sender,
+		instance=instance
+	)
 
 
 def addLink(sender, instance, **kwargs):
