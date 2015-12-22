@@ -10,7 +10,7 @@
 
         <div id="link">
             {% if link.hasThumbnail %}
-                <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}"/>
+                <img src="{{ link.thumbnail.url }}"/>
             {% else %}
                 <img src="{% static 'img/icons/link.png' %}"/>
             {% endif %}

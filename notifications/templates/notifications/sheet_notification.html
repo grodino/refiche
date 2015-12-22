@@ -9,7 +9,7 @@
         <p>{{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name }} a posté:</p>
         <div id="sheet">
             {% if sheet.thumbnail %}
-                <img src="http://refiche.fr{% url 'app.views.downloadRessource' ressource='sheet-thumbnails' url=sheet.thumbnail.url|cut:'sheet-thumbnails/'%}" alt="Icone de la fiche"/>
+                <img src="http://refiche.fr{{ sheet.thumbnail.url }}" alt="Icone de la fiche"/>
             {% elif sheet.fileSetExtension == '.pdf' %}
                 <img src="http://refiche.fr{% static 'img/icons/Pdf.png' %}" alt="Icone de la fiche"/>
             {% else %}
