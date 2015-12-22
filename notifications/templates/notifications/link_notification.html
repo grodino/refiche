@@ -1,0 +1,27 @@
+{% extends 'notifications/basic_notification.html' %}
+{% load static %}
+
+{% block mail_content %}
+    <header>
+        <h3>Un nouveau lien a été posté!</h3>
+    </header>
+    <div align="center">
+        <p>{{ link.uploadedBy.user.first_name }} {{ link.uploadedBy.user.last_name }} a posté:</p>
+
+        <div id="link">
+            {% if link.hasThumbnail %}
+                <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}"/>
+            {% else %}
+                <img src="{% static 'img/icons/link.png' %}"/>
+            {% endif %}
+
+            <br />
+            <div class="feed_info_container">
+                <a class="title" href="http://refiche.fr{% url 'app.views.lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
+                    <h5 class="end-line-wrap">{{ link.webSiteName }}</h5>
+                    <a href="{{ link.url }}">Accès direct au lien</a>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

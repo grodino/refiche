@@ -70,7 +70,6 @@ class Notification(models.Model):
 		user = self.receiver
 		content = self.content
 
-		# TODO: Create text only template, create a template for Links
 		# TODO: Fix the media serving with nginx (allow anyone to access to sheet and link thumbnails) and in DEBUG
 
 		if self.content:
@@ -78,26 +77,55 @@ class Notification(models.Model):
 
 			context = locals()
 			template = get_template(self.defaultTemplate).render(context)
+
 		elif self.sender == 'Sheet':
 			subject = """ De nouvelles fiches vous attendent! """
+
 			sheet = self.instance
-
-			print('DEBUG', sheet.name)
-
 			context = locals()
 			template = get_template('notifications/sheet_notification.html').render(context)
-			self.content = """ Salut envoie moi un mail si tu ne vois que ça, il faut que je règle ce problème ! """ # TODO: Use the template for text only email
+
+			self.content = """
+			Une nouvelle fiche a été partagée par {first_name} {last_name}
+			{sheet_name}
+
+			Refiche.
+			""".format(
+				first_name=sheet.uploadedBy.user.first_name,
+				last_name=sheet.uploadedBy.user.last_name,
+				sheet_name=sheet.name
+			)
+
+		elif self.sender == 'Link':
+			subject = """ De nouvelles fiches vous attendent! """
+
+			link = self.instance
+			context = locals()
+			template = get_template('notifications/link_notification.html').render(context)
+
+			self.content = """
+			Un nouveau lien a été partagé par {first_name} {last_name}
+			{link_name} : {link_url}
+
+			Refiche.
+			""".format(
+				first_name=link.uploadedBy.user.first_name,
+				last_name=link.uploadedBy.user.last_name,
+				link_name=link.webSiteName,
+				link_url=link.url
+			)
+
 		else:
 			subject = """ Vous avez une nouvelle notification! """
 
 			context = locals()
 			template = get_template(self.defaultTemplate).render(context)
-			self.content = """ Vous avez une nouvelle notification! """ # TODO: Use the template for text only email
+			self.content = """ Vous avez une nouvelle notification! """ #
 
 
 		user.email_user(
 			subject=subject,
-			message='',
+			message=self.content,
 			html_message=template,
 			from_email='contact@refiche.fr'
 		)

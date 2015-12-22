@@ -2,9 +2,11 @@
 {% load static %}
 
 {% block mail_content %}
-    <header>De nouvelles fiches vous attendent !</header>
-    <div>
-        <p>{{ sheet.UploadedBy.user.first_name }} {{ sheet.UploadedBy.user.last_name }} a posté:</p>
+    <header>
+        <h3>Une nouvelle fiche a été postée !</h3>
+    </header>
+    <div align="center">
+        <p>{{ sheet.uploadedBy.user.first_name }} {{ sheet.uploadedBy.user.last_name }} a posté:</p>
         <div id="sheet">
             {% if sheet.thumbnail %}
                 <img src="http://refiche.fr{% url 'app.views.downloadRessource' ressource='sheet-thumbnails' url=sheet.thumbnail.url|cut:'sheet-thumbnails/'%}" alt="Icone de la fiche"/>
@@ -14,7 +16,8 @@
                 <img src="http://refiche.fr{% static 'img/icons/Word.png' %}" alt="Icone de la fiche"/>
             {% endif %}
 
-            {{ sheet.name }}
+            <br />
+            <a href="http://refiche.fr{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">{{ sheet.name }}</a>
         </div>
     </div>
 {% endblock %}
