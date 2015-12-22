@@ -149,6 +149,7 @@ def newSheetPage(request):
 
 			if splitext(files[0].name)[1] in ('.jpeg', '.jpg', '.png'):
 				sheet.thumbnail = files[0]
+				print('THUMBNAILED')
 			else:
 				sheet.thumbnail = None
 
@@ -194,7 +195,7 @@ def newLinkPage(request):
 			thumbnailId = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20)) + '.png'
 			savePath = settings.MEDIA_ROOT + '/webpage-thumbnails/' + thumbnailId
 
-			response = system('wkhtmltoimage' + ' ' + link.url + ' ' + savePath)
+			response = system('wkhtmltoimage' + ' --crop-h 800 --quality 50 ' + link.url + ' ' + savePath)
 
 			if response == 0:
 				file = open(savePath, 'rb')
@@ -354,26 +355,6 @@ def downloadRessource(request, ressource, url):
 			student.avatar.close()
 		else:
 			raise PermissionDenied()
-	elif ressource == 'webpage-thumbnails':
-		try:
-			link = Link.objects.get(thumbnail=ressource + '/' + url)
-		except Link.DoesNotExist:
-			raise Http404('This thumbnail doesn\'t exist :/')
-
-		if link.lesson in student.classroom.lessons.all():
-			with link.thumbnail as data:
-				response = HttpResponse(data.read(), content_type='image/png')
-				response['Content-Disposition'] = 'attachment; filename="{}"'.format(link.webSiteName + '.png')
-	elif ressource == 'sheet-thumbnails':
-		try:
-			sheet = Sheet.objects.get(thumbnail=ressource + '/' + url)
-		except Sheet.DoesNotExist:
-			raise Http404('This sheet thumbnail doesn\'t exist :/')
-
-		if sheet.lesson in student.classroom.lessons.all():
-			with sheet.thumbnail as data:
-				response = HttpResponse(data.read(), content_type='image/png')
-				response['Content-Disposition'] = 'attachment; filename="{}"'.format(sheet.name + '.jpg')
 	else:
 		response = Http404('The ressource you\'re looking for doesn\'t exist')
 

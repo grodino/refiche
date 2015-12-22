@@ -1,8 +1,8 @@
 {% load static app_extras %}
 
 <div id="link_{{ link.pk }}" class="link item" style="
-        {% if link.hasThumbnail %}
-            background-image: url('{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}');
+        {% if link.thumbnail %}
+            background-image: url('{{ link.thumbnail.url }}');
         {% else %}
             background-image: url('{% static 'img/icons/link.png' %}');
         {% endif %}

@@ -1,7 +1,8 @@
 {% load static app_extras %}
 
-<div id="sheet_{{ sheet.pk }}" class="sheet item" style="  {% if sheet.thumbnail %}
-                                        background-image: url('{% url 'app.views.downloadRessource' ressource='sheet-thumbnails' url=sheet.thumbnail.url|cut:'sheet-thumbnails/'  %}');
+<div id="sheet_{{ sheet.pk }}" class="sheet item" style="
+                                    {% if sheet.thumbnail %}
+                                        background-image: url('{{ sheet.thumbnail.url }}');
                                     {% elif sheet.fileSetExtension == '.pdf' %}
                                         background-image: url('{% static 'img/icons/Pdf.png' %}');
                                     {% else %}

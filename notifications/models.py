@@ -49,8 +49,6 @@ class Notification(models.Model):
 
 		if student.notificationsSettings.mailsEnabled:
 			self.__notifyMail()
-		else:
-			self.__notifyMail()
 
 		self.save()
 
@@ -69,8 +67,6 @@ class Notification(models.Model):
 
 		user = self.receiver
 		content = self.content
-
-		# TODO: Fix the media serving with nginx (allow anyone to access to sheet and link thumbnails) and in DEBUG
 
 		if self.content:
 			subject = """ Vous avez une nouvelle notification! """
@@ -120,7 +116,7 @@ class Notification(models.Model):
 
 			context = locals()
 			template = get_template(self.defaultTemplate).render(context)
-			self.content = """ Vous avez une nouvelle notification! """ #
+			self.content = """ Vous avez une nouvelle notification! """
 
 
 		user.email_user(

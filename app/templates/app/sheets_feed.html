@@ -4,12 +4,12 @@
     <div class="sheet_in_feed">
         {% if item.name %}
             {% with item as sheet %}
-                {% if sheet.extension == '.doc' or sheet.extension == '.docx' %}
+                {% if sheet.fileSetExtension == '.doc' or sheet.fileSetExtension == '.docx' %}
                     <img src="{% static 'img/icons/Word.png' %}" />
-                {% elif sheet.extension == '.pdf' %}
+                {% elif sheet.fileSetExtension == '.pdf' %}
                     <img src="{% static 'img/icons/Pdf.png' %}" />
-                {% elif sheet.sheetType == '.png' or sheet.extension == '.jpg' or sheet.extension == '.jpeg' or sheet.extension == '.png' %}
-                    <img src="{% url 'app.views.downloadSheetPage' sheet.pk %}" />
+                {% elif sheet.thumbnail %}
+                    <img src="{{ sheet.thumbnail.url }}" />
                 {% else %}
                     <img src="{% static 'img/icons/Word.png' %}" />
                 {% endif %}
@@ -31,8 +31,8 @@
 
         {% if item.webSiteName %}
             {% with item as link %}
-                {% if link.hasThumbnail %}
-                    <img src="{% url 'app.views.downloadRessource' ressource='webpage-thumbnails' url=link.thumbnail.url|cut:'webpage-thumbnails/' %}"/>
+                {% if link.thumbnail %}
+                    <img src="{{ link.thumbnail.url }}"/>
                 {% else %}
                     <img src="{% static 'img/icons/link.png' %}"/>
                 {% endif %}

@@ -208,15 +208,6 @@ class Link(AbstractUploadedContent):
 	def __str__(self):
 		return '{}: {}'.format(self.webSiteName, self.url)
 
-	def hasThumbnail(self):
-		"""
-		Return True if the model has a thumbnail
-		"""
-		if self.thumbnail:
-			return True
-		else:
-			return False
-
 
 # _____________________________________________________________________
 # SIGNALS
