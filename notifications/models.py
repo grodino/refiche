@@ -28,7 +28,7 @@ class Notification(models.Model):
 
 	sender = models.CharField(max_length=50)
 	receiver = models.ForeignKey(User)
-	content = models.CharField(max_length=250)
+	content = models.CharField(null=True, max_length=250)
 	hasBeenRead = models.BooleanField(default=False)
 	dateCreated = models.DateTimeField(auto_now_add=True, auto_now=False)
 
