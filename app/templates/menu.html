@@ -6,7 +6,7 @@
             <div id="user_infos_content" class="full-container-size">
                 <a href="#" class="full-container-size">
                     <img id="user-icon" src="{% if student.avatar %}
-                                                {% url 'app.views.downloadRessource' ressource='avatars' url=student.avatar.name|cut:'avatars/' %}
+                                                {% url 'app.views.downloadRessource' ressource='avatars' url=student.avatar.url|cut:'/media/avatars/' %}
                                              {% else %}
                                                 {% static 'img/icons/default_avatar.png' %}
                                              {% endif %}" />

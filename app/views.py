@@ -335,7 +335,7 @@ def downloadRessource(request, ressource, url):
 	response = None
 
 	if ressource == 'avatars':
-		if ressource+'/'+url == student.avatar.url: # If he is asking for his avatar
+		if '/media/'+ressource+'/'+url == student.avatar.url: # If he is asking for his avatar
 			extension = splitext(student.avatar.name)[1]
 
 			if extension in ('.jpg', '.jpeg'):
