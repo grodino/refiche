@@ -20,7 +20,7 @@
 
     <div id="error">
         <p>
-            {% if exception %}
+            {% if exception and exception != 'Resolver404' %}
                 {{ exception }}
             {% else %}
                 La page que vous cherchez n'existe pas :(
