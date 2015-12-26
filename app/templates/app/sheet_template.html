@@ -10,7 +10,7 @@
                                     {% endif %}
                                     ">
     <div class="info_container">
-        <a class="title" href="{% url 'app.views.downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
+        <a class="title" href="{% url 'app:downloadSheetPage' pk=sheet.pk %}" class="full-container-size">
             <h5>{{ sheet.name }}</h5>
         </a>
 

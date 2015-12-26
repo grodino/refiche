@@ -1,6 +1,9 @@
 # coding=UTF-8
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from accueil import views
 
-urlpatterns = patterns('accueil.views',
-	url(r'^about/$', 'about')
-)
+app_name = 'accueil'
+
+urlpatterns = [
+	url(r'^about/$', views.about, name='about')
+]

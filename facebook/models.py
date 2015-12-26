@@ -55,7 +55,6 @@ class ClassGroup(FacebookAPIConnexion):
 	groupId = models.CharField(max_length=50, unique=True)
 	name = models.CharField(max_length=50)
 
-	@classmethod
 	def createClassGroup(self, student, uid=None):
 		""" Create the facebook group of the class and make the student passed in argument the admin """
 
@@ -81,3 +80,11 @@ class ClassGroup(FacebookAPIConnexion):
 
 	def __str__(self):
 		return self.groupId
+
+
+class UserAccessToken(FacebookAPIConnexion):
+	"""
+	Represents an access_token used to retrieve user data whit facebook graph API
+	"""
+
+	accessToken = models.CharField(max_length=)

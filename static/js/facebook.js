@@ -64,6 +64,17 @@ $(function() {
         });
     });
 
+    function signInStatusCallback(response) {
+
+    }
+
+    $('#sign_in_facebook').click(function(e) {
+        window.open(
+            'https://www.facebook.com/dialog/oauth?client_id=413837768813785&scope=email&response_type=code&redirect_uri=http://refiche.dev:8000/register/facebook',
+            '_top'
+        );
+    });
+
     $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
         FB.init({
           appId: '413837768813785',

@@ -35,7 +35,7 @@
 <header id="banner">
     {% block header-nolink %}{% endblock %}
 
-    <a id="header-link" href="{% url "app.views.home" %}" class="full-container-size">
+    <a id="header-link" href="{% url 'app:home' %}" class="full-container-size">
         {% block header %}
             <img id="logo" class="logo" src="{% static "img/logo_full.png" %}"/>
         {% endblock %}

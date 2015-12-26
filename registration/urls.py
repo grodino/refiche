@@ -1,9 +1,13 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import  url
+from registration import views
 
-urlpatterns = patterns('registration.views',
-    url(r'^$', 'register'),
-    url(r'^get-student-code/', 'getCode'),
-    url(r'^delegate/$', 'delegateRegister'),
-    url(r'^code/(?P<code>.+)$', 'studentRegister'),
-    url(r'^change-infos', 'changeUserInfos'),
-)
+app_name = 'registration'
+
+urlpatterns = [
+    url(r'^$', views.register,                          										name='register'),
+    url(r'^get-student-code/', views.getCode,           										name='getCode'),
+    url(r'^delegate/$', views.delegateRegister,         										name='delegateRegister'),
+    url(r'^code/(?P<code>.+)$', views.studentRegister,  										name='studentRegister'),
+    url(r'^success/(?P<profileType>.+)/(?:(?P<token>.+))?$', views.registerSuccess,				name='registerSuccess'),
+    url(r'^change-infos', views.changeUserInfos,        										name='changeUserInfos'),
+]

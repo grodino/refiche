@@ -1,20 +1,18 @@
 import json, logging, random, string
 from django.http import Http404, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
 from facebook.models import CreateGroupToken
 from notifications.models import NotificationSettings
 from registration.models import StudentRegistrationCode
-from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode
+from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode, createUserAndStudent
 from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
 
-
-# TODO: Transform all the register views in one object to be more readable
 
 def register(request):
 	""" View for signing up, also includes a form for the students who have a link """
@@ -72,52 +70,29 @@ def studentRegister(request, code):
 	try:
 		code = StudentRegistrationCode.objects.get(code=code)
 	except StudentRegistrationCode.DoesNotExist:
-		raise Http404('Votre code n\'est pas valide :\ ')
+		raise PermissionDenied('Votre code n\'est pas valide :\ ')
 
 	if request.method == 'POST':
 		form = RegistrationForm(data=request.POST, files=request.FILES)
 
 		if form.is_valid():
-			firstName = form.cleaned_data['firstName']
-			lastName = form.cleaned_data['lastName']
-			email = form.cleaned_data['email']
-			password = form.cleaned_data['password2']
-			username = firstName[0].lower()+lastName.lower()
-			avatar = form.cleaned_data['avatar']
-
-			if len(username) > 30:
-				username = username[:30]
-
-			# Checks if the email is unique if not, throws Http404
-			# And if it's ok, checks if the username is unique, if not change it until it is
-			checkUniqueEmail(email)
-			username = checkAndFixUniqueUsername(username)
-
-			# Saving everything
-			newUser = User.objects.create_user(username=username,
-											   email=email,
-											   password=password,
-											   first_name=firstName,
-											   last_name=lastName,)
-			newUser.is_staff = False
-			newUser.save()
-
-			notificationSettings = NotificationSettings(groupedMailsEnabled=True,
-														mailsEnabled=True)
-			notificationSettings.save()
-
-			newStudent = Student.objects.create(user=newUser,
-												school=code.classroom.school,
-												classroom=code.classroom,
-												avatar=avatar,
-												notificationsSettings=notificationSettings)
-			newStudent.save()
+			newUser, newStudent = createUserAndStudent(
+				firstName=form.cleaned_data['firstName'],
+				lastName=form.cleaned_data['lastName'],
+				email=form.cleaned_data['email'],
+				password=form.cleaned_data['password2'],
+				avatar=form.cleaned_data['avatar'],
+				is_delegate=False,
+				code=code
+			)
 
 			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
 																   Nom d\'utilisateur: {}
-																   Mot de passe: {}""".format(username, password), from_email='contact@refiche.fr')
+																   Mot de passe: Vous seul le connaissez""".format(newUser.username), from_email='contact@refiche.fr')
 
-			classroomDelegates = Student.objects.filter(user__is_staff=True).filter(classroom=newStudent.classroom)
+			classroomDelegates = Student.objects.filter(classroom=newStudent.classroom).filter(user__is_staff=True)
+
+			# TODO: Use the notification system
 			send_mail('REFICHE ' + newStudent.classroom.name + 'administration',
 					  'Une personne s\'est inscrite à votre classe : ' + newUser.first_name + newUser.last_name.upper(),
 					  'contact@refiche.fr',
@@ -126,7 +101,7 @@ def studentRegister(request, code):
 
 			is_delegate = False
 
-			return render(request, 'registration/register_success.html', locals())
+			return redirect('registration:registerSuccess', profileType='student')
 	else: 
 		form = RegistrationForm()
 
@@ -141,54 +116,18 @@ def delegateRegister(request):
 
 		if form.is_valid():
 			# Fetching user data and creating a username
-			firstName = form.cleaned_data['firstName']
-			lastName = form.cleaned_data['lastName']
-			email = form.cleaned_data['email']
-			password = form.cleaned_data['password2']
-			username = firstName[0].lower()+lastName.lower()
-			avatar = form.cleaned_data['avatar']
-
-			if len(username) > 30:
-				username = username[:30]
-
-			# Fetching classroom's information
-			school = form.cleaned_data['school']
-			classroomName = form.cleaned_data['classroomName']
-			classroomShortName = form.cleaned_data['classroomShortName']
-			classroomLevel = form.cleaned_data['classroomLevel']
-
-			# Checks if the email is unique if not, throws Http404
-			# And if it's ok, checks if the username is unique, if not change it until it is
-			checkUniqueEmail(email)
-			username = checkAndFixUniqueUsername(username)
-
-			# Saving everything
-			newUser = User.objects.create_user(username=username,
-											   email=email,
-											   password=password,
-											   first_name=firstName,
-											   last_name=lastName,)
-			newUser.is_staff = True
-			newUser.groups.add(Group.objects.get(name='delegates'))
-			newUser.save()
-
-			newClassroom = Classroom(level=classroomLevel,
-									 school=school,
-									 name=classroomName,
-									 shortName=classroomShortName)
-			newClassroom.save()
-
-			notificationSettings = NotificationSettings(groupedMailsEnabled=True,
-														mailsEnabled=True)
-			notificationSettings.save()
-
-			newDelegate = Student.objects.create(user=newUser,
-												 school=school,
-												 classroom=newClassroom,
-												 avatar=avatar,
-												 notificationsSettings=notificationSettings)
-			newDelegate.save()
-
+			newUser, newStudent = createUserAndStudent(
+				firstName=form.cleaned_data['firstName'],
+				lastName=form.cleaned_data['lastName'],
+				email=form.cleaned_data['email'],
+				password=form.cleaned_data['password2'],
+				avatar=form.cleaned_data['avatar'],
+				is_delegate=True,
+				level=form.cleaned_data['classroomLevel'],
+				school=form.cleaned_data['school'],
+				classroomName=form.cleaned_data['classroomName'],
+				classroomShortName=form.cleaned_data['classroomShortName']
+			)
 
 			is_delegate = True
 
@@ -196,15 +135,40 @@ def delegateRegister(request):
 			token.delegate = newUser
 			token.save()
 
+			# TODO: Use the notification system
 			newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
-			 													   Nom d\'utilisateur: {}
-			 													   Mot de passe: {}""".format(username, password), from_email='contact@refiche.fr')
+																   Nom d\'utilisateur: {}
+																   Mot de passe: Vous seul le connaissez""".format(newUser.username), from_email='contact@refiche.fr')
 
-			return render(request, 'registration/register_success.html', locals())
+			return redirect('registration:registerSuccess', profileType='delegate', token=token.value)
 	else:
 		form = DelegateRegistrationForm()
 
 	return render(request, 'registration/delegate_register.html', locals())
+
+
+def registerUserFacebook(request):
+	"""
+	Register a user who wants to sign in with facebook
+	"""
+
+	facebook_code = request.GET['code']
+
+
+
+
+def registerSuccess(request, profileType, token):
+	"""
+	View where the user is redirected after a successful registration
+	"""
+
+	if profileType == 'delegate':
+		is_delegate = True
+	else:
+		is_delegate = None
+
+	return render(request, 'registration/register_success.html', locals())
+
 
 @login_required
 def changeUserInfos(request):

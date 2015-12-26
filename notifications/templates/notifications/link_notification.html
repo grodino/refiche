@@ -10,14 +10,14 @@
 
         <div id="link">
             {% if link.hasThumbnail %}
-                <img src="{{ link.thumbnail.url }}"/>
+                <img src="http://refiche.fr{{ link.thumbnail.url }}"/>
             {% else %}
-                <img src="{% static 'img/icons/link.png' %}"/>
+                <img src="http://refiche.fr{% static 'img/icons/link.png' %}"/>
             {% endif %}
 
             <br />
             <div class="feed_info_container">
-                <a class="title" href="http://refiche.fr{% url 'app.views.lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
+                <a class="title" href="http://refiche.fr{% url 'app:lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
                     <h5 class="end-line-wrap">{{ link.webSiteName }}</h5>
                     <a href="{{ link.url }}">Accès direct au lien</a>
                 </a>

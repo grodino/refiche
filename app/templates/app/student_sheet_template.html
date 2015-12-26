@@ -2,5 +2,5 @@
 {% load static app_extras %}
 
 {% block delete_link %}
-    <a class="delete_link" href="{% url 'app.views.deleteSheetPage' pk=sheet.pk %}">Cliquez pour supprimer</a>
+    <a class="delete_link" href="{% url 'app:deleteSheetPage' pk=sheet.pk %}">Cliquez pour supprimer</a>
 {% endblock %}

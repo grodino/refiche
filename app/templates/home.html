@@ -42,7 +42,7 @@
     <div class="flex-container">
         {% for lesson in lessons %}
         <div class="lesson">
-            <a class="full-container-size" href="{% url 'app.views.lessonPage' lesson_name=lesson.name %}">
+            <a class="full-container-size" href="{% url 'app:lessonPage' lesson_name=lesson.name %}">
                 <div class="name_container">
                     <h5>{{ lesson.name }}</h5>
                     <p>

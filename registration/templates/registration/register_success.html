@@ -8,11 +8,11 @@
 {% block content %}
     <h3>Bravo, vous êtes inscrit(e) !</h3>
     <p>Vous allez recevoir un email avec vos identifiants, vous pourrez ensuite vous connecter</p>
-    <a href="{% url 'app.views.home' %}" class="button" >Se connecter</a>
+    <a href="{% url 'app:home' %}" class="button" >Se connecter</a>
 
     {% if is_delegate %}
         <div>
-            <input id="token" type="hidden" value="{{ token.value }}" />
+            <input id="token" type="hidden" value="{{ token }}" />
 
             <h3>Refiche et facebook</h3>
             <p>

@@ -17,7 +17,7 @@
             {% endif %}
 
             <br />
-            <a href="http://refiche.fr{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">{{ sheet.name }}</a>
+            <a href="http://refiche.fr{% url 'app:lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">{{ sheet.name }}</a>
         </div>
     </div>
 {% endblock %}

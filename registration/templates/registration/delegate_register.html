@@ -13,7 +13,7 @@
 
 {% block content %}
     <form class="registration_form" id="delegate_form" action="{% block action %}
-                                                                    {% url 'registration.views.delegateRegister' %}
+                                                                    {% url 'registration:delegateRegister' %}
                                                                {% endblock %}" method="POST" enctype="multipart/form-data" >
         {% csrf_token %}
 
@@ -39,7 +39,7 @@
             {% cycle '' '</div>' %}
         {% endfor %}
 
-        <input class="button-primary full-container-size"type="submit" value="S'inscrire !">
+        <input class="button-primary full-container-size" type="submit" value="S'inscrire !">
     </form>
 {% endblock %}
 
@@ -51,7 +51,7 @@
 
             <div class="row">
                 <div class="six columns">
-                    <button id="with_facebook" class="button-primary full-container-width">S'inscrire avec facebook</button>
+                    <button id="sign_in_facebook" class="button-primary full-container-width">S'inscrire avec facebook</button>
                 </div>
 
                 <div class="six columns">

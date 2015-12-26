@@ -1,5 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from facebook import views
 
-urlpatterns = patterns('facebook.views',
-	url(r'^create-group/(?P<tokenValue>.+)/(?P<facebookUserId>.+)$', 'createClassroomGroup'),
-)
+
+urlpatterns = [
+	url(r'^create-group/(?P<tokenValue>.+)/(?P<facebookUserId>.+)$', views.createClassroomGroup, name='createClassroomGroup'),
+]

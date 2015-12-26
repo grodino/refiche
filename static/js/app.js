@@ -27,11 +27,17 @@ $(function() {
     function showSpinner() {
         $('#main_wrapper').addClass('blur');
         $('.spinner').css('display', 'block');
+
+        $('body').addClass('no-scroll');
+        $('body').bind('touchmove', function(e){e.preventDefault()}); // For mobile devices
     }
 
     function hideSpinner() {
         $('#main_wrapper').removeClass('blur');
         $('.spinner').css('display', 'none');
+
+        $('body').removeClass('no-scroll');
+        $('body').unbind('touchmove');
     }
 
 // User options

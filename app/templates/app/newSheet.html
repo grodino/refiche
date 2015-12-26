@@ -1,4 +1,4 @@
-<form id="id_sheet_form" method="post" enctype="multipart/form-data" action="/app/upload/">
+<form id="id_sheet_form" method="post" enctype="multipart/form-data" action={% url 'app:newSheetPage' %}>
     {% csrf_token %}
 
     {{ form.errors }}

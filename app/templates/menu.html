@@ -6,7 +6,7 @@
             <div id="user_infos_content" class="full-container-size">
                 <a href="#" class="full-container-size">
                     <img id="user-icon" src="{% if student.avatar %}
-                                                {% url 'app.views.downloadRessource' ressource='avatars' url=student.avatar.url|cut:'/media/avatars/' %}
+                                                {% url 'app:downloadRessource' ressource='avatars' url=student.avatar.url|cut:'/media/avatars/' %}
                                              {% else %}
                                                 {% static 'img/icons/default_avatar.png' %}
                                              {% endif %}" />
@@ -30,7 +30,7 @@
                     {% endif %}
 
                     <div>
-                        <a href="{% url 'app.views.accountPage' %}">Mon compte</a>
+                        <a href="{% url 'app:accountPage' %}">Mon compte</a>
                     </div>
 
                     <div>
@@ -58,7 +58,7 @@
         <div id="left_cell" class="six columns">
             <div class="container">
                 <div id="classroom_profile" class="row right-cell">
-                    <a href="{% url 'app.views.classroomPage' %}" class="full-container-size">
+                    <a href="{% url 'app:classroomPage' %}" class="full-container-size">
                         <h5>{{ student.classroom.name }}</h5>
                     </a>
                 </div>

@@ -15,7 +15,7 @@
                 {% endif %}
 
                 <div class="feed_info_container">
-                    <a class="title" href="{% url 'app.views.lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">
+                    <a class="title" href="{% url 'app:lessonPage' lesson_name=sheet.lesson.name %}#sheet_{{ sheet.pk }}">
                         <h5 class="end-line-wrap">{{ sheet.name }}</h5>
                     </a>
 
@@ -38,7 +38,7 @@
                 {% endif %}
 
                 <div class="feed_info_container">
-                    <a class="title" href="{% url 'app.views.lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
+                    <a class="title" href="{% url 'app:lessonPage' lesson_name=link.lesson.name %}#link_{{ link.pk }}">
                         <h5 class="end-line-wrap">{{ link.webSiteName }}</h5>
                     </a>
 

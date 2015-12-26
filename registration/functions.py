@@ -1,5 +1,8 @@
 from django.http import Http404
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+
+from app.models import Student, Classroom
+from notifications.models import NotificationSettings
 from registration.models import StudentRegistrationCode
 
 def checkUniqueEmail(email):
@@ -38,3 +41,74 @@ def checkStudentRegistrationCode(code):
 		return None
 
 	return verifiedCode.classroom
+
+
+def createUserAndStudent(**kwargs):
+	"""
+	Create a user given the kwargs
+	"""
+
+	firstName = kwargs.get('firstName')
+	lastName = kwargs.get('lastName')
+	email = kwargs.get('email')
+	password = kwargs.get('password')
+	username = firstName[0].lower()+lastName.lower()
+	avatar = kwargs.get('avatar')
+
+	if len(username) > 30:
+		username = username[:30]
+
+	# Checks if the email is unique if not, throws Http404
+	# And if it's ok, checks if the username is unique, if not change it until it is
+	checkUniqueEmail(email)
+	username = checkAndFixUniqueUsername(username)
+
+	# Saving everything
+	newUser = User.objects.create_user(username=username,
+									   email=email,
+									   password=password,
+									   first_name=firstName,
+									   last_name=lastName,
+									   is_staff = kwargs.get('is_delegate'))
+
+	if kwargs.get('is_delegate') is True:
+		newUser.groups.add(Group.objects.get(name='delegates'))
+
+	newUser.save()
+
+	if kwargs.get('is_delegate') is True:
+		newClassroom = Classroom(
+			level=kwargs.get('level'),
+			school=kwargs.get('school'),
+			name=kwargs.get('classroomName'),
+			shortName=kwargs.get('classroomShortName')
+		)
+		newClassroom.save()
+
+		school = newClassroom.school
+		classroom = newClassroom
+	else:
+		school = kwargs.get('code').classroom.school
+		classroom = kwargs.get('code').classroom
+
+
+	notificationSettings = NotificationSettings(
+		groupedMailsEnabled=True,
+		mailsEnabled=True
+	)
+	notificationSettings.save()
+
+	newStudent = Student.objects.create(
+		user=newUser,
+		school=school,
+		classroom=classroom,
+		avatar=avatar,
+		notificationsSettings=notificationSettings
+	)
+	newStudent.save()
+
+	return newUser, newStudent
+
+
+def createStudent():
+	pass
