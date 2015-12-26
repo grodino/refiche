@@ -1,0 +1,31 @@
+/*  STRUCTURE
+------------------------------------------- */
+body {
+        background-size: cover;
+}
+
+footer {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+
+/*  CONTENT
+------------------------------------------- */
+#ono-text {
+    font-size: 16vw;
+    font-family: sifonnbasic, sans-serif;
+    color: #FFF;
+}
+
+#ono-text .outlined-red {
+    font-family: sifonnbasic_outline, sans-serif;
+    color: #FF2700;
+}
+
+#error {
+    font-size: 2em;
+
+    background-color: #FFF;
+    padding: 1em;
+}

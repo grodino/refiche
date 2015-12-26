@@ -52,10 +52,10 @@ def home(request):
 	return render(request, 'home.html', locals())
 
 
-def underConstruction(request, classroom_name):
+def underConstruction(request):
 	""" A funny under construction page, just for fun """
 
-	return render(request, 'app/under_construction.html', locals())
+	return render(request, '404.html', locals())
 
 
 @login_required

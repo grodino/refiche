@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_stylesheets %}
+    {{ block.super }}
+
+    <style>
+        body { background-image: url("{% static 'img/404.png' %}"); }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'css/html_errors.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <div id="ono-text">
+        <p>
+            <span class="outlined-red">O</span>h n<span class="outlined-red">o</span>n...
+        </p>
+    </div>
+
+    <div id="error">
+        <p>
+            {% if exception %}
+                {{ exception }}
+            {% else %}
+                La page que vous cherchez n'existe pas :(
+            {% endif %}
+        </p>
+
+        <p>
+            Si le problème persiste, n'hésitez pas à me contacter : <a target="_blank" href="mailto:support@refiche.fr">support@refiche.fr</a>
+        </p>
+    </div>
+{% endblock %}

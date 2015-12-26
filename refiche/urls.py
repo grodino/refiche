@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^register/', include('registration.urls')),
     url(r'^facebook/', include('facebook.urls')),
 ] + static(settings.MEDIA_URL + 'sheet-thumbnails/', document_root=join(settings.MEDIA_ROOT, 'sheet-thumbnails')) \
-	+ static(settings.MEDIA_URL + 'webpage-thumbnails/', document_root=join(settings.MEDIA_ROOT, 'webpage-thumbnails'))
+	+ static(settings.MEDIA_URL + 'webpage-thumbnails/', document_root=join(settings.MEDIA_ROOT, 'webpage-thumbnails')) \
+	+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
