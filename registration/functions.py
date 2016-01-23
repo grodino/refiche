@@ -1,3 +1,7 @@
+import tempfile
+
+import requests
+from django.core import files
 from django.http import Http404
 from django.contrib.auth.models import User, Group
 
@@ -98,17 +102,48 @@ def createUserAndStudent(**kwargs):
 	)
 	notificationSettings.save()
 
+	if kwargs.get('facebook_id'):
+		fb_id = kwargs.get('facebook_id')
+	else:
+		fb_id = None
+
 	newStudent = Student.objects.create(
 		user=newUser,
 		school=school,
 		classroom=classroom,
 		avatar=avatar,
-		notificationsSettings=notificationSettings
+		notificationsSettings=notificationSettings,
+		facebookId=fb_id
 	)
 	newStudent.save()
 
 	return newUser, newStudent
 
+def getRemoteImage(url):
+	image_urls = [
+    'http://i.thegrindstone.com/wp-content/uploads/2013/01/how-to-get-awesome-back.jpg',
+]
 
-def createStudent():
-	pass
+	request = requests.get(url, stream=True)
+
+	# Was the request OK?
+	if request.status_code != requests.codes.ok:
+		raise ValueError('The file is not an image or has not been fully downloaded')
+
+	# Create a temporary file
+	lf = tempfile.NamedTemporaryFile()
+
+	# Read the streamed image in sections
+	for block in request.iter_content(1024 * 8):
+
+		# If no more file then stop
+		if not block:
+			break
+
+		# Write image block to temporary file
+		lf.write(block)
+
+
+	image = files.File(lf)
+
+	return image

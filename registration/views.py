@@ -1,4 +1,5 @@
 import json, logging, random, string
+from django.conf import settings
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
@@ -7,10 +8,12 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
 from app.models import Student, Classroom
 from app.functions import getStudent
-from facebook.models import CreateGroupToken
+from facebook.functions import generateRandomKey
+from facebook.models import CreateGroupToken, UserAccessToken
 from notifications.models import NotificationSettings
 from registration.models import StudentRegistrationCode
-from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode, createUserAndStudent
+from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode, createUserAndStudent, \
+	getRemoteImage
 from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
 
 
@@ -147,14 +150,58 @@ def delegateRegister(request):
 	return render(request, 'registration/delegate_register.html', locals())
 
 
-def registerUserFacebook(request):
+def registerUserFacebook(request, profileType):
 	"""
 	Register a user who wants to sign in with facebook
 	"""
 
 	facebook_code = request.GET['code']
+	access_token = UserAccessToken()
+
+	if profileType == 'delegate':
+		redirect_uri = settings.FACEBOOK_SETTINGS['OAUTH_REDIRECT_URI'] + 'delegate/'
+
+		raise Http404('Désolé, en tant que délégué vous ne pouvez pas vous inscrive avec facebook pour l\'instant :(')
+	else:
+		try:
+			code = StudentRegistrationCode.objects.get(code=profileType)
+		except StudentRegistrationCode.DoesNotExist:
+			raise PermissionDenied('Votre code n\'est pas valide :\ ')
+
+		redirect_uri = settings.FACEBOOK_SETTINGS['OAUTH_REDIRECT_URI'] + profileType + '/'
+
+	access_token.fetchAccessToken(facebook_code, redirect_uri)
+	user_info = access_token.fetchUserInfo()
+
+	avatar = getRemoteImage(user_info['avatar_url'])
+	password = generateRandomKey(10)
+
+	newUser, newStudent = createUserAndStudent(
+		firstName=user_info['first_name'],
+		lastName=user_info['last_name'],
+		email=user_info['email'],
+		password=password,
+		avatar=avatar,
+		is_delegate=False,
+		code=code
+	)
+
+	newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
+																   Nom d\'utilisateur: {}
+																   Mot de passe: {}""".format(newUser.username, password), from_email='contact@refiche.fr')
+
+	classroomDelegates = Student.objects.filter(classroom=newStudent.classroom).filter(user__is_staff=True)
+
+	# TODO: Use the notification system
+	send_mail('REFICHE ' + newStudent.classroom.name + 'administration',
+			  'Une personne s\'est inscrite à votre classe : ' + newUser.first_name + newUser.last_name.upper(),
+			  'contact@refiche.fr',
+			  [delegate.user.email for delegate in classroomDelegates])
 
 
+	is_delegate = False
+
+	return redirect('registration:registerSuccess', profileType='student')
 
 
 def registerSuccess(request, profileType, token):

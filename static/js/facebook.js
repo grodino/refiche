@@ -64,13 +64,19 @@ $(function() {
         });
     });
 
-    function signInStatusCallback(response) {
-
-    }
 
     $('#sign_in_facebook').click(function(e) {
+        var redirect_uri;
+
+        if(window.location.pathname == '/register/delegate/') {
+            redirect_uri = 'http://refiche.fr/register/facebook/delegate/';
+        } else {
+            var code = window.location.pathname.replace('/register/code/', '');
+            redirect_uri = 'http://refiche.dev:8000/register/facebook/' + code + '/';
+        }
+
         window.open(
-            'https://www.facebook.com/dialog/oauth?client_id=413837768813785&scope=email&response_type=code&redirect_uri=http://refiche.dev:8000/register/facebook',
+            'https://www.facebook.com/dialog/oauth?client_id=413837768813785&scope=email&response_type=code&redirect_uri=' + redirect_uri,
             '_top'
         );
     });

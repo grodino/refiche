@@ -1,4 +1,7 @@
+from urllib.parse import urlparse, parse_qs
+
 import requests
+import json
 from django.db import models
 from django.http import Http404
 from django.conf import settings
@@ -63,18 +66,18 @@ class ClassGroup(FacebookAPIConnexion):
 
 		r = requests.post(
 			self.facebookApiUrl+'/'+str(self.appId)+'/groups',
-			data={'name': student.classroom.name,
-				  'description': 'Le groupe de classe de la '+student.classroom.name,
-				  'privacy': 'closed',
-				  'admin': uid,
-				  'access_token': str(self.appToken.fget(self))}
+			data={
+				'name': student.classroom.name,
+				'description': 'Le groupe de classe de la '+student.classroom.name,
+				'privacy': 'closed',
+				'admin': uid,
+				'access_token': str(self.appToken.fget(self))
+			}
 		)
 
-		status = r.status_code
-
-		if status >= 400:
+		if r.status_code >= 400:
 			print(r.text)
-			raise Http404('Je n\'arrive pas à parler avec Facebook :/ la connexion passe mal :\'(')
+			raise Http404('Je n\'arrive pas à parler avec Facebook :/ la connexion passe mal avec lui en ce moment :(')
 
 		return r.text.replace('{"id":"', '').replace('"}', '')
 
@@ -87,4 +90,92 @@ class UserAccessToken(FacebookAPIConnexion):
 	Represents an access_token used to retrieve user data whit facebook graph API
 	"""
 
-	accessToken = models.CharField(max_length=)
+	accessToken = None
+	user = None
+
+	def __str__(self):
+		return self.accessToken
+
+	def fetchAccessToken(self, code, redirectURI):
+		"""
+		Fetches the access_token with the code given
+		"""
+
+		r = requests.get(
+			self.facebookApiUrl + '/oauth/access_token?',
+			params={
+				'client_id': self.appId,
+				'redirect_uri': redirectURI,
+				'client_secret': self.appSecret,
+				'code': code
+			}
+		)
+
+		if r.status_code >= 400:
+			raise Http404('Je n\'arrive pas à parler avec Facebook :/ la connexion passe mal avec lui en ce moment :(')
+
+		# Just an awful way to get the parameters properly
+		parsed_r = urlparse('http://refiche.fr/?' + r.text)
+		access_token = parse_qs(parsed_r.query)['access_token']
+
+		self.accessToken = access_token
+
+		return access_token
+
+	def fetchUserInfo(self):
+		"""
+		Fetches user info from his facebook account to fill his profile
+		"""
+
+		r = requests.get(
+			self.facebookApiUrl + '/me',
+			params={
+				'access_token': self.accessToken,
+				'fields': 'id,first_name,last_name,email,picture'
+			}
+		)
+
+		r2 = requests.get(
+			self.facebookApiUrl + '/me/picture',
+			params={
+				'access_token': self.accessToken,
+				'type': 'large',
+				'redirect': 0
+			}
+		)
+
+		response = r.json()
+		picture = r2.json()
+
+		user_info = {
+			'first_name': response['first_name'],
+			'last_name': response['last_name'],
+			'email': response['email'],
+			'facebook_id': response['id'],
+			'avatar_url': picture['data']['url']
+		}
+
+		return user_info
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
