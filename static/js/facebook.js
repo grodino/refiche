@@ -72,7 +72,7 @@ $(function() {
             redirect_uri = 'http://refiche.fr/register/facebook/delegate/';
         } else {
             var code = window.location.pathname.replace('/register/code/', '');
-            redirect_uri = 'http://refiche.dev:8000/register/facebook/' + code + '/';
+            redirect_uri = 'http://refiche.fr/register/facebook/' + code + '/';
         }
 
         window.open(
