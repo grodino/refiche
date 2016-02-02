@@ -1,40 +1,222 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %} REFICHE {% endblock %}
 
+{% block add_stylesheets %}
+    {{ bock.super }}
+    <link rel="stylesheet" href="{% static 'css/accueil.css' %}" />
+{% endblock %}
+
+{% block add_js %}
+    {{ block.super }}
+    <script src="{% static 'js/accueil.js' %}"></script>
+{% endblock %}
+
+{% block banner %}{% endblock %}
+
+{% block left-bar %}
+    <header class="full-container-width">
+        <a href="{% url 'app:home' %}">
+            <img id="logo_primary" src="{% static "img/logo_full_primary_color.svg" %}"/>
+            <img id="logo" class="hidden" src="{% static 'img/logo_full.svg' %}" />
+        </a>
+    </header>
+
+    <div id="menu" class="hidden">
+        {% if user.is_authenticated %}
+            <a href="{% url 'app:home' %}">
+                <h3>MA CLASSE</h3>
+            </a>
+        {% else %}
+           <a href="{% url 'registration:register' %}">
+                <h3>INSCRIPTION</h3>
+            </a>
+        {% endif %}
+
+        <a href="{% url 'accueil:about' %}">
+            <h3>ABOUT</h3>
+        </a>
+
+        <a href="{% url 'blog:home' %}">
+            <div class="full-container-size"><h3>BLOG</h3></div>
+        </a>
+    </div>
+
+    {% if not user.is_authenticated %}
+         <section id="login">
+            {% block login %}s{% endblock %}
+        </section>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-	<div id="menu" class="container">        
-        <div class="row">
-            <div class="cell twelve columns">{% block login%}{% endblock %}</div>
+    <div id="big-picture" class="full-container-size">
+        <div class="catchphrase-container full-container-size">
+            <h1>Organiser, partager, progresser</h1>
+            <button class="button">En savoir plus | inscription</button>
         </div>
-        
-        <div class="row">
-            {% if user.is_authenticated %}
-            <div class="bot-cell eight columns"><a class="menu_title" href="{% url 'app:home' %}">
-                <div class="full-container-size">
-                    <h3>HUB DE LA CLASSE</h3>                    
-                        <p>Accédez au Hub de la classe pour envoyer vos fiches et voir celles qui ont été publiées !</p>
+    </div>
+
+    <div id="info">
+        <div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
                 </div>
-            {% else %}
-                <div class="bot-cell eight columns"><a class="menu_title" href="{% url 'accueil:about' %}">
-                    <div class="full-container-size">
-                        <h3>ABOUT</h3>
-                            <p>Connectez vous pour accéder à l'espace de votre classe ! <br />
-                               Vous voulez en savoir plus ? Cliquez !</p>
-                    </div>         
-            {% endif %}
-            </a></div>
-            <div class="bot-cell four columns">
-                {% if user.is_authenticated %}
-                    <a class="menu_title" href="{% url 'blog:home' %}">
-                        <div class="full-container-size"><h3>BLOG</h3></div>
-                    </a>
-                {% else %}
-                    <a class="menu_title" href="{% url 'registration:register' %}">
-                        <div class="full-container-size"><h3>INSCRIPTION</h3></div>
-                    </a>
-                {% endif %}
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
             </div>
         </div>
-	</div>
+
+    <div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
+            </div>
+        </div><div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
+            </div>
+        </div><div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
+            </div>
+        </div><div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
+            </div>
+        </div><div id="quick-info">
+            <div class="key_point" style="background-color: #2EA490;">
+                <h3>Une interface claire pour ...</h3>
+            </div>
+
+            <div class="icons-flex-list">
+                <div class="icon-flex-listed" style="background-color: #133B6F;">
+                    <img src="{% static 'img/icons/study.png' %}" />
+                    <p>... Profiter des sujets de DST et contrôles des années précédentes.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FF6B48;">
+                    <img src="{% static 'img/icons/discuss.png' %}" />
+                    <p>... Discuter, échanger avec votre classe.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-color: #FFE448;">
+                    <img src="{% static 'img/icons/share.png' %}" />
+                    <p>... Retrouver tous vos cours et ceux de votre classe en ligne, à tout moment.</p>
+                </div>
+
+                <div class="icon-flex-listed" style="background-image: url('{% static 'img/lesson_preview.gif' %}');">
+                    <p>... Être facilement au courant des derniers partages</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

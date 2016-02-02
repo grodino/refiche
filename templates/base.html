@@ -32,16 +32,19 @@
     
 <body>
 	{# The url specified is from django just to be able to include the login form in the index page #}
-<header id="banner">
-    {% block header-nolink %}{% endblock %}
 
-    <a id="header-link" href="{% url 'app:home' %}" class="full-container-size">
-        {% block header %}
-            <img id="logo" class="logo" src="{% static "img/logo_full.png" %}"/>
-        {% endblock %}
-    </a>
+    {% block banner %}
+        <header id="banner">
+            {% block header-nolink %}{% endblock %}
 
-</header>
+            <a id="header-link" href="{% url 'app:home' %}" class="full-container-size">
+                {% block header %}
+                    <img id="logo" class="logo" src="{% static "img/logo_full.png" %}"/>
+                {% endblock %}
+            </a>
+
+        </header>
+    {% endblock %}
 
     {% if messages %}
         <ul id="messages" class="messages">
@@ -60,9 +63,9 @@
   {% endif %}
 
     <div id="main_wrapper">
-        <aside id="left-bar">
+        <section id="left-bar">
             {% block left-bar %}{% endblock %}
-        </aside>
+        </section>
 
         <section id="content">
             {% block content %}{% endblock %}
@@ -73,7 +76,9 @@
         {% block hidden %}{% endblock %}
     </section>
 
-<footer>&copy;Augustin GODINOT  ||  All Rights Reserved @2015  ||  <a class="" href="/admin">Admin  </a></footer>
+{% block footer %}
+    <footer>&copy;Augustin GODINOT  ||  All Rights Reserved @2015  ||  <a class="" href="{% url 'admin:index' %}">Admin  </a></footer>
+{% endblock %}
 </body>
 
 <script src="{% static 'js/jquery-2.1.3.js' %}"></script>
