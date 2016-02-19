@@ -68,12 +68,14 @@ def createUserAndStudent(**kwargs):
 	username = checkAndFixUniqueUsername(username)
 
 	# Saving everything
-	newUser = User.objects.create_user(username=username,
-									   email=email,
-									   password=password,
-									   first_name=firstName,
-									   last_name=lastName,
-									   is_staff = kwargs.get('is_delegate'))
+	newUser = User.objects.create_user(
+		username=username,
+		email=email,
+		password=password,
+		first_name=firstName,
+		last_name=lastName,
+		is_staff = kwargs.get('is_delegate')
+	)
 
 	if kwargs.get('is_delegate') is True:
 		newUser.groups.add(Group.objects.get(name='delegates'))
@@ -122,7 +124,7 @@ def createUserAndStudent(**kwargs):
 def getRemoteImage(url):
 	image_urls = [
     'http://i.thegrindstone.com/wp-content/uploads/2013/01/how-to-get-awesome-back.jpg',
-]
+	]
 
 	request = requests.get(url, stream=True)
 

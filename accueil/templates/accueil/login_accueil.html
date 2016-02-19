@@ -1,4 +1,10 @@
 {% extends "accueil/index.html" %}
+{% load static %}
+
+{% block add_js %}
+    {{ block.super }}
+    <script src="{% static 'js/facebook.js' %}"></script>
+{% endblock %}
 
 {% block login%}
 {% if user.is_authenticated %}
@@ -23,5 +29,7 @@
         </div>
     	<input type="submit" class="button-primary" value="Se connecter" />
 	</form>
+
+    <a id="facebook_login" href="{% url 'facebook:login' %}">Se connecter avec facebook</a>
 {% endif %}
 {% endblock %}

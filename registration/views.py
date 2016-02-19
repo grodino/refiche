@@ -154,18 +154,23 @@ def registerUserFacebook(request, profileType):
 	"""
 	Register a user who wants to sign in with facebook
 	"""
+	logger = logging.getLogger('registration')
 
 	facebook_code = request.GET['code']
 	access_token = UserAccessToken()
 
+	# TODO : handle facebook registration flow for delegates
 	if profileType == 'delegate':
 		redirect_uri = settings.FACEBOOK_SETTINGS['OAUTH_REDIRECT_URI'] + 'delegate/'
+		logger.warn('Someone tried to register with facebook as a delegate and failed')
 
 		raise Http404('Désolé, en tant que délégué vous ne pouvez pas vous inscrive avec facebook pour l\'instant :(')
 	else:
 		try:
 			code = StudentRegistrationCode.objects.get(code=profileType)
 		except StudentRegistrationCode.DoesNotExist:
+			logger.info('Someone tried to register as a student with the wrong registration code')
+
 			raise PermissionDenied('Votre code n\'est pas valide :\ ')
 
 		redirect_uri = settings.FACEBOOK_SETTINGS['OAUTH_REDIRECT_URI'] + profileType + '/'
@@ -183,7 +188,8 @@ def registerUserFacebook(request, profileType):
 		password=password,
 		avatar=avatar,
 		is_delegate=False,
-		code=code
+		code=code,
+		facebook_id=user_info['facebook_id']
 	)
 
 	newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
@@ -198,8 +204,7 @@ def registerUserFacebook(request, profileType):
 			  'contact@refiche.fr',
 			  [delegate.user.email for delegate in classroomDelegates])
 
-
-	is_delegate = False
+	logger.info('User {user.first_name} {user.last_name} as registered to REFICHE !'.format(user=newUser))
 
 	return redirect('registration:registerSuccess', profileType='student')
 

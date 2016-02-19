@@ -69,10 +69,11 @@ $(function() {
         var redirect_uri;
 
         if(window.location.pathname == '/register/delegate/') {
-            redirect_uri = 'http://refiche.fr/register/facebook/delegate/';
+            redirect_uri = 'http://refiche.dev:8000/register/facebook/delegate/';
         } else {
+            // TODO : change the redirect_uri
             var code = window.location.pathname.replace('/register/code/', '');
-            redirect_uri = 'http://refiche.fr/register/facebook/' + code + '/';
+            redirect_uri = 'http://refiche.dev:8000/register/facebook/' + code + '/';
         }
 
         window.open(

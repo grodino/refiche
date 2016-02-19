@@ -112,6 +112,7 @@ class UserAccessToken(FacebookAPIConnexion):
 		)
 
 		if r.status_code >= 400:
+			print(r.text)
 			raise Http404('Je n\'arrive pas à parler avec Facebook :/ la connexion passe mal avec lui en ce moment :(')
 
 		# Just an awful way to get the parameters properly
