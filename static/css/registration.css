@@ -94,3 +94,13 @@ input [type=file] {
     background-color: rgba(58, 107, 170, 0.7);
     text-align: center;
 }
+
+#sign_in_facebook {
+    background-color: #44619D;
+    color: #FFFFFF;
+    border: none;
+}
+
+#sign_in_facebook:hover {
+    background-color: rgba(68, 97, 157, 0.57);
+}

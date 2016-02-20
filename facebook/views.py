@@ -14,6 +14,9 @@ def facebook_login(request):
 	Login the User with the facebook authentication backend
 	"""
 
+	if request.user.is_authenticated():
+		return redirect('app:home')
+
 	# Get the facebook access token from the code returned
 	facebook_code = request.GET['code']
 	access_token = UserAccessToken()

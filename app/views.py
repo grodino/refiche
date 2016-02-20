@@ -5,10 +5,8 @@ from itertools import chain
 from operator import attrgetter
 from os.path import splitext
 
-from io import StringIO
 from  django.conf import settings
 from django.core.files import File
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -20,9 +18,7 @@ from os import system
 
 import random
 from zipfile import ZipFile
-from PIL import Image
 
-from os import remove
 from os.path import join
 
 from django.utils.six import BytesIO

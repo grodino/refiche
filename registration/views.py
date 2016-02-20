@@ -1,19 +1,18 @@
 import json, logging, random, string
 from django.conf import settings
+from django.contrib import messages
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.contrib.auth import authenticate, login
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
-from app.models import Student, Classroom
+from app.models import Student
 from app.functions import getStudent
 from facebook.functions import generateRandomKey
 from facebook.models import CreateGroupToken, UserAccessToken
-from notifications.models import NotificationSettings
 from registration.models import StudentRegistrationCode
-from registration.functions import checkUniqueEmail, checkAndFixUniqueUsername, checkStudentRegistrationCode, createUserAndStudent, \
-	getRemoteImage
+from registration.functions import checkStudentRegistrationCode, createUserAndStudent, getRemoteImage
 from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
 
 
@@ -192,9 +191,8 @@ def registerUserFacebook(request, profileType):
 		facebook_id=user_info['facebook_id']
 	)
 
-	newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e), voici vos identifiants, conservez les!
-																   Nom d\'utilisateur: {}
-																   Mot de passe: {}""".format(newUser.username, password), from_email='contact@refiche.fr')
+	newUser.email_user('Votre inscription sur REFICHE', """Vous êtes maintenant inscrit(e) sur Refiche !
+															Pour vous connecter sur refiche.fr avec votre compte facebook, cliquez sur \"se connecter avec facebook\"""", from_email='contact@refiche.fr')
 
 	classroomDelegates = Student.objects.filter(classroom=newStudent.classroom).filter(user__is_staff=True)
 
@@ -205,6 +203,15 @@ def registerUserFacebook(request, profileType):
 			  [delegate.user.email for delegate in classroomDelegates])
 
 	logger.info('User {user.first_name} {user.last_name} as registered to REFICHE !'.format(user=newUser))
+	messages.add_message(request, messages.SUCCESS, 'Vous êtes maintenant inscrit sur Refiche, bienvenue ;)')
+
+	user = authenticate(
+		fb_id=user_info['facebook_id']
+	)
+
+	if user is not None:
+		login(request, user)
+		return redirect('app:home')
 
 	return redirect('registration:registerSuccess', profileType='student')
 

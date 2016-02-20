@@ -47,6 +47,24 @@
          <section id="login">
             {% block login %}s{% endblock %}
         </section>
+    {% else %}
+        <section id="menu_connected">
+            <div class="row">
+                <a href="{% url 'app:home' %}">MA CLASSE</a>
+            </div>
+
+            <div class="row">
+                <a href="{% url 'accueil:about' %}">ABOUT</a>
+            </div>
+
+            <div class="row">
+                <a href="{% url 'blog:home' %}">BLOG</a>
+            </div>
+
+            <div class="row">
+                <a href="{% url 'django.contrib.auth.views.logout' %}">DECONNEXION</a>
+            </div>
+        </section>
     {% endif %}
 {% endblock %}
 

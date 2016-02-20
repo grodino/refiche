@@ -28,8 +28,7 @@
             <div>{{ form.password }}</div>
         </div>
     	<input type="submit" class="button-primary" value="Se connecter" />
+        <button id="facebook_login" class="full-container-width">Se connecter avec facebook</button>
 	</form>
-
-    <a id="facebook_login" href="{% url 'facebook:login' %}">Se connecter avec facebook</a>
 {% endif %}
 {% endblock %}

@@ -1,5 +1,47 @@
 /*  LEFT-BAR
 ------------------------------------------- */
+#left-bar #login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 0 1em 0 1em;
+}
+
+#left-bar #login form {
+    display: block;
+    margin: 0 auto 0 auto;
+
+    width: 25em;
+    max-width: 100%;
+}
+
+#left-bar #login form input {
+    width: 100%;
+}
+
+#left-bar #menu_connected {
+    display: block;
+}
+
+#left-bar #menu_connected .row {
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+
+    font-size: 2em;
+    font-weight: 300;
+}
+
+#facebook_login {
+    background-color: #44619D;
+    color: #FFFFFF;
+    border: none;
+}
+
+#facebook_login:hover {
+    background-color: rgb(71, 121, 183);
+}
+
 @media screen and (min-width: 1000px) {
     #left-bar {
         display: flex;
@@ -51,6 +93,15 @@
         padding-left: 1em;
         color: #FFFFFF;
     }
+
+    #left-bar #menu_connected {
+        width: 20em;
+        margin: 0 auto 0 auto;
+    }
+
+    #left-bar #menu_connected .row {
+        background-color: #FFFFFF;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -74,27 +125,17 @@
     #left-bar header {
         margin-bottom: 1em;
     }
+
+    #left-bar #menu_connected {
+        width: 100%;
+        margin: 0;
+    }
+
+    #left-bar #menu_connected .row {
+        background-color: #D9D9D9;
+    }
 }
 
-#left-bar #login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    margin: 0 1em 0 1em;
-}
-
-#left-bar #login form {
-    display: block;
-    margin: 0 auto 0 auto;
-
-    width: 25em;
-    max-width: 100%;
-}
-
-#left-bar #login form input {
-    width: 100%;
-}
 
 /*  CONTENT
 ------------------------------------------- */
