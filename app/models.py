@@ -74,6 +74,7 @@ class Profile(models.Model):
 
 	user = models.OneToOneField(User)  # Link with the original user class that we extend
 	notificationsSettings = models.ForeignKey(NotificationSettings)
+	first_login = models.BooleanField(default=True)
 
 	classroom = models.ForeignKey('Classroom')  # Link to the user's classroom
 	school = models.ForeignKey('School')  # Link to the school of the profile (student or teacher)

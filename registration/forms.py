@@ -2,23 +2,6 @@ from os.path import splitext
 from django import forms
 from django.conf import settings
 from app.models import School, Level
-from registration.models import StudentRegistrationCode
-
-
-class StudentCodeForm(forms.ModelForm):
-	class Meta:
-		model = StudentRegistrationCode
-		fields = ('numberOfStudents',)
-		widgets = {
-			'numberOfStudents': forms.NumberInput(attrs={'min': '1', 'class': 'full-container-width'})
-		}
-
-	def clean_numberOfStudents(self):
-		if self.cleaned_data.get('numberOfStudents') <= 0:
-			raise forms.ValidationError('Vous ne pouvez pas inscrire un nombre nul ou négatif d\'élèves :/',
-										code='not_positive')
-
-		return self.cleaned_data.get('numberOfStudents')
 
 
 class StudentRegistrationForm(forms.Form):

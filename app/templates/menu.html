@@ -25,7 +25,7 @@
                     </div>
 
                     <div>
-                        <a id="get_code" href="#">Code d'inscription</a>
+                        <a id="get_link" href="#">Lien d'inscription</a>
                     </div>
                     {% endif %}
 
@@ -40,17 +40,15 @@
             </div>
 
             {% if request.user.is_staff %}
-                <div id="new_code_form" class="new_form">
-                    {% load registration_extras %}
-                    {% getStudentRegistrationForm request %}
-                </div>
+                <div id="link_display" class="full-container-size hidden">
+                    <h3>Lien d'inscription</h3>
 
-                <div id="new_code_form_success" class="full-container-size">
-                    <div class="full-container-size">
-                        <h5>Votre code : </h5>
-                        <input type="text" readonly="true" value="{{ code }}">
-                        <a href="#" id="hide_new_code_success">RETOUR</a>
-                    </div>
+                    <p>
+                        Ce lien permet aux membres de votre classe de s'inscrire facilement à Refiche.<br/>
+                        Vous pouvez le copier (Ctrl + C ou Cmd + C) pour le partager à toute votre classe
+                    </p>
+
+                    <input type='text' class="full-container-width" readonly="readonly" value="refiche.fr{% url 'registration:studentRegister' code=registration_code %}" />
                 </div>
             {% endif %}
         </div>

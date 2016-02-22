@@ -41,9 +41,14 @@ def home(request):
 	# Construct the menu for the delegate
 	if request.user.has_perm('registration.add_studentregistrationcode'):
 		try:
-			code = StudentRegistrationCode.objects.get(classroom=student.classroom).code
+			registration_code = StudentRegistrationCode.objects.get(classroom=student.classroom).code
 		except StudentRegistrationCode.DoesNotExist:
-			code = 'NONE'
+			registration_code = 'NONE'
+
+	if student.first_login is True:
+		first_login = True
+		student.first_login = False
+		student.save()
 
 	return render(request, 'home.html', locals())
 

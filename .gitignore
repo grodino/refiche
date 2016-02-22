@@ -1,6 +1,7 @@
 media/sheets/*
 media/avatars/*
 media/webpage-thumbnails/*
+media/sheet-thumbnails/*
 refiche/settings.py
 */migrations/*
 */__pycache__/*

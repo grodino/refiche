@@ -2,8 +2,8 @@
 {% load static app_extras admin_urls %}
 
 {% block add_js %}
-    {{ block.super }}
-    <script src="{% static 'js/sheets_feed.js' %}"></script>
+	{{ block.super }}
+	<script src="{% static 'js/sheets_feed.js' %}"></script>
 {% endblock %}
 
 {% block add_stylesheets %}
@@ -11,23 +11,42 @@
 {% endblock %}
 
 {% block header-nolink %}
-    <div class="nav-icon">
-        <div></div>
-    </div>
+	<div class="nav-icon">
+		<div></div>
+	</div>
 {% endblock %}
 
 {% block hidden %}
-    {% include 'loading.html' %}
+	{% include 'loading.html' %}
+
+	{% if first_login == True and request.user.is_staff == True %}
+		<div id="first_login" class="hidden">
+			<div>
+				<h3>Bienvenue</h3>
+
+				<p>
+					C'est la première fois que vous vous connectez sur Refiche !<br/>
+					Partagez ce lien aux autres membres de votre classe pour qu'ils puissent s'inscrire<br/>
+					Vous pourrez le retrouver dans l'onglet "Lien d'inscription de votre interface"
+				</p>
+
+				<input type='text' class="full-container-width" readonly="readonly" value="refiche.fr{% url 'registration:studentRegister' code=registration_code %}" />
+
+				<button id="hide_first_login" class="button button-primary full-container-width">J'ai compris</button>
+			</div>
+		</div>
+	{% endif %}
+
 {% endblock %}
 
 {% block left-bar %}
-    <header id="left-bar-header">
-        <h3>Dernières fiches</h3>
-    </header>
+	<header id="left-bar-header">
+		<h3>Dernières fiches</h3>
+	</header>
 
-    <div id="feed">
-        Chargement ...
-    </div>
+	<div id="feed">
+		Chargement ...
+	</div>
 {% endblock %}
 
 {% block content %}
@@ -35,50 +54,50 @@
 
 {% block in_content %}
 <div id="lessons">
-    <header>
-        <h3>Matières</h3>
-    </header>
-    
-    <div class="flex-container">
-        {% for lesson in lessons %}
-        <div class="lesson">
-            <a class="full-container-size" href="{% url 'app:lessonPage' lesson_name=lesson.name %}">
-                <div class="name_container">
-                    <h5>{{ lesson.name }}</h5>
-                    <p>
-                        {{ lesson.teacher.gender }}
-                        {{ lesson.teacher.lastName }}
-                    </p>
-                </div>
+	<header>
+		<h3>Matières</h3>
+	</header>
+	
+	<div class="flex-container">
+		{% for lesson in lessons %}
+		<div class="lesson">
+			<a class="full-container-size" href="{% url 'app:lessonPage' lesson_name=lesson.name %}">
+				<div class="name_container">
+					<h5>{{ lesson.name }}</h5>
+					<p>
+						{{ lesson.teacher.gender }}
+						{{ lesson.teacher.lastName }}
+					</p>
+				</div>
 
-                <div class="info_container">
-                    <h5>Derniers partages:</h5>
+				<div class="info_container">
+					<h5>Derniers partages:</h5>
 
-                    {% for item in lesson.getLastItems %}
-                        {% if item.name %}
-                            {% with item as sheet %}
-                                <div class="end-line-wrap">{{ sheet.name }}</div>
-                            {% endwith %}
-                        {% endif %}
+					{% for item in lesson.getLastItems %}
+						{% if item.name %}
+							{% with item as sheet %}
+								<div class="end-line-wrap">{{ sheet.name }}</div>
+							{% endwith %}
+						{% endif %}
 
-                        {% if item.webSiteName %}
-                            {% with item as link %}
-                                <div class="end-line-wrap">{{ link.webSiteName }}</div>
-                            {% endwith %}
-                        {% endif %}
-                    {% empty %}
-                        Arghh aucun partage récent :'(
-                    {% endfor %}
-                </div>
-            </a> 
-        </div>
-        {% empty %}
-            <div class="full-container-size">
-                <h5>Vous n'avez pas encore de matière :(</h5>
-                <p>Demandez à votre délégué de les créer !</p>
-            </div>
-        {% endfor %}
-    </div>
+						{% if item.webSiteName %}
+							{% with item as link %}
+								<div class="end-line-wrap">{{ link.webSiteName }}</div>
+							{% endwith %}
+						{% endif %}
+					{% empty %}
+						Arghh aucun partage récent :'(
+					{% endfor %}
+				</div>
+			</a> 
+		</div>
+		{% empty %}
+			<div class="full-container-size">
+				<h5>Vous n'avez pas encore de matière :(</h5>
+				<p>Demandez à votre délégué de les créer !</p>
+			</div>
+		{% endfor %}
+	</div>
 </div>
 
 {% endblock %}

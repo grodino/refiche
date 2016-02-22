@@ -21,6 +21,7 @@
 
 #content nav #user-icon {
     max-height: 13em;
+    max-width: 90%;
     
     border: 3px solid #2EA490;
 }
@@ -111,28 +112,8 @@
     font-weight: 300;
 }
 
-#content #new_code_form_success {
-    display: none;
-}
-
-#content #new_code_form_success div {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+#link_display {
+    padding: 0.5em;
 }
 
 #content #new_link_form {
@@ -222,6 +203,39 @@
     #content {
         margin-left: 25em;
     }
+}
+
+
+/*  FIRST LOGIN
+------------------------------------------- */
+#first_login {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#first_login h3 {
+    font-family: 'sifonnbasic', Helvetica, Verdana, sans-serif;
+}
+
+#first_login input {
+    color: #2F2F2F;
+}
+
+#first_login div {
+    display: block;
+    padding: 1em;
+
+    color: #FFFFFF;
+    background-color: #3A6BAA;
 }
 
 

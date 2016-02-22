@@ -93,6 +93,11 @@ def createUserAndStudent(**kwargs):
 
 		school = newClassroom.school
 		classroom = newClassroom
+
+		# Create a student registration code for the other students to register easely to the classroom
+		code.code = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20))
+		code.classroom = classroom
+		code.save()
 	else:
 		school = kwargs.get('code').classroom.school
 		classroom = kwargs.get('code').classroom

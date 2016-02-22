@@ -8,8 +8,6 @@ class StudentRegistrationCode(models.Model):
 	code = models.CharField(unique=True,
 							max_length=20)
 	classroom = models.OneToOneField(Classroom)
-	numberOfStudents = models.IntegerField(verbose_name='nombre d\'élèves')
-	numberOfStudentsLeft = models.IntegerField(verbose_name='nombre d\'élèves restants')
 
 	def __str__(self):
-		return '{} pour {} élèves de {}'.format(self.code, self.numberOfStudents, self.classroom)
+		return '{} pour les élèves de {}'.format(self.code, self.classroom)

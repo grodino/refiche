@@ -5,7 +5,7 @@ from registration.models import StudentRegistrationCode
 
 @admin.register(StudentRegistrationCode)
 class CodeAdmin(admin.ModelAdmin):
-	list_display = ('code', 'classroom', 'numberOfStudents', 'numberOfStudentsLeft')
+	list_display = ('code', 'classroom',)
 
 	def get_queryset(self, request):
 		qs = super(CodeAdmin, self).get_queryset(request)

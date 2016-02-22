@@ -13,7 +13,7 @@ from facebook.functions import generateRandomKey
 from facebook.models import CreateGroupToken, UserAccessToken
 from registration.models import StudentRegistrationCode
 from registration.functions import checkStudentRegistrationCode, createUserAndStudent, getRemoteImage
-from registration.forms import StudentCodeForm, DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
+from registration.forms import DelegateRegistrationForm, RegistrationForm, StudentRegistrationForm, ChangeUserInfosForm
 
 
 def register(request):
@@ -37,34 +37,6 @@ def register(request):
 		form = StudentRegistrationForm()
 
 	return render(request, 'registration.html', locals())
-
-
-@login_required
-@permission_required('registration.add_studentregistrationcode')
-def getCode(request):
-	""" View made to get a code valid for limited number of student to be able to sign up """
-
-	student = getStudent(request.user)
-
-	if request.method == 'POST':
-		form = StudentCodeForm(request.POST)
-
-		if form.is_valid():
-			code = form.save(commit=False)
-
-			# Create a random string of 20 chars for the code
-			code.code = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(20))
-			code.classroom = student.classroom
-			code.numberOfStudentsLeft = code.numberOfStudents
-			code.save()
-
-			JSONResponse = json.dumps({'success': 'true', 'code': code.code})
-		else:
-			JSONResponse = json.dumps(form.errors)
-	else:
-		raise Http404('Hey :/ I wasn\'t expecting you here !')
-
-	return HttpResponse(JSONResponse, content_type='application/json')
 
 
 def studentRegister(request, code):
